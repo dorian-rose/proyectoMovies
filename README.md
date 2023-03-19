@@ -1,1 +1,1 @@
-# proyectoMovies
+# proyecoMovies
