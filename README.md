@@ -12,10 +12,12 @@ Frontend (usuario):
 
 5. menu "hamburguesa" para importar ("include") en toda pagina menos dashboard - tiene botones que redirigen a salir, busqueda, mis pelis 
 
-6. Panel de control/dashboard (ruta: /dashboard, mehtod: GET) - tiene ejs/pug/html con boton "buscar" y "mis pelis" (no se enseña menu aqui)
+6. Panel de control/dashboard (ruta: /dashboard, mehtod: GET) - tiene ejs/pug/html con boton "buscar" y "mis pelis" (no se enseña menu aqui pero tiene boton de salir/back)
 
 7. busqueda (ruta: /search, mthod: GET) Aparecerá un buscador (una caja de texto y un botón o icono de enviar) que buscará una película por título y mostrará a continuación las posibles coincidencias. Lo complicado aqui va a ser que tiene que primero buscar en el api que elijamos (IMBD?) y si no encuentra nada alli, tiene que buscar en la base de datos que creamos en Mongo. 
 Para cada posible coincidencia encontrado, dara la opcion de añadir a favoritos. 
 Para cada posible coincidencia encontrado, dara la opcion de ver Vista detalle de la película??
 
-8. 
+8. ruta:/search/:title, method: GET - vista detalle de la pelicula. 
+Tiene botón de Añadir a Mis películas, que tiene que vincular la peli con el Usuario - no se cree ddbb nuevo pero asocia la fuente de la peli con el usuario. Cada usuario differente tendra su lista de pelis asociadas. 
+8b- en la vista detalle tiene que aparecer resenas de la peli, que se obtendran via scraping
