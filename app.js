@@ -1,6 +1,8 @@
 const express = require('express');
+const cors = require('cors');
 
-//const cors = require('cors');
+const {connection}=require('./helpers/dbConect')
+
 
 require('dotenv').config();
 
@@ -15,6 +17,9 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 app.set('views', __dirname + '/views'); //* también es posible hacer `${__dirname}/views`
+
+//* CONEXION A BBDD
+connection()
 
 //* Para parsear // traducir
 app.use(express.json());
@@ -42,5 +47,5 @@ app.use((req, res, next) => {
 
 //* Listener
 app.listen(port, () => {
-    console.log(`conectados al servidor por el puerto ${port}`)
+    console.log(`connected from port ${port}`)
 })
