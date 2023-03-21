@@ -16,7 +16,7 @@ app.use(express.static('public'));
 
 app.set('view engine', 'ejs');
 
-app.set('views', __dirname + '/views'); //* también es posible hacer `${__dirname}/views`
+app.set('views', __dirname + './client/views'); //* también es posible hacer `${__dirname}/views`
 
 //* CONEXION A BBDD
 connection()
@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 
 //* RUTAS
 
-app.use("/", require("./routers/movieRouters"));
+app.use("/", require('./routers/movieRouters'));
 //app.use('/dashboard',require('./routers/adminRouters'));
 
 //app.use('/dashboard/createMovie', require('./routers/adminRouters')); //* Ver si la ruta llevará el /dashboard delante o no
