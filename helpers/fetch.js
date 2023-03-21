@@ -1,5 +1,4 @@
 const urlBase = 'http://www.omdbapi.com/?';
-const apikey = 'cf8ab226'
 const url = ""
 
 const consultation = async (title, searchTerm) => {  //! ver qué modificar
@@ -9,7 +8,7 @@ const consultation = async (title, searchTerm) => {  //! ver qué modificar
         console.log("estamos aqui en el try")
         if (title) {
 
-            let url = `${urlBase}apikey=${apikey}&t=${title}`
+            let url = `${urlBase}apikey=${process.env.API_KEY_OMDB}&t=${title}`
             console.log(url)
             console.log(title)
             const response = await fetch(url);

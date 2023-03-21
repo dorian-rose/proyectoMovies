@@ -1,12 +1,10 @@
  const mongoose = require('mongoose');
 
- const uriDB = `mongodb+srv://admin:admin@peju.fbbyggi.mongodb.net/movies?retryWrites=true&w=majority`
-
  const connection = async () => {
 
     try {
 
-        const response = await mongoose.connect(uriDB)
+        const response = await mongoose.connect(process.env.URI_CONECT)
         console.log('connected to Data Base')
         console.log(response.json())
         return response
