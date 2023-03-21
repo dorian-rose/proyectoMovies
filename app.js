@@ -30,9 +30,8 @@ app.use(express.urlencoded({ extended: false }));
 //* RUTAS
 
 app.use("/", require('./routers/movieRouters'));
-//app.use('/dashboard',require('./routers/adminRouters'));
 
-//app.use('/dashboard/createMovie', require('./routers/adminRouters')); //* Ver si la ruta llevará el /dashboard delante o no
+app.use('/admin',require('./routers/adminRouters')); //* Ver si la ruta llevará el /dashboard delante o no
 
 app.use("/api", require("./routers/apiRouters"));
 

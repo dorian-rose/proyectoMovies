@@ -1,0 +1,32 @@
+<%- include('./templates/header.ejs') %>
+<%- include('./templates/nav-todos.ejs') %>
+
+        <main>
+
+            <button><a href="/admin/movies/createForm">Crear película</a></button>
+
+            <% if(servicios.length > 0) {%>
+
+                <% servicios.forEach(element=> {%>
+
+                    <h2>
+                        <%= element.title %>
+                    </h2>
+
+                    <p>
+                        <%= element.descripcion %>
+                    </p>
+                    <button><a href="/admin/movies/editForm/<%= element.title %>">Editar</a></button>
+                    <button><a href="/admin/movies/delete/<%= element.title %>">Eliminar</a></button>
+                    
+                    <% }); %>
+
+                        <% } else { %>
+
+                            <p>No hay ninguna película</p>
+
+                            <% } %>
+        </main>
+
+
+        <%- include('./templates/footer.ejs') %>
