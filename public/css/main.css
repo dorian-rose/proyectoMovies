@@ -1,0 +1,56 @@
+/** STYLE FOR ALL ++++++++++++++++++++++++++++ */
+* {
+    padding: 0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.border1px {
+    border: 1px solid black;
+}
+
+.border2px {
+    border: 2px solid black;
+}
+
+.gridContainerMF-1c {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+/** GENERAL FRONT VIEWS */
+
+
+
+/** GENERAL ADMIN VIEWS */
+
+
+
+/**MEDIA QUERY +++++++++++++++++++ */
+/* ===================================
+                     media query 768px
+======================================*/
+@media screen and (min-width:768px) {
+
+}
+/*768px end.*/
+
+/* ===================================
+                     media query 992px
+======================================*/
+@media screen and (min-width:992px) {
+
+}
+/*992px end.*/
+
+/* ===================================
+                    media query 1200px
+======================================*/
+@media screen and (min-width:1200px) {
+
+}
+/*1200px end.*/
