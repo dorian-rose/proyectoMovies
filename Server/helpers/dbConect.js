@@ -5,8 +5,7 @@
     try {
 
         const response = await mongoose.connect(process.env.URI_CONECT)
-        console.log('connected to Data Base')
-        console.log(response.json())
+        console.log('connected to Database')
         return response
        
 
@@ -14,7 +13,7 @@
        
             return {
                 ok: false,
-                msg: 'Fail trying to connect to Data Base',
+                msg: 'Fail trying to connect to Database',
                 error
             }
 
