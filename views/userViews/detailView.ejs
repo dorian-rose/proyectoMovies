@@ -1,0 +1,29 @@
+<%- include("./userTemplates/header") %><%- include("./userTemplates/nav") %> <%
+if (movieData.Response== "True") { %>
+
+<section>
+  <a href="http://localhost:3000/search/lion king"
+    ><i class="fa-solid fa-heart"></i
+  ></a>
+  <div>
+    <img src="<%=movieData.Poster%>" alt="movieData.Title" />
+  </div>
+  <article>
+    <h1><%=movieData.Title %></h1>
+    <div>
+      <span>Year: <%=movieData.Year%>, </span
+      ><span>Duration: <%= movieData.Runtime %>, </span>
+      <span>Genre: <%= movieData.Genre %> </span>
+    </div>
+    <h4>Director:</h4>
+    <p><%= movieData.Director %></p>
+    <h4>Cast:</h4>
+    <p><%= movieData.Actors %></p>
+    <h4>Plot:</h4>
+    <p><%= movieData.Plot %></p>
+  </article>
+</section>
+
+<% } else { %>
+<p class="error-message"><%= movieData.Error %></p>
+<% } %> <%- include("./userTemplates/footer") %>

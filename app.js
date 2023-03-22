@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 
-const {connection}=require('./helpers/dbConect')
+const { connection } = require('./helpers/dbConect')
 
 
 require('dotenv').config();
@@ -29,12 +29,14 @@ app.use(express.urlencoded({ extended: false }));
 
 //* RUTAS
 
-app.use("/", require('./routers/movieRouters'));
+//app.use("/", require('./routers/movieRouters')); -router de test, borrado
 //app.use('/dashboard',require('./routers/adminRouters'));
 
 //app.use('/dashboard/createMovie', require('./routers/adminRouters')); //* Ver si la ruta llevará el /dashboard delante o no
 
-app.use("/api", require("./routers/apiRouters"));
+//app.use("/api", require("./routers/apiRouters"));
+
+app.use("/", require("./routers/frontRouters"));
 
 
 //* En caso de error, mandar a la página 404 (Frontend y backend, hay que configurarlo)
