@@ -1,11 +1,12 @@
 const { consultation } = require('../helpers/fetch');
 
 const getMovie = async (req, res) => {
-  const searchQuery = req.query.search;
+  const {search} = req.body;
+  console.log(search, 'estamos en getMOvie')
   
   try {
-    const response = await consultation(`https://www.omdbapi.com/?apikey=cf8ab226&s=${searchQuery}`); //mirar template
-    const movies = response.Search;
+    const response = await consultation(null, search); //mirar template
+    const movies = response;
     
     
     console.log(movies); // Imprime los resultados en la consola
