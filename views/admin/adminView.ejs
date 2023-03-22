@@ -1,23 +1,23 @@
 <%- include('./templates/header.ejs') %>
-<%- include('./templates/nav-todos.ejs') %>
+<%- include('./templates/nav.ejs') %>
 
         <main>
 
             <button><a href="/admin/movies/createForm">Crear película</a></button>
 
-            <% if(servicios.length > 0) {%>
+            <% if(movies.length > 0) {%>
 
-                <% servicios.forEach(element=> {%>
+                <% movies.forEach(element=> {%>
 
                     <h2>
-                        <%= element.title %>
+                        <%= element.Title %>
                     </h2>
 
                     <p>
-                        <%= element.descripcion %>
+                    
                     </p>
-                    <button><a href="/admin/movies/editForm/<%= element.title %>">Editar</a></button>
-                    <button><a href="/admin/movies/delete/<%= element.title %>">Eliminar</a></button>
+                    <button><a href="/admin/movies/editForm/<%= element.Title %>">Editar</a></button>
+                    <button><a href="/admin/movies/delete/<%= element.Title %>">Eliminar</a></button>
                     
                     <% }); %>
 

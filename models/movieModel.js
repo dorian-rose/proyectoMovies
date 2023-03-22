@@ -39,13 +39,11 @@ const MoviesSchema = new Schema({
 
         type: String,
 
-
     },
 
     Plot: {
 
         type: String,
-
 
     },
 

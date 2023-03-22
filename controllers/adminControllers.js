@@ -1,16 +1,17 @@
-//const Movies = require('../models/movieModel');
+const Movies = require('../models/movieModel');
 
 
-const getMovies = async (req, res) => {
+const getMoviesAdmin = async (req, res) => {
 
     try {
         const movies = await Movies.find()
-                res.render('movies', {
+                res.render('admin/adminView', {
                 movies,
             })
         
 
     } catch (error) {
+        
         console.log(error)
     }
 
@@ -19,6 +20,6 @@ const getMovies = async (req, res) => {
 
 module.exports = {
   
-   // getMovies
+   getMoviesAdmin
 
 }
