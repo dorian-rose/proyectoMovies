@@ -1,6 +1,7 @@
 const { consultation } = require('../helpers/fetch');
 
 const getMovie = async (req, res) => {
+  
   const {search} = req.body;
   console.log(search, 'estamos en getMOvie')
   
