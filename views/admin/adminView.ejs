@@ -3,7 +3,7 @@
 
         <main>
 
-            <button><a href="/admin/movies/createForm">Crear película</a></button>
+            <button><a href="/admin/movies/create-form">Crear película</a></button>
 
             <% if(movies.length > 0) {%>
 
@@ -16,8 +16,8 @@
                     <p>
                     
                     </p>
-                    <button><a href="/admin/movies/editForm/<%= element.Title %>">Editar</a></button>
-                    <button><a href="/admin/movies/delete/<%= element.Title %>">Eliminar</a></button>
+                    <button><a href="/admin/movies/edit-form/<%=element.Title%>">Editar</a></button>
+                    <button><a href="/admin/movies/delete/<%=element.Title%>">Eliminar</a></button>
                     
                     <% }); %>
 
