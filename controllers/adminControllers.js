@@ -150,8 +150,8 @@ const deleteMovie = async (req, res) => {
 
     try {
 
-        const id = req.params._id;
-        const movie = await Movies.findOneAndDelete({ id });
+        const title = req.params.title;
+        const movie = await Movies.findOneAndDelete({ title: title});
 
         if (!movie) {
             return res.status(404).json({

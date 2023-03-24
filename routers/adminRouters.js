@@ -5,7 +5,7 @@ const {getMoviesAdmin, getMovieAdmin, formCreateMovie, createMovie, deleteMovie,
 
 
 router.get('/movies', getMoviesAdmin);
-router.get('/movies/title/:id', getMovieAdmin)
+router.get('/movies/title/:title', getMovieAdmin);
 
 router.post('/movies/create-movie', createMovie);
 router.get('/movies/create-form', formCreateMovie);
