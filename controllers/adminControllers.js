@@ -22,19 +22,21 @@ const getMoviesAdmin = async (req, res) => {
 
 
     } catch (error) {
-
-        console.log(error)
+        return res.status(500).json({
+            ok: false,
+            msg: "Error retrieving the movie",
+        });
 
     }
 }
 
-
-//
 const getMovieAdmin = async (req, res) => {
+
     try {
+
         const title = req.params.title;
-        console.log(title)
         const movie = await Movies.findOne({ Title: title });
+        console.log(movie)
         if (movie) {
             return res.status(200).json({
                 ok: true,
@@ -54,8 +56,6 @@ const getMovieAdmin = async (req, res) => {
         });
     }
 };
-
-}
 
 
 const createMovie = async (req, res) => {
@@ -89,10 +89,7 @@ const createMovie = async (req, res) => {
         });
 
     };
-
-
-//
-
+}
 
 const formCreateMovie = async (req, res) => {
 
@@ -122,7 +119,6 @@ const editMovie = async (req, res) => {
         });
     }
 };
-
 
 
 const formEditMovie = async (req, res) => {
@@ -176,12 +172,11 @@ const deleteMovie = async (req, res) => {
 
 module.exports = {
 
-getMovieAdmin
+    getMovieAdmin,
     getMoviesAdmin,
     createMovie,
     formCreateMovie,
     editMovie,
     formEditMovie,
-    deleteMovie
-
+    deleteMovie,
 }
