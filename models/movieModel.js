@@ -7,59 +7,59 @@ const MoviesSchema = new Schema({
         required: true,
     },
 
-    Year: {
+    // Year: {
 
-        type: String,
-        required: true,
+    //     type: String,
+    //     required: true,
 
-    },
+    // },
 
-    Runtime: {
+    // Runtime: {
 
-        type: String,
-        required: true,
+    //     type: String,
+    //     required: true,
 
-    },
+    // },
 
-    Genre: {
+    // Genre: {
 
-        type: String,
-        required: true,
+    //     type: String,
+    //     required: true,
 
-    },
+    // },
 
-    Director: {
+    // Director: {
 
-        type: String,
-        required: true,
+    //     type: String,
+    //     required: true,
 
-    },
+    // },
 
-    Actors: {
+    // Actors: {
 
-        type: String,
+    //     type: String,
 
-    },
+    // },
 
-    Plot: {
+    // Plot: {
 
-        type: String,
+    //     type: String,
 
-    },
+    // },
 
-    Poster: {
+    // Poster: {
 
-        type: String,
-        required: true,
+    //     type: String,
+    //     required: true,
 
-    },
+    // },
 
-    Metascore: {
+    // Metascore: {
 
-        type: String,
+    //     type: String,
 
 
-    },
+    // },
 
     fecha: {
         type: Date,

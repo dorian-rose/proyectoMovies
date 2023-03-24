@@ -1,5 +1,13 @@
 <%- include('./templates/header.ejs') %>
-<%- include('./templates/nav-todos.ejs') %>
+<%- include('./templates/nav.ejs') %>
 
+<section>
+
+    <form action="/admin/movies/edit-movie/<%= movie.Title %>" method="PUT">
+        <input type="text" id="Title" name="Title" placeholder="nombre de la película" class="" value="<%= movie.Title %>">
+        <input type="submit" value="Editar Película">
+    </form>
+
+</section>
 
 <%- include('./templates/footer.ejs') %>
