@@ -75,65 +75,81 @@ const formCreateMovie = async (req, res) => {
 };
 
 const editMovie = async (req, res) => {
-
-
     try {
-
         const title = req.params.title;
-        console.log(title, 'estamos en controller')
-        const url = `movies/${title}`;
-        const method = 'post';
+        const movie = await Movies.findOne({ Title: title });
 
-        // await Movies.find(url, method, title);
+        if (!movie) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'Película no encontrada'
+            });
+        } else {
+            movie.Title = req.body.Title;
 
+            const updatedMovie = await movie.save();
 
-        res.render('../views/admin/movies',{
-            titulo: title
-        });
-
+            res.redirect('/admin/movies');
+        }
     } catch (error) {
-
-        console.log(error)
-
+        console.log(error);
         return res.status(500).json({
             ok: false,
-            msg: 'ERROR: no se ha podido editar la película.'
+            msg: 'Error al buscar película para editar'
         });
-
     }
 };
 
-const formEditMovie = async (req,res) => {
 
-    let id = req.params;
-    console.log(id, 'estamos aqui')
-    // const url = `movies/${id}`;
-    // const method = 'get';
+const formEditMovie = async (req, res) => {
+    try {
+        const title = req.params.title;
+        const movie = await Movies.findOne({title: title});
 
-    // await Movies(url);
-
-
-    res.render('../views/admin/edit-movie', {
-        id,
-    });
-
-}
-
-
-const deleteMovie = async (req, res) => {
-
-    const id = req.params.id;
-
-    const url = `movies/${id}`;
-    const method = 'delete';
-
-
-    await consulta(url, method, req.body);
-
-
-    res.redirect('/admin/movies');
-
+        if (!movie) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'Película no encontrada'
+            });
+        } else {
+            res.render('../views/admin/adminEdit.ejs', {
+                movie
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg: 'Error al buscar película para editar'
+        });
+    }
 };
+  
+  
+  const deleteMovie = async (req, res) => {
+
+    try {
+
+      const title = req.params.title;
+      const movie = await Movies.findOneAndDelete({ title });
+
+      if (!movie) {
+        return res.status(404).json({
+          ok: false,
+          msg: 'Película no encontrada'
+        });
+      }
+      res.redirect('/admin/movies');
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        ok: false,
+        msg: 'ERROR: no se ha podido eliminar la película.'
+      });
+    }
+  };
+
+
 module.exports = {
 
     getMoviesAdmin,
@@ -141,6 +157,6 @@ module.exports = {
     formCreateMovie,
     editMovie,
     formEditMovie,
-    //deleteMovie
+    deleteMovie
 
 }

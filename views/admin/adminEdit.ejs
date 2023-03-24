@@ -3,14 +3,10 @@
 
 <section>
 
-    <form action="/admin/movies/edit-movie" method="POST">
-
-        <input type="text" id="Title" name="Title" placeholder="nombre de la película" class="">
-        
-
-
-        <input type="submit" value="Añadir Película">
-
+    <form action="/admin/movies/edit-movie/<%= movie.Title %>" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="text" id="Title" name="Title" placeholder="nombre de la película" class="" value="<%= movie.Title %>">
+        <input type="submit" value="Editar Película">
     </form>
 
 </section>
