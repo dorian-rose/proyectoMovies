@@ -3,11 +3,16 @@
 
 <section>
 
-    <form action="/admin/movies/edit-movie/<%= movie.Title %>" method="PUT">
+    <form action="/admin/movies/edit-movie/<%=movie._id%>" method="PUT">
         <input type="text" id="Title" name="Title" placeholder="nombre de la película" class="" value="<%= movie.Title %>">
+        <!-- <input type="text" id="Year" name="Year" placeholder="Año de la película" class="" value="<%= //movie.Year %>">
+        <input type="text" id="Runtime" name="Runtime" placeholder="Duración de la película" class="" value="<%= //movie.Runtime %>">
+        <input type="text" id="Genre" name="Genre" placeholder="Género de la película" class="" value="<%= //movie.Genre %>">
+        <input type="text" id="Director" name="Director" placeholder="Director de la película" class="" value="<%= //movie.Director %>">
+        <input type="text" id="Poster" name="Poster" placeholder="Imagen de la película" class="" value="<%= //movie.Poster %>"> -->
         <input type="submit" value="Editar Película">
     </form>
 
 </section>
-
+<%= movie %>
 <%- include('./templates/footer.ejs') %>

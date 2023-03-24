@@ -7,59 +7,59 @@ const MoviesSchema = new Schema({
         required: true,
     },
 
-    // Year: {
+    Year: {
 
-    //     type: String,
-    //     required: true,
+        type: String,
+        required: true,
 
-    // },
+    },
 
-    // Runtime: {
+    Runtime: {
 
-    //     type: String,
-    //     required: true,
+        type: String,
+        required: true,
 
-    // },
+    },
 
-    // Genre: {
+    Genre: {
 
-    //     type: String,
-    //     required: true,
+        type: String,
+        required: true,
 
-    // },
+    },
 
-    // Director: {
+    Director: {
 
-    //     type: String,
-    //     required: true,
+        type: String,
+        required: true,
 
-    // },
+    },
 
-    // Actors: {
+    Poster: {
 
-    //     type: String,
+        type: String,
+        required: true,
 
-    // },
+    },
 
-    // Plot: {
+    Actors: {
 
-    //     type: String,
+        type: String,
 
-    // },
+    },
 
-    // Poster: {
+    Plot: {
 
-    //     type: String,
-    //     required: true,
+        type: String,
 
-    // },
+    },
 
-    // Metascore: {
+    Metascore: {
 
-    //     type: String,
+        type: String,
 
 
-    // },
+    },
 
     fecha: {
         type: Date,
@@ -68,3 +68,45 @@ const MoviesSchema = new Schema({
 })
 
 module.exports = model('Movies', MoviesSchema)
+
+
+// const createEditMovieSchema = {
+//     Title: {
+//         in: ['body'],
+//         isString: true,
+//         notEmpty: true,
+//         errorMessage: 'El título es requerido'
+//     },
+//     Year: {
+//         in: ['body'],
+//         isString: true,
+//         notEmpty: true,
+//         errorMessage: 'El año es requerido'
+//     },
+//     Runtime: {
+//         in: ['body'],
+//         isString: true,
+//         notEmpty: true,
+//         errorMessage: 'La duración es requerida'
+//     },
+//     Genre: {
+//         in: ['body'],
+//         isString: true,
+//         notEmpty: true,
+//         errorMessage: 'El género es requerido'
+//     },
+//     Director: {
+//         in: ['body'],
+//         isString: true,
+//         notEmpty: true,
+//         errorMessage: 'El director es requerido'
+//     },
+//     Poster: {
+//         in: ['body'],
+//         isString: true,
+//         notEmpty: true,
+//         errorMessage: 'La imagen es requerida'
+//     },
+// };
+
+//router.post('/movies/create-movie',checkSchema(createMovieSchema), validarInputs, createMovie);
