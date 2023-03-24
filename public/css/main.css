@@ -1,66 +1,119 @@
 /** STYLE FOR ALL ++++++++++++++++++++++++++++ */
 * {
-    padding: 0;
-    margin:0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-:root{ /*paleta de colores*/
-    --dark-blue: rgb(69 0 255);
-    --blue: rgb(0 106 244);
-    --light-blue: rgb(27 164 224);
-    --aqua-blue: rgb(82 209 219);
-    --red: rgb(255 42 0);
-    --blank: rgb(183, 236, 239);
-    --dark: rgb(33, 36, 37);
+:root {
+  /*paleta de colores*/
+  --dark-blue: rgb(69 0 255);
+  --blue: rgb(0 106 244);
+  --light-blue: rgb(27 164 224);
+  --aqua-blue: rgb(82 209 219);
+  --red: rgb(255 42 0);
+  --blank: rgb(183, 236, 239);
+  --dark: rgb(33, 36, 37);
 }
 
 .centerText {
-    text-align: center;
+  text-align: center;
 }
 
 .border1px {
-    border: 1px solid black;
+  border: 1px solid black;
 }
 
 .border2px {
-    border: 2px solid black;
+  border: 2px solid black;
 }
 
 .gridContainerMF-1c {
-    display: grid;
-    grid-template-columns: 1fr;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* he hecho este nuevo aqui abajo con otro class porque no quiero que se haga mas que de dos columnas aunque este muy grande la pantall! */
+.gridContainerMax-2c {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.maxWidthMedium {
+  max-width: 1000px;
 }
 
 /** GENERAL FRONT VIEWS */
+/* movie-card contiene informacion "detalle" y foto de la peli */
+.movie-card {
+  margin: 50px auto;
+  color: var(--dark);
+  background-color: rgb(234, 232, 232);
+  border-radius: 10px;
+}
+.movie-card img {
+  width: 80%;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+/* el contenedor para la info de la peli (todo menos la foto) */
+.movie-card article {
+  margin: 0 30px;
+}
 
+/* el contendero para los campos de año, genero y duracion */
+.movie-card .movie-facts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+/* los campos de año, genero y duracion */
+.movie-card span {
+  margin: 2px 5px;
+  background-color: var(--dark);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
 
+/* el corazoncito boton para añadir a lista favoritas */
+.movie-card .favourite-button {
+  color: var(--dark-blue);
+  font-size: 30px;
+}
+
+.movie-card h1 {
+  color: var(--dark-blue);
+  margin: 30px;
+}
+.movie-card h4 {
+  margin: 30px 15px 15px;
+}
 
 /** GENERAL ADMIN VIEWS */
-
-
 
 /**MEDIA QUERY +++++++++++++++++++ */
 /* ===================================
                      media query 768px
 ======================================*/
-@media screen and (min-width:768px) {
-
+@media screen and (min-width: 768px) {
+  .gridContainerMax-2c {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 /*768px end.*/
 
 /* ===================================
                      media query 992px
 ======================================*/
-@media screen and (min-width:992px) {
-
+@media screen and (min-width: 992px) {
 }
 /*992px end.*/
 
 /* ===================================
                     media query 1200px
 ======================================*/
-@media screen and (min-width:1200px) {
-
+@media screen and (min-width: 1200px) {
 }
 /*1200px end.*/

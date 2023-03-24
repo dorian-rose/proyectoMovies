@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const {getMoviesAdmin} = require('../controllers/adminControllers');
+const { getMoviesAdmin, getMovieAdmin } = require('../controllers/adminControllers');
 
 
 router.get('/movies', getMoviesAdmin);
+router.get('/movies/:title', getMovieAdmin); // /movies/:title
 
 // router.get('/movies/createMovie', );
 // router.get('/movies/createForm', );
