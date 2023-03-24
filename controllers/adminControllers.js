@@ -36,7 +36,7 @@ const getMovieAdmin = async (req, res) => {
 
         const title = req.params.title;
         const movie = await Movies.findOne({ Title: title });
-        console.log(movie)
+   
         if (movie) {
             return res.status(200).json({
                 ok: true,
@@ -59,7 +59,7 @@ const getMovieAdmin = async (req, res) => {
 
 
 const createMovie = async (req, res) => {
-        console.log('creando')
+    console.log('creando')
     const newMovies = new Movies(req.body);
 
     try {
@@ -100,26 +100,30 @@ const formCreateMovie = async (req, res) => {
 const editMovie = async (req, res) => {
     console.log('entrando')
 
-    try {  
-        
+    try {
+
         const id = req.params.id;
-        const title = req.body.title;
-        const editedMovie = await Pelicula.findOneAndUpdate({_id:id},{$set:{title}},{new:true});
-            return res.status(201).json({
-                ok:true,
-                msg:"actualizando pelicula",
-                editedMovie,
-            })
-        
+        const title = req.body.Title;
+        const year = req.body.Year;
+        const genre = req.body.Genre;
+        const director = req.body.Director;
+        const poster = req.body.Poster;
+        const runtime = req.body.Runtime;
+
+        const update = { 'Title': title, 'Year': year, 'Genre': genre, 'Director': director, 'Poster': poster, 'Runtime': runtime };
+
+        await Movies.findOneAndUpdate({ _id: id }, { $set: update });
+        return res.redirect('/admin/movies');
+
     } catch (error) {
-        
+
         return res.status(500).json({
             ok: false,
             msg: 'Error al buscar película para editar'
         });
 
     };
-  };
+};
 
 const formEditMovie = async (req, res) => {
     try {
