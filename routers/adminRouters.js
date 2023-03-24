@@ -9,7 +9,7 @@ router.get('/movies', getMoviesAdmin);
 router.post('/movies/create-movie', createMovie);
 router.get('/movies/create-form', formCreateMovie);
 
-router.put('/movies/edit-movie/:title', editMovie); 
+router.put('/movies/edit-movie/:id', editMovie); 
 router.get('/movies/edit-form/:id', formEditMovie);
 
 router.get('/movies/remove-movie/:id', deleteMovie);

@@ -47,12 +47,9 @@ const createMovie = async (req, res) => {
 
         } else {
 
-            return res.status(201).json({
-                ok: true,
-                msg: 'Película creada',
-                data: movies
-            })
-        }
+            return res.redirect('/admin/movies')
+            }
+        
 
     } catch (error) {
 
@@ -75,23 +72,20 @@ const formCreateMovie = async (req, res) => {
 };
 
 const editMovie = async (req, res) => {
+    console.log('estoy aqui')
+    
     try {
+
         const title = req.params.title;
-        const movie = await Movies.findOne({ Title: title });
+        const movie = await Movies.findOneAndUpdate({title: title},{$set: req.body},{ new: true });
 
-        if (!movie) {
-            return res.status(404).json({
-                ok: false,
-                msg: 'Película no encontrada'
-            });
-        } else {
-            movie.Title = req.body.Title;
+        return res.status(200).redirect('/admin/movies'), {
+            movie
+        };
 
-            const updatedMovie = await movie.save();
 
-            res.redirect('/admin/movies');
-        }
     } catch (error) {
+
         console.log(error);
         return res.status(500).json({
             ok: false,
@@ -101,10 +95,11 @@ const editMovie = async (req, res) => {
 };
 
 
+
 const formEditMovie = async (req, res) => {
     try {
         const title = req.params.title;
-        const movie = await Movies.findOne({title: title});
+        const movie = await Movies.findOne({ title: title });
 
         if (!movie) {
             return res.status(404).json({
@@ -124,30 +119,30 @@ const formEditMovie = async (req, res) => {
         });
     }
 };
-  
-  
-  const deleteMovie = async (req, res) => {
+
+
+const deleteMovie = async (req, res) => {
 
     try {
 
-      const title = req.params.title;
-      const movie = await Movies.findOneAndDelete({ title });
+        const id = req.params._id;
+        const movie = await Movies.findOneAndDelete({ id });
 
-      if (!movie) {
-        return res.status(404).json({
-          ok: false,
-          msg: 'Película no encontrada'
-        });
-      }
-      res.redirect('/admin/movies');
+        if (!movie) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'Película no encontrada'
+            });
+        }
+        res.redirect('/admin/movies');
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        ok: false,
-        msg: 'ERROR: no se ha podido eliminar la película.'
-      });
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg: 'ERROR: no se ha podido eliminar la película.'
+        });
     }
-  };
+};
 
 
 module.exports = {
