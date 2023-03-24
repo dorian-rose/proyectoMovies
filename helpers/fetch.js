@@ -1,35 +1,41 @@
 const urlBase = 'http://www.omdbapi.com/?';
-const url = ""
-
+let url;
+const mongoUrlBase = "http://localhost:3000/admin/movies/"
 const consultation = async (title, searchTerm) => {  //! ver qué modificar
-    console.log("estamos aqui en fetch")
-    console.log(title)
-    try {
-        console.log("estamos aqui en el try")
-        if (title) {
 
-            let url = `${urlBase}apikey=${process.env.API_KEY_OMDB}&t=${title}`
-            console.log(url)
-            console.log(title)
+    try {
+        let movies = "";
+        console.log(title)
+        if (title) {
+            url = `${urlBase}apikey=${process.env.API_KEY_OMDB}&t=${title}`
             const response = await fetch(url);
-            const movies = await response.json();
+            movies = await response.json();
+            console.log(movies)
+            if (movies.Response == "False") {
+                console.log("in mongo api consult");
+                url = `${mongoUrlBase}${title}`;
+                console.log(url)
+                const response = await fetch(url);
+                data = await response.json();
+                if (data.ok) {
+                    movies = data.data
+                } else { movies = data }
+            }
 
             return movies;
         }
-        // if (searchTerm) {
-        //     url = `${urlBase}apikey=${apikey}&s=${searchTerm}`
-        // }
-
     }
-
     catch (error) {
-
         console.log('FAILED retrieving fetch');
-
     }
-
 };
 
 
 
 module.exports = { consultation };
+
+
+
+// const response = await fetch("http://localhost:3000/admin/movies/Kevin en la jungla");
+// movies = await response.json();
+// console.log(movies)

@@ -5,6 +5,7 @@ const searchTitle = async (req, res) => {
     const title = req.params.title
     try {
         const movieData = await consultation(title);
+        console.log(movieData)
         res.render("userViews/detailView", {
             movieData,
         });
