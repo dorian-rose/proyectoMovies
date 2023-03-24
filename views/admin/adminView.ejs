@@ -1,0 +1,32 @@
+<%- include('./templates/header.ejs') %>
+<%- include('./templates/nav.ejs') %>
+
+        <main>
+
+            <button><a href="/admin/movies/create-form">Crear película</a></button>
+
+            <% if(movies.length > 0) {%>
+
+                <% movies.forEach(element=> {%>
+
+                    <h2>
+                        <%= element.Title %>
+                    </h2>
+
+                    <p>
+                    
+                    </p>
+                    <button><a href="/admin/movies/edit-form/<%= element._id %>">Editar</a></button>
+                    <button><a href="/admin/movies/remove-movie/<%= element._id %>">Eliminar</a></button>
+                    
+                    <% }); %>
+
+                        <% } else { %>
+
+                            <p>No hay ninguna película</p>
+
+                            <% } %>
+        </main>
+
+
+        <%- include('./templates/footer.ejs') %>
