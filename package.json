@@ -22,6 +22,6 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.2",
     "nodemon": "^2.0.21",
-    "puppeteer": "^19.7.3"
+    "puppeteer": "^19.8.0"
   }
 }

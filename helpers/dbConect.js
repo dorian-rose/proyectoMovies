@@ -4,7 +4,7 @@
 
     try {
 
-        const response = await mongoose.connect(process.env.URI_CONECT)
+        const response = await mongoose.connect(process.env.URI_CONNECT)
         console.log('connected to Database')
         return response
        
