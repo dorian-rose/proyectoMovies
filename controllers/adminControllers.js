@@ -98,7 +98,6 @@ const formCreateMovie = async (req, res) => {
 };
 
 const editMovie = async (req, res) => {
-    console.log('entrando')
 
     try {
 
@@ -109,8 +108,11 @@ const editMovie = async (req, res) => {
         const director = req.body.Director;
         const poster = req.body.Poster;
         const runtime = req.body.Runtime;
+        const actors = req.body.Actors;
+        const plot = req.body.Plot;
+        const metascore = req.body.Metascore;
 
-        const update = { 'Title': title, 'Year': year, 'Genre': genre, 'Director': director, 'Poster': poster, 'Runtime': runtime };
+        const update = { 'Title': title, 'Year': year, 'Genre': genre, 'Director': director, 'Poster': poster, 'Runtime': runtime, 'Actors': actors, 'Plot': plot, 'Metascore': metascore };
 
         await Movies.findOneAndUpdate({ _id: id }, { $set: update });
         return res.redirect('/admin/movies');
