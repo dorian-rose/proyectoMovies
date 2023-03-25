@@ -35,6 +35,7 @@ const getMovieAdmin = async (req, res) => {
     try {
 
         const title = req.params.title;
+        console.log("title =", title)
         const movie = await Movies.findOne({ Title: title });
    
         if (movie) {
@@ -99,6 +100,7 @@ const formCreateMovie = async (req, res) => {
 
 const editMovie = async (req, res) => {
 
+
     try {
 
         const id = req.params.id;
@@ -111,6 +113,7 @@ const editMovie = async (req, res) => {
         const actors = req.body.Actors;
         const plot = req.body.Plot;
         const metascore = req.body.Metascore;
+
 
         const update = { 'Title': title, 'Year': year, 'Genre': genre, 'Director': director, 'Poster': poster, 'Runtime': runtime, 'Actors': actors, 'Plot': plot, 'Metascore': metascore };
 

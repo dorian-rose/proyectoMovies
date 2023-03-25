@@ -1,4 +1,9 @@
 const { consultation } = require('../helpers/fetch');
+//Renderiza la vista inicial
+const getIndex = (req, res) => {
+    console.log(req.oidc.isAuthenticated())
+    res.render("userViews/index", { isAuthenticated: req.oidc.isAuthenticated(), user: req.oidc.user, })
+}
 
 //Recoge datos de una pelicula por su titulo y pinta 
 const searchTitle = async (req, res) => {
@@ -16,4 +21,4 @@ const searchTitle = async (req, res) => {
         });
     }
 };
-module.exports = { searchTitle }
+module.exports = { searchTitle, getIndex }

@@ -1,0 +1,15 @@
+<%- include("./userTemplates/header") %>
+<h1 class="centerText">Heading</h1>
+<section class="index centerText">
+  <a href="/login">Login (pondremos aqui el auth0)</a>
+  <a href="/logout">Logout</a>
+  <a href="/">Sign up</a>
+  <a href="/dashboard">Temporary link to dashboard</a>
+  <a href="/search/lion king"
+    >Temporary link to search with lion king de ejemplo</a
+  >
+  <% if (isAuthenticated) { %>
+  <p><%= JSON.stringify(user.nickname) %></p>
+  <% } %>
+</section>
+<%- include("./userTemplates/footer") %>

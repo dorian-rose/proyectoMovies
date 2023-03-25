@@ -1,15 +1,14 @@
-
-<%- include('/views/userViews/userTemplates/header.ejs') %>
+<%- include("./userTemplates/header") %>
 
 <main>
-    <section class="gridContainerMF">
-        <div>
-            <a href="/search">Search Movies</a>
-        </div>
-        <div>
-            <a href="/movies">My Movies</a>
-        </div>
-    </section>
+  <section class="gridContainerMF">
+    <div>
+      <a href="/search">Search Movies</a>
+    </div>
+    <div>
+      <a href="/movies">My Movies</a>
+    </div>
+  </section>
 </main>
 
-<%- include('/views/userViews/userTemplates/footer.ejs') %>
+<%- include("./userTemplates/footer") %>

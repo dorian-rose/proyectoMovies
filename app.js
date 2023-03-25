@@ -1,10 +1,20 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
+//auth0
+const { auth } = require('express-openid-connect');
+//auth0 configuration
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    secret: process.env.SECRET,
+    baseURL: process.env.BASEURL,
+    clientID: process.env.CLIENTID,
+    issuerBaseURL: process.env.ISSUER,
+};
 
 const { connection } = require('./helpers/dbConect')
 
-
-require('dotenv').config();
 
 const app = express();
 
@@ -18,6 +28,8 @@ app.set('view engine', 'ejs');
 
 app.set('views', __dirname + '/views'); //* también es posible hacer `${__dirname}/views`
 
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
 //* CONEXION A BBDD
 connection()
 
@@ -29,11 +41,12 @@ app.use(express.urlencoded({ extended: false }));
 
 //* RUTAS
 
-app.use('/admin',require('./routers/adminRouters')); //* Ver si la ruta llevará el /dashboard delante o no
+app.use('/admin', require('./routers/adminRouters')); //* Ver si la ruta llevará el /dashboard delante o no
 
 //app.use("/api", require("./routers/apiRouters"));
 
 app.use("/", require("./routers/frontRouters"));
+app.use("/", require("./routers/userRouters"));
 
 
 //* En caso de error, mandar a la página 404 (Frontend y backend, hay que configurarlo)

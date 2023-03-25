@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 const { validarInputs } = require('../middleware/inputValidator');
 const { check } = require('express-validator');
 const {getMoviesAdmin, getMovieAdmin, formCreateMovie, createMovie, deleteMovie, editMovie, formEditMovie} =require('../controllers/adminControllers');
@@ -33,6 +34,7 @@ router.post('/movies/edit-movie/:id',[
     
      
     
+
 router.get('/movies/edit-form/:id', formEditMovie);
 
 router.get('/movies/remove-movie/:id', deleteMovie);
