@@ -1,8 +1,8 @@
 
 
-const showDashboard = (req,res) => {
+const showDashboard = (req, res) => {
     try {
-        res.render('./userViews/dashboard.ejs')
+        res.render('userViews/dashboard')
     } catch (error) {
         console.log('FAILED to RENDER dashboard')
     }

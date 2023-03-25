@@ -35,6 +35,7 @@ const getMovieAdmin = async (req, res) => {
     try {
 
         const title = req.params.title;
+        console.log("title =", title)
         const movie = await Movies.findOne({ Title: title });
         console.log(movie)
         if (movie) {
@@ -76,8 +77,8 @@ const createMovie = async (req, res) => {
         } else {
 
             return res.redirect('/admin/movies')
-            }
-        
+        }
+
 
     } catch (error) {
 
@@ -99,11 +100,11 @@ const formCreateMovie = async (req, res) => {
 
 const editMovie = async (req, res) => {
     console.log('estoy aqui')
-    
+
     try {
 
         const title = req.params.title;
-        const movie = await Movies.findOneAndUpdate({title: title},{$set: req.body},{ new: true });
+        const movie = await Movies.findOneAndUpdate({ title: title }, { $set: req.body }, { new: true });
 
         return res.status(200).redirect('/admin/movies'), {
             movie

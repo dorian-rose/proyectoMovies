@@ -44,6 +44,11 @@
 }
 
 /** GENERAL FRONT VIEWS */
+/* index page */
+.index a {
+  display: block;
+}
+
 /* movie-card contiene informacion "detalle" y foto de la peli */
 .movie-card {
   margin: 50px auto;
