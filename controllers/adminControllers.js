@@ -128,6 +128,7 @@ const editMovie = async (req, res) => {
 };
 
 const formEditMovie = async (req, res) => {
+    
     try {
         const id = req.params.id;
         const movie = await Movies.findOne({ _id: id });
