@@ -37,7 +37,7 @@ const getMovieAdmin = async (req, res) => {
         const title = req.params.title;
         console.log("title =", title)
         const movie = await Movies.findOne({ Title: title });
-        console.log(movie)
+   
         if (movie) {
             return res.status(200).json({
                 ok: true,
@@ -60,7 +60,7 @@ const getMovieAdmin = async (req, res) => {
 
 
 const createMovie = async (req, res) => {
-
+    console.log('creando')
     const newMovies = new Movies(req.body);
 
     try {
@@ -99,33 +99,41 @@ const formCreateMovie = async (req, res) => {
 };
 
 const editMovie = async (req, res) => {
-    console.log('estoy aqui')
+
 
     try {
 
-        const title = req.params.title;
-        const movie = await Movies.findOneAndUpdate({ title: title }, { $set: req.body }, { new: true });
+        const id = req.params.id;
+        const title = req.body.Title;
+        const year = req.body.Year;
+        const genre = req.body.Genre;
+        const director = req.body.Director;
+        const poster = req.body.Poster;
+        const runtime = req.body.Runtime;
+        const actors = req.body.Actors;
+        const plot = req.body.Plot;
+        const metascore = req.body.Metascore;
 
-        return res.status(200).redirect('/admin/movies'), {
-            movie
-        };
 
+        const update = { 'Title': title, 'Year': year, 'Genre': genre, 'Director': director, 'Poster': poster, 'Runtime': runtime, 'Actors': actors, 'Plot': plot, 'Metascore': metascore };
+
+        await Movies.findOneAndUpdate({ _id: id }, { $set: update });
+        return res.redirect('/admin/movies');
 
     } catch (error) {
 
-        console.log(error);
         return res.status(500).json({
             ok: false,
             msg: 'Error al buscar película para editar'
         });
-    }
-};
 
+    };
+};
 
 const formEditMovie = async (req, res) => {
     try {
-        const title = req.params.title;
-        const movie = await Movies.findOne({ title: title });
+        const id = req.params.id;
+        const movie = await Movies.findOne({ _id: id });
 
         if (!movie) {
             return res.status(404).json({
@@ -151,16 +159,11 @@ const deleteMovie = async (req, res) => {
 
     try {
 
-        const id = req.params._id;
-        const movie = await Movies.findOneAndDelete({ id });
+        const id = req.params.id;
+        await Movies.findOneAndDelete({ _id: id });
 
-        if (!movie) {
-            return res.status(404).json({
-                ok: false,
-                msg: 'Película no encontrada'
-            });
-        }
-        res.redirect('/admin/movies');
+        return res.redirect('/admin/movies');
+
     } catch (error) {
         console.log(error);
         return res.status(500).json({
@@ -168,6 +171,8 @@ const deleteMovie = async (req, res) => {
             msg: 'ERROR: no se ha podido eliminar la película.'
         });
     }
+
+
 };
 
 
