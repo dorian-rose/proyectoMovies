@@ -48,6 +48,41 @@ const scrapeMovieReviews = async (movieTitle) => {
   }
 };
 
+
+//ejemplo de srapping en una pagina más fácil de acceder
+
+
+// const crapeMovieReviews =()=>(tituloPelicula) {
+//     const browser = await puppeteer.launch();
+//     const page = await browser.newPage();
+//     await page.goto('http://www.bandejadeplata.com/criticas-de-cine/');
+  
+//     // Ingresa el título de la película en el cuadro de búsqueda y haz clic en el botón de búsqueda
+//     await page.type('#s', tituloPelicula);
+//     await page.click('#searchsubmit');
+  
+//     // Espera a que la página de resultados cargue y haz clic en la primera reseña
+//     await page.waitForSelector('.post h2 a');
+//     await page.click('.post h2 a');
+  
+//     // Espera a que la página de la reseña cargue y extrae su contenido por consola
+//     await page.waitForSelector('.entry-content');
+//     const contenidoResena = await page.$eval('.entry-content', elemento => elemento.textContent);
+//     console.log(contenidoResena);
+  
+//     await browser.close();
+//   }
+
+
+
+
+
+
+
+
+
+
+
 module.exports = {
   scrapeMovieReviews,
 };
