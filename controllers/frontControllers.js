@@ -1,8 +1,9 @@
 const { consultation } = require('../helpers/fetch');
+const {scrapeMovieReviews}= require('../helpers/scraping')
 //Renderiza la vista inicial
 const getIndex = (req, res) => {
-    console.log(req.oidc.isAuthenticated())
-    res.render("userViews/index", { isAuthenticated: req.oidc.isAuthenticated(), user: req.oidc.user, })
+   console.log(req.oidc.isAuthenticated())
+   res.render("userViews/index", { isAuthenticated: req.oidc.isAuthenticated(), user: req.oidc.user, })
 }
 
 //Recoge datos de una pelicula por su titulo y pinta 
@@ -72,7 +73,7 @@ const searchMovie = async (req, res) => {
   
       // Si no se encontró la película en OMDB, mostrar un mensaje de error en la vista
       if (!movie) {
-        return res.render('movies', { error: 'Movie not found' });
+      //  return res.render('movies', { error: 'Movie not found' });
       }
   
       console.log('este es el titulo:', search)
