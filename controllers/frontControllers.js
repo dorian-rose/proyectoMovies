@@ -21,4 +21,87 @@ const searchTitle = async (req, res) => {
         });
     }
 };
-module.exports = { searchTitle, getIndex }
+
+/////////
+const searchMovie = async (req, res) => {
+    try {
+      const { search } = req.body;
+      console.log('estamos en searchMovie');
+      console.log(search, 'estamos buscando en Mongo');
+  
+      // Conectar a la base de datos
+      await connection();
+  
+      // Buscar películas en la base de datos
+      const movies = await Movie.find({ Title: search });
+  
+      // Si se encontraron películas en la base de datos, mostrarlas en la vista
+      if (movies.length > 0) {
+        return res.render('movies', { movies });
+      }
+  
+      // Si no se encontraron películas en la base de datos, mostrar un mensaje de error en la vista
+      if (!movies || movies.length === 0) {
+        return res.render('movies', { error: 'No movies found' });
+      }
+  
+      // Si se encontraron películas en la base de datos, mostrarlas en la vista (aun no he pintado)
+      const moviesToRender = movies.map(async (movie) => {
+        const reviews = await scrapeMovieReviews(movie.Title);
+        return { ...movie, reviews };
+      });
+  
+      return res.render('movies', { movies: moviesToRender });
+    } catch (error) {
+      console.error(error);
+  
+      return res.status(500).json({
+        ok: false,
+        msg: 'Error retrieving movies',
+      });
+    }
+  };
+  
+  const getMovie = async (req, res) => {
+    try {
+      const { search } = req.body;
+      console.log(search, 'estamos en getMovie');
+  
+      // Buscar película en OMDB
+      const movie = await consultation(null, search);
+  
+      // Si no se encontró la película en OMDB, mostrar un mensaje de error en la vista
+      if (!movie) {
+        return res.render('movies', { error: 'Movie not found' });
+      }
+  
+      console.log('este es el titulo:', search)
+      // Si se encontró la película en OMDB, obtener las reseñas y mostrarlas en la vista
+     
+     
+      const reviews = await scrapeMovieReviews(search);
+  
+     // return res.render('movie', { movie, reviews });  no tengo la ruta para renderizar, lo saco por consola
+     
+     
+     console.log(movie)
+    
+    
+      console.log('review', reviews)
+    
+    
+    } catch (error) {
+      console.error(error);
+  
+      return res.status(500).json({
+        ok: false,
+        msg: 'Error retrieving movie',
+      });
+    }
+  };
+
+
+
+
+
+module.exports = { searchTitle, getIndex, searchMovie, getMovie }
