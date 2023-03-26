@@ -10,7 +10,7 @@ router.get("/", getIndex);
 router.get('/search', getMovie)
 router.post("/search", getMovie); 
 router.get('/search', searchMovie)
-router.post("/search", searchMovie); 
+router.post("/search", searchMovie); //
 
 
 
