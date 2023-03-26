@@ -1,20 +1,26 @@
-/** STYLE FOR ALL ++++++++++++++++++++++++++++ */
+/** STYLE FOR ALL ++++++++++++++++++++ */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
+/**paleta de colores*/
 :root {
-  /*paleta de colores*/
-  --dark-blue: #4500ff;
+
+  
+  --dark-blue: rgb(69 0 255);
+
   --blue: rgb(0 106 244);
   --light-blue: rgb(27 164 224);
   --aqua-blue: rgb(82 209 219);
   --red: rgb(255 42 0);
-  --blank: rgb(183, 236, 239);
-  --dark: #212425;
+
+  --blank: rgb(228, 249, 250);
+  --dark: rgb(33, 36, 37);
+
 }
+/**++++++++++++++++++*/
 
 .centerText {
   text-align: center;
@@ -33,23 +39,187 @@
   grid-template-columns: 1fr;
 }
 
-/* he hecho este nuevo aqui abajo con otro class porque no quiero que se haga mas que de dos columnas aunque este muy grande la pantall! */
 .gridContainerMax-2c {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 .maxWidthMedium {
   max-width: 1000px;
 }
 
-/** GENERAL FRONT VIEWS */
-/* index page */
+.centerGridItems {
+  margin: 0 auto;
+  justify-items: center;
+}
+/*+++++++++++++++++*/
+
+/*HEADERS ++++++++++++++++++++++++++++*/
+.headerBlock1 {
+  background-color: var(--dark);
+}
+
+#logoImgHeader {
+  max-width:12%;
+  margin: 2%;
+}
+/*+++++++++++++++++*/
+
+/*FOOTER ++++++++++++++++++++++++++++*/
+#logoImgFooter {
+  display:flex;
+  margin:auto;
+  max-width:8%;
+  padding: 4px;
+}
+
+.footerText {
+  font-family: sans-serif;
+  font-size: 70%;
+  text-align: center;
+  color: var(--blank);
+  padding: 8px;
+}
+
+.footerIcons {
+  max-width: 3%;
+  margin-right: 5%;
+  margin-left: 20%;
+  margin-bottom: 1%;
+  margin-top: 1%;
+  text-decoration: none;
+}
+
+#iconsBlock {
+  text-decoration: none;
+}
+/*+++++++++++++++++*/
+
+/*SLIDER ++++++++++++++++++++++++++++*/
+.photoSlider {
+  width: 100%;
+  height: 130px;
+  overflow: hidden;
+}
+
+.photoSlider ul{
+  display: flex;
+  animation: slider 12s infinite alternate linear;
+  width: 400%;
+}
+
+.photoSlider li{
+  width: 100%;
+  list-style: none;
+}
+
+.photoSlider img{
+  width: 100%;
+  height: 100%;
+}
+
+.opacity30{
+  opacity:30%;
+}
+/*+++++++++++++++++*/
+
+/** GENERAL FRONT VIEWS +++++++++++++ */
+/* movie-card contiene informacion "detalle" y foto de la peli */
+
+/*INDEX ++++++++++++++++++++++++++++*/
+#indexBG {
+  display:grid;
+  background-image: url('../assets/spectacularOMG_logo_blue_small.png');
+  background-repeat: no-repeat;
+
+  background-color: var(--blue);
+  background-size: 25%;
+}
+
 .index a {
   display: block;
 }
+/*+++++++++++++++++*/
 
-/* movie-card contiene informacion "detalle" y foto de la peli */
+/*404 ++++++++++++++++++++++++++++*/
+
+#block404 {
+  display:flex;
+  justify-content: center;
+  background-color: var(--blank);
+}
+
+#block404 img{
+  width: 100%;
+  animation: breathing 5s ease-out infinite normal;
+
+  z-index: -1000px;
+}
+
+#goBackBtn {
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 100%;
+
+  color: var(--dark);
+  background-color: var(--blank);
+
+  border-radius: 5%;
+
+  display:flex;
+  justify-content: center;
+
+  transition:0.5s;
+}
+
+#goBackBtn:hover {
+  transform: scale(1.1);
+  background-color: rgb(197, 238, 197);
+}
+/*+++++++++++++++++*/
+
+/*DASHBOARD ++++++++++++++++++++++++++++*/
+#dashboardBtnBlock {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  gap: 10%;
+
+  background-color: var(--blank);
+}
+
+#searchBtn {
+  grid-column: 1/2;
+}
+
+#myMoviesBtn {
+  grid-column: 2/2;
+}
+.generalBtn {
+  background-color: var(--dark);
+  color: var(--blank);
+
+  padding-top: 2%;
+  padding-bottom: 2%;
+
+  font-family: sans-serif;
+  font-size: 100%;
+  text-decoration: none;
+
+  border-radius: 20%;
+
+  transition: 0.5s;
+}
+
+.generalBtn:hover{
+  border:2px solid var(--red);
+  background-color: var(--blank);
+  color: var(--dark);
+
+  transform: scale(2);
+}
+
+/*+++++++++++++++++*/
 .movie-card {
   margin: 50px auto;
   color: var(--dark);
@@ -106,6 +276,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+  .photoSlider {
+    height: 200px;
+  }
 }
 /*768px end.*/
 
@@ -113,6 +286,9 @@
                      media query 992px
 ======================================*/
 @media screen and (min-width: 992px) {
+  .photoSlider {
+    height: 300px;
+  }
 }
 /*992px end.*/
 
@@ -120,5 +296,49 @@
                     media query 1200px
 ======================================*/
 @media screen and (min-width: 1200px) {
+  .photoSlider {
+    height: 540px;
+  }
 }
 /*1200px end.*/
+
+/**KEYFRAMES +++++++++++++++++++ */
+@keyframes slider{
+  0%{margin-left: 0;}
+  20%{margin-left: 0;}
+
+  25%{margin-left: -100%;}
+  45%{marginleft: -100%;}
+
+  50%{margin-left: -200%;}
+  70%{margin-left: -200%;}
+
+  75%{margin-left: -300%;}
+  100%{margin-left: -300%;}
+}
+
+@keyframes breathing {
+  0% {
+    transform: scale(1.01);
+  }
+
+  15% {
+    transform: scale(1.03);
+  }
+
+  25% {
+    transform: scale(1.05);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+
+  60% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1.01);
+  }
+}
