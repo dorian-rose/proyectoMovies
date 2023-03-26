@@ -55,12 +55,21 @@ const getMovie = async (req, res) => {
       return res.render('movies', { error: 'Movie not found' });
     }
 
+    console.log('este es el titulo:', search)
     // Si se encontró la película en OMDB, obtener las reseñas y mostrarlas en la vista
-    const reviews = await scrapeMovieReviews(movie.Title);
+   
+   
+    const reviews = await scrapeMovieReviews(search);
 
-    //return res.render('movie', { movie, reviews });  no tengo la ruta para renderizar, lo saco por consola
-    console.log(movie)
+   // return res.render('movie', { movie, reviews });  no tengo la ruta para renderizar, lo saco por consola
+   
+   
+   console.log(movie)
+  
+  
     console.log('review', reviews)
+  
+  
   } catch (error) {
     console.error(error);
 
