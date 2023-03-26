@@ -7,7 +7,7 @@ const scrapeMovieReviews = async (movieTitle) => {
   try {
     // Navega a la página de la película en IMDb
     const url = `https://www.imdb.com/find?q=${movieTitle}&s=tt&ttype=ft&ref_=fn_ft`;
-    await page.goto(url, { waitUntil: 'networkidle0' });
+    await page.goto(url, { waitUntil: 'networkidle0' }); // 'networkidle0'hace que espere hasta que termina de cargar la páina
 
     // Obtiene el enlace de la película
     const link = await page.evaluate(() => {
