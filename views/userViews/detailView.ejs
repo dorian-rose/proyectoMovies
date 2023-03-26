@@ -1,5 +1,7 @@
-<%- include("./userTemplates/header") %><%- include("./userTemplates/nav") %> <%
-if (movieData.Response== "True"||movieData.ok !=false) { %>
+<%- include('./userTemplates/header2') %>
+<%- include("userTemplates/nav") %>
+
+<% if (movieData.Response== "True"||movieData.ok !=false) { %>
 
 <section class="movie-card centerText gridContainerMax-2c maxWidthMedium">
   <div>
@@ -26,4 +28,6 @@ if (movieData.Response== "True"||movieData.ok !=false) { %>
 
 <% } else { %>
 <p class="error-message"><%= movieData.msg %></p>
-<% } %> <%- include("./userTemplates/footer") %>
+<% } %>
+
+<%- include("./userTemplates/footer") %>
