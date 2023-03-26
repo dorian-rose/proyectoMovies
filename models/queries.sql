@@ -9,6 +9,6 @@ CREATE TABLE movies (
   id_movie serial NOT NULL PRIMARY KEY, 
   title varchar(100) NOT NULL, 
   id_users int,
-  database varchar(15),
+--   database varchar(15),
   FOREIGN KEY (id_users) REFERENCES users(id_users)
 )

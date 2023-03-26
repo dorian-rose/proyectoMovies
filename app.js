@@ -48,6 +48,8 @@ app.use('/admin', require('./routers/adminRouters')); //* Ver si la ruta llevarÃ
 app.use("/", require("./routers/frontRouters"));
 app.use("/", require("./routers/userRouters"));
 
+//router for user apis (user details and list 'mis pelis')
+app.use("/api", require("./routers/userApiRouters"));
 
 //* En caso de error, mandar a la pÃ¡gina 404 (Frontend y backend, hay que configurarlo)
 app.use((req, res, next) => {
