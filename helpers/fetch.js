@@ -33,6 +33,8 @@ const consultation = async (title, searchTerm, user) => {  //! ver qué modifica
             url = `${urlBase}apikey=${process.env.API_KEY_OMDB}&t=${title}`
             const response = await fetch(url);
             movies = await response.json();
+            
+           console.log(movies)
 
             if (movies.Response == "False") {
                 console.log("in mongo api consult");
@@ -51,7 +53,33 @@ const consultation = async (title, searchTerm, user) => {  //! ver qué modifica
             console.log("user", user)
             url = `http://localhost:3000/api/movie/${user}`
             const response = await fetch(url);
+   //// estaba en la rama de Dorian
             movies = await response.json();
+            return movies;
+        }
+  //// estaba en la rama de Dorian
+            movieTitles = await response.json();
+            return movieTitles;
+        }
+
+       
+        console.log(searchTerm)
+        if (searchTerm) {
+            url = `${urlBase}apikey=${process.env.API_KEY_OMDB}&t=${searchTerm}`
+            const response = await fetch(url);
+            movies = await response.json();
+           console.log(movies)
+            if (movies.Response == "False") {
+                console.log("in mongo api consult");
+                url = `${mongoUrlBase}${searchTerm}`;
+                console.log(url)
+                const response = await fetch(url);
+                data = await response.json();
+                if (data.ok) {
+                    movies = data.data
+                } else { movies = data }
+            }
+
             return movies;
         }
     }

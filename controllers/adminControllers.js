@@ -1,3 +1,4 @@
+const { errors } = require('puppeteer');
 const Movies = require('../models/movieModel');
 
 
@@ -37,7 +38,7 @@ const getMovieAdmin = async (req, res) => {
         const title = req.params.title;
         console.log("title =", title)
         const movie = await Movies.findOne({ Title: title });
-   
+
         if (movie) {
             return res.status(200).json({
                 ok: true,
@@ -60,41 +61,27 @@ const getMovieAdmin = async (req, res) => {
 
 
 const createMovie = async (req, res) => {
-    console.log('creando')
     const newMovies = new Movies(req.body);
 
     try {
 
-        const movies = await newMovies.save()
-
-        if (!movies) {
-
-            return res.status(404).json({
-                ok: false,
-                msg: 'CUATROCIENTOS CUATRO NOOOOOO!'
-            })
-
-        } else {
-
-            return res.redirect('/admin/movies')
-        }
-
+        await newMovies.save();
+        return res.redirect('/admin/movies');
 
     } catch (error) {
 
-        console.log(error)
+        const errors = res.locals.errors;
+        console.log(errors)
+        res.render('../views/admin/adminCreate.ejs', { errors });
+        
+    }
+};
 
-        return res.status(500).json({
-            ok: false,
-            msg: 'ERROR: no se ha podido crear la película.'
-        });
-
-    };
-}
 
 const formCreateMovie = async (req, res) => {
 
     res.render('../views/admin/adminCreate.ejs');
+
 
 };
 
@@ -114,7 +101,6 @@ const editMovie = async (req, res) => {
         const plot = req.body.Plot;
         const metascore = req.body.Metascore;
 
-
         const update = { 'Title': title, 'Year': year, 'Genre': genre, 'Director': director, 'Poster': poster, 'Runtime': runtime, 'Actors': actors, 'Plot': plot, 'Metascore': metascore };
 
         await Movies.findOneAndUpdate({ _id: id }, { $set: update });
@@ -122,37 +108,21 @@ const editMovie = async (req, res) => {
 
     } catch (error) {
 
-        return res.status(500).json({
-            ok: false,
-            msg: 'Error al buscar película para editar'
-        });
+        const movie = await Movies.findById(req.params.id);
+        const errors = res.locals.errors;
+        res.render('../views/admin/adminEdit.ejs', { movie, errors });
 
     };
 };
 
 const formEditMovie = async (req, res) => {
-    
-    try {
-        const id = req.params.id;
-        const movie = await Movies.findOne({ _id: id });
 
-        if (!movie) {
-            return res.status(404).json({
-                ok: false,
-                msg: 'Película no encontrada'
-            });
-        } else {
-            res.render('../views/admin/adminEdit.ejs', {
-                movie
-            });
-        }
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            ok: false,
-            msg: 'Error al buscar película para editar'
-        });
-    }
+    const id = req.params.id;
+    const movie = await Movies.findOne({ _id: id });
+    res.render('../views/admin/adminEdit.ejs', {
+        movie,
+    });
+
 };
 
 
