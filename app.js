@@ -1,5 +1,8 @@
 const express = require('express');
-const cors = require('cors');
+
+const cors = require("cors");
+
+//dotenv
 require('dotenv').config();
 //auth0
 const { auth } = require('express-openid-connect');
@@ -17,6 +20,8 @@ const { connection } = require('./helpers/dbConect')
 
 
 const app = express();
+
+app.use(cors());
 
 const port = process.env.PORT;
 

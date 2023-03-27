@@ -25,7 +25,6 @@ const getFaveMovies = async (user) => {
 
 //add assocoation for a favourite movie to user
 const addFaveMovie = async (user, title) => {
-    console.log("addmovie", user, title)
     let client, result;
     try {
         client = await pool.connect();
@@ -35,7 +34,6 @@ const addFaveMovie = async (user, title) => {
         console.log(error)
         throw error
     } finally { client.release() }
-
     return result
 }
 
