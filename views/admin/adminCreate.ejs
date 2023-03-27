@@ -21,24 +21,18 @@
 
         </section>
 
-        <% if(errors.length > 0) {%>
-            <% errors.forEach(element=> {%>
+        <% if(locals.errors && locals.errors.length> 0) { %>
+
+            <% locals.errors.forEach(element=> {
+
+                if (!element.msg.includes("Invalid value")) { %>
 
                 <p>
                     <%= element.msg %>
                 </p>
 
-                <% }); %>
+                <% } }) %>
 
-                    <% } else { %>
-
-                        <p>No hay ninguna error</p>
-
-                        <% } %>
-
-
-
-
-
+                    <% } %>
 
 <%- include('./templates/footer.ejs') %>
