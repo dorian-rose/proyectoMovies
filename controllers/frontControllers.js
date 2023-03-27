@@ -1,5 +1,7 @@
 const { consultation } = require('../helpers/fetch');
+const {connection} = require('../helpers/dbConect')
 const {scrapeMovieReviews}= require('../helpers/scraping')
+
 //Renderiza la vista inicial
 const getIndex = (req, res) => {
    //console.log(req.oidc.isAuthenticated())
@@ -25,8 +27,24 @@ const searchTitle = async (req, res) => {
     }
 };
 
+//Renderiza el dashboard
+const showDashboard = (req, res) => {
+  try {
+      res.render('userViews/dashboard')
+  } catch (error) {
+      console.log('FAILED to RENDER dashboard')
+  }
+}
 
-/////////
+//Renderiza la view del la barra de búsqueda
+const showSearch = (req, res) => {
+  try {
+      res.render('userViews/search')
+  } catch (error) {
+      console.log('FAILED to RENDER search')
+  }
+}
+
 const searchMovie = async (req, res) => {
     try {
       const { search } = req.body;
@@ -41,23 +59,21 @@ const searchMovie = async (req, res) => {
   
       // Si se encontraron películas en la base de datos, mostrarlas en la vista
       if (movies.length > 0) {
-        return res.render('movies', { movies });
+        //return res.render('movies', { movies });
+        console.log(movies)
       }
   
       // Si no se encontraron películas en la base de datos, mostrar un mensaje de error en la vista
       if (!movies || movies.length === 0) {
         await getMovie()
-      
-        
       }
-  
       // Si se encontraron películas en la base de datos, mostrarlas en la vista (aun no he pintado)
       const moviesToRender = movies.map(async (movie) => {
        
         return { movie };
       });
-  
-      return res.render('movies', { movies: moviesToRender });
+      //return res.render('myMovies', { movies: moviesToRender });
+
     } catch (error) {
       console.error(error);
   
@@ -78,23 +94,17 @@ const searchMovie = async (req, res) => {
   
       // Si no se encontró la película en OMDB, mostrar un mensaje de error en la vista
       if (!movie) {
-        return res.render('movies', { error: 'Movie not found' });
+      //  return res.render('myMovies', { error: 'Movie not found' });
       }
   
       console.log('este es el titulo:', search)
       // Si se encontró la película en OMDB, obtener las reseñas y mostrarlas en la vista
      
-     
-      
-  
       //return res.render('movie', { movie});  //no tengo la ruta para renderizar, lo saco por consola
-     
      
      console.log(movie)
     
-    
-      console.log('review', reviews)
-    
+      //console.log('review', reviews)
     
     } catch (error) {
       console.error(error);
@@ -105,12 +115,6 @@ const searchMovie = async (req, res) => {
       });
     }
   };
-
-
-
-
-
-
 
 //recoge datos y pinta lista "mis peliculas" (favourites)
 const getFavouriteMovies = async (req, res) => {
@@ -123,9 +127,9 @@ const getFavouriteMovies = async (req, res) => {
         movieList.forEach(movie => {
             //     const movieData = await consultation(movie.title)
         });
-        // res.render("userViews/detailView", {
-        //     movieData,
-        // });
+        res.render("userViews/myMovies", {
+            movieData,
+        });
     } catch (error) {
         return res.status(500).json({
             ok: false,
@@ -134,4 +138,12 @@ const getFavouriteMovies = async (req, res) => {
     }
 }
 
-module.exports = { searchTitle, getIndex, getFavouriteMovies, searchMovie, getMovie }
+module.exports = {
+  searchTitle,
+  getIndex,
+  getFavouriteMovies,
+  searchMovie,
+  getMovie,
+  showDashboard,
+  showSearch
+}

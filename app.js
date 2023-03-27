@@ -46,10 +46,8 @@ app.use('/admin', require('./routers/adminRouters')); //* Ver si la ruta llevarÃ
 //app.use("/api", require("./routers/apiRouters"));
 
 app.use("/", require("./routers/frontRouters"));
-app.use("/", require("./routers/userRouters"));
 
 //router for user apis (user details and list 'mis pelis')
-
 app.use("/api", require("./routers/userApiRouters")); //en srapping estÃ¡ comentado
 
 
