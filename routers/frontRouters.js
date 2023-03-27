@@ -4,13 +4,13 @@ const {
     searchTitle, getIndex, getMovie, searchMovie
 } = require("../controllers/frontControllers");
 
-router.get("/search/:title", searchTitle);
+router.get("/search-title/:title", searchTitle);
 router.get("/", getIndex);
 
-router.get('/search', getMovie)
-router.post("/search", getMovie); 
+//router.get('/search', getMovie)
+//router.post("/search", getMovie); 
 router.get('/search', searchMovie)
-router.post("/search", searchMovie); //
+router.post("/search", searchMovie); 
 
 
 
