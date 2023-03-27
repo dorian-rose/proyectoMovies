@@ -1,0 +1,47 @@
+<%- include('./templates/header.ejs') %>
+<%- include('./templates/nav.ejs') %>
+
+<section>
+
+    <form action="/admin/movies/create-movie" method="POST">
+
+        <input type="text" id="Title" name="Title" placeholder="Nombre de la película" class="">
+        <input type="text" id="Year" name="Year" placeholder="Año de la película" class="">
+        <input type="text" id="Runtime" name="Runtime" placeholder="Duración de la película" class="">
+        <input type="text" id="Genre" name="Genre" placeholder="Género de la película" class="">
+        <input type="text" id="Director" name="Director" placeholder="Director de la película" class="">
+        <input type="text" id="Poster" name="Poster" placeholder="Imagen de la película" class="">
+        <input type="text" id="Actors" name="Actors" placeholder="Actores de la película" class="">
+        <input type="text" id="Plot" name="Plot" placeholder="Trama de la película" class="">
+        <input type="text" id="Metascore" name="Metascore" placeholder="Puntuación de la película" class="">
+        
+        <input type="submit" value="Añadir Película">
+
+    </form>
+
+</section>
+
+
+
+<% if(Result.errors) {%>
+
+    <% Result.forEach(element=> {%>
+  
+        <p>
+            <%= element.msg %>
+        </p>
+  
+        <% }); %>
+  
+            <% } else { %>
+  
+                <p>No hay ninguna error</p>
+  
+                <% } %>
+  
+
+
+<%- include('./templates/footer.ejs') %>
+
+
+  

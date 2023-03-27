@@ -1,3 +1,4 @@
+const { errors } = require('puppeteer');
 const Movies = require('../models/movieModel');
 
 
@@ -68,11 +69,8 @@ const createMovie = async (req, res) => {
         const movies = await newMovies.save()
 
         if (!movies) {
-
-            return res.status(404).json({
-                ok: false,
-                msg: 'CUATROCIENTOS CUATRO NOOOOOO!'
-            })
+            console.log(movies, 'try create')
+            return res.redirect('back')
 
         } else {
 
@@ -82,7 +80,7 @@ const createMovie = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error)
+        console.log(error, 'catch create')
 
         return res.status(500).json({
             ok: false,
@@ -94,7 +92,13 @@ const createMovie = async (req, res) => {
 
 const formCreateMovie = async (req, res) => {
 
-    res.render('../views/admin/adminCreate.ejs');
+    
+
+    res.render('../views/admin/adminCreate.ejs',{
+        errors,   
+    });
+
+   
 
 };
 
@@ -143,7 +147,8 @@ const formEditMovie = async (req, res) => {
             });
         } else {
             res.render('../views/admin/adminEdit.ejs', {
-                movie
+                movie,
+                errors,
             });
         }
     } catch (error) {
