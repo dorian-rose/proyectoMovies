@@ -1,5 +1,5 @@
 <%- include('./templates/header.ejs') %>
-
+<%- include('./templates/nav.ejs') %>
 <section>
 
     <form action="/admin/movies/edit-movie/<%=movie._id%>" method="POST">
@@ -17,5 +17,19 @@
 
 </section>
 
+<% if(errors.length > 0) {%>
+    <% errors.forEach(element=> {%>
+
+        <p>
+            <%= element.msg %>
+        </p>
+
+        <% }); %>
+
+            <% } else { %>
+
+                <p>No hay ninguna error</p>
+
+                <% } %>
 
 <%- include('./templates/footer.ejs') %>

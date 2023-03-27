@@ -1,17 +1,32 @@
-const {validationResult}=require('express-validator');
+const { validationResult } = require('express-validator');
 
-const validarInputs = (req,res,next) => {
-    const errors = validationResult(req);
+const validateInputs = (req,res,next) => {
+    let errors = validationResult(req);
 
     if(!errors.isEmpty()){
-        return res.status(400).json ({
+        console.log(errors, 'estamos en validateInputs')
+        return res.render('admin/adminCreate', errors)
+        // status(400).json ({
+        //     ok:false,
+        //     erores:errors.mapped()
+        // })
+    }
+    next()
+}
+
+
+const validateInputsEdit = (req,res,next) => {
+    let errors = validationResult(req);
+
+    if(!errors.isEmpty()){
+        console.log(errors, 'estamos en validateInputs')
+        return res.status(400).json({
             ok:false,
             erores:errors.mapped()
         })
     }
     next()
 }
-
-module.exports={
-    validarInputs
+module.exports = {
+    validateInputs
 }
