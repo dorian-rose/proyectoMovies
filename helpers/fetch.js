@@ -54,9 +54,7 @@ const consultation = async (title, searchTerm, user) => {  //! ver qué modifica
             url = `http://localhost:3000/api/movie/${user}`
             const response = await fetch(url);
    //// estaba en la rama de Dorian
-            movies = await response.json();
-            return movies;
-        }
+        
   //// estaba en la rama de Dorian
             movieTitles = await response.json();
             return movieTitles;

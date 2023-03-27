@@ -1,4 +1,4 @@
-const { getFaveMovies, addFaveMovie, removeFaveMovie } = require("../models/favouritesModel");
+const { getFaveMovies, addFaveMovie, removeFaveMovie} = require("../models/favouritesModel");
 
 
 //URL for this function: /api/movie/:user 

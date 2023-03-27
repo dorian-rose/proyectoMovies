@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { searchTitle, getIndex, getFavouriteMovies, getMovie, searchMovie, showDashboard, showSearch
+const { searchTitle, getIndex, getFavouriteMovies, getMovie, searchMovie, showDashboard, showSearch, addFavouriteMovie
 } = require("../controllers/frontControllers");
 
 //INDEX renderView
@@ -24,7 +24,6 @@ router.post("/found-all", getMovie);
 // router.get('/found', searchMovie);
 // router.post('/found', searchMovie); 
 
-router.get("/search-title/:title", searchTitle);
 router.get("/movies/:user", getFavouriteMovies);
 router.post("/movies/add/:movie", addFavouriteMovie);
 

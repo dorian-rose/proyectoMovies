@@ -13,9 +13,9 @@ const searchTitle = async (req, res) => {
     const title = req.params.title
     try {
         const movieData = await consultation(title);
-        const reviews = await scrapeMovieReviews(search);
-        //console.log(movieData)
-        console.log(reviews)
+        //const reviews = await scrapeMovieReviews(search);
+        console.log(movieData)
+        //console.log(reviews)
         res.render("userViews/detailView", {
             movieData,
         });
@@ -152,5 +152,7 @@ module.exports = {
   //searchMovie,
   getMovie,
   showDashboard,
-  showSearch
+  showSearch,
+  addFavouriteMovie,
+  
 }
