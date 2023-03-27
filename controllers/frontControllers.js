@@ -24,24 +24,44 @@ const searchTitle = async (req, res) => {
 
 //recoge datos y pinta lista "mis peliculas" (favourites)
 const getFavouriteMovies = async (req, res) => {
-    const user = 1
+    const user = req.params.user
+    const arrayMovies = []
     try {
         const data = await consultation(null, null, user);
         const movieList = data.data
-        console.log(movieList[0])
+        //movieList.forEach(movie => {
+        for (let movie of movieList) {
+            const movieData = await consultation(movie.title)
+            arrayMovies.push(movieData)
+        }
+        console.log(arrayMovies)
 
-        movieList.forEach(movie => {
-            //     const movieData = await consultation(movie.title)
-        });
-        // res.render("userViews/detailView", {
-        //     movieData,
-        // });
+        res.render("userViews/favouriteMovies", { arrayMovies })
+
     } catch (error) {
         return res.status(500).json({
             ok: false,
-            msg: "Error retrieving movies",
+            msg: "Error retrieving favourite movies",
         });
     }
 }
 
-module.exports = { searchTitle, getIndex, getFavouriteMovies }
+//recoge datos y pinta lista "mis peliculas" (favourites)
+const addFavouriteMovie = async (req, res) => {
+    console.log("here in front controller add movie")
+    const user = "4"
+    movie = req.body.movie
+    const title = JSON.stringify({ title: movie })
+    try {
+        await consultation(title, null, user);
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            msg: "Error adding movies",
+        });
+    }
+}
+
+
+
+module.exports = { searchTitle, getIndex, getFavouriteMovies, addFavouriteMovie }

@@ -1,7 +1,5 @@
-<%- include('./userTemplates/header2') %>
-<%- include("userTemplates/nav") %>
-
-<% if (movieData.Response== "True"||movieData.ok !=false) { %>
+<%- include('./userTemplates/header2') %> <%- include("userTemplates/nav") %> <%
+if (movieData.ok !=false||movieData.Response== "True") { %>
 
 <section class="movie-card centerText gridContainerMax-2c maxWidthMedium">
   <div>
@@ -20,14 +18,26 @@
     <p><%= movieData.Actors %></p>
     <h4>Plot:</h4>
     <p><%= movieData.Plot %></p>
-    <a href="http://localhost:3000/search/lion king"
-      ><i class="fa-solid fa-heart favourite-button"></i
-    ></a>
+    <a href="http://localhost:3000/movies/add/2/Walkabout"
+      >Add to favourites
+    </a>
+
+    <form
+      action="http://localhost:3000/movies/add"
+      method="post"
+      id="add-movie"
+    >
+      <input
+        type="text"
+        name="movie"
+        id="movie"
+        value="<%= movieData.Title %>"
+      />
+      <input type="submit" />
+    </form>
   </article>
 </section>
 
 <% } else { %>
 <p class="error-message"><%= movieData.msg %></p>
-<% } %>
-
-<%- include("./userTemplates/footer") %>
+<% } %> <%- include("./userTemplates/footer") %>
