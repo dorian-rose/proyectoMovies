@@ -87,14 +87,22 @@ const showSearch = (req, res) => {
   const getMovie = async (req, res) => {
     try {
       const { search } = req.body;
+      const arraySearchResult = [];
+
       console.log(search, 'estamos en getMovie');
       // Buscar película en OMDB
       const movie = await consultation(null, search, null);
+
+      arraySearchResult.push(movie);
+      console.log('este es el array results', arraySearchResult);
+
       if (!movie) {
         //return res.render('movies', { error: 'Movie not found' });
       }
       console.log('este es el titulo:', search)
-     //console.log(movie)
+
+     res.render('userViews/searchResults', {arraySearchResult});
+
     } catch (error) {
       console.error(error);
   

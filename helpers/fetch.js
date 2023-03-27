@@ -53,15 +53,11 @@ const consultation = async (title, searchTerm, user) => {  //! ver qué modifica
             console.log("user", user)
             url = `http://localhost:3000/api/movie/${user}`
             const response = await fetch(url);
-   //// estaba en la rama de Dorian
-        
-  //// estaba en la rama de Dorian
+
             movieTitles = await response.json();
             return movieTitles;
         }
 
-       
-        console.log(searchTerm)
         if (searchTerm) {
             url = `${urlBase}apikey=${process.env.API_KEY_OMDB}&t=${searchTerm}`
             const response = await fetch(url);
@@ -70,7 +66,7 @@ const consultation = async (title, searchTerm, user) => {  //! ver qué modifica
             if (movies.Response == "False") {
                 console.log("in mongo api consult");
                 url = `${mongoUrlBase}${searchTerm}`;
-                console.log(url)
+                // console.log(url)
                 const response = await fetch(url);
                 data = await response.json();
                 if (data.ok) {
