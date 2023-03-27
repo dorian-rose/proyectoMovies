@@ -49,7 +49,9 @@ app.use("/", require("./routers/frontRouters"));
 app.use("/", require("./routers/userRouters"));
 
 //router for user apis (user details and list 'mis pelis')
-//app.use("/api", require("./routers/userApiRouters"));
+
+app.use("/api", require("./routers/userApiRouters")); //en srapping está comentado
+
 
 //* En caso de error, mandar a la página 404 (Frontend y backend, hay que configurarlo)
 app.use((req, res, next) => {

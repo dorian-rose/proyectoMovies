@@ -7,14 +7,18 @@
 
 /**paleta de colores*/
 :root {
+
   
   --dark-blue: rgb(69 0 255);
+
   --blue: rgb(0 106 244);
   --light-blue: rgb(27 164 224);
   --aqua-blue: rgb(82 209 219);
   --red: rgb(255 42 0);
+
   --blank: rgb(228, 249, 250);
   --dark: rgb(33, 36, 37);
+
 }
 /**++++++++++++++++++*/
 

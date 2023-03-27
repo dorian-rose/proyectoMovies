@@ -25,6 +25,7 @@ const searchTitle = async (req, res) => {
     }
 };
 
+
 /////////
 const searchMovie = async (req, res) => {
     try {
@@ -109,4 +110,28 @@ const searchMovie = async (req, res) => {
 
 
 
-module.exports = { searchTitle, getIndex, searchMovie, getMovie }
+
+
+//recoge datos y pinta lista "mis peliculas" (favourites)
+const getFavouriteMovies = async (req, res) => {
+    const user = 1
+    try {
+        const data = await consultation(null, null, user);
+        const movieList = data.data
+        console.log(movieList[0])
+
+        movieList.forEach(movie => {
+            //     const movieData = await consultation(movie.title)
+        });
+        // res.render("userViews/detailView", {
+        //     movieData,
+        // });
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            msg: "Error retrieving movies",
+        });
+    }
+}
+
+module.exports = { searchTitle, getIndex, getFavouriteMovies, searchMovie, getMovie }
