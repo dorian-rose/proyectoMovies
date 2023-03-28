@@ -14,9 +14,7 @@ router.post('/movies/create-movie', [
   checkSchema(createEditMovieSchema),
   validateInputs
 ],
-  (req, res) => {
-    createMovie(req, res);
-  });
+  createMovie);
 
 router.get('/movies/create-form', formCreateMovie);
 
@@ -24,9 +22,7 @@ router.post('/movies/edit-movie/:id', [
   checkSchema(createEditMovieSchema),
   validateInputs
 ],
-  (req, res) => {
-   editMovie(req, res);
-});
+  editMovie);
 
 router.get('/movies/edit-form/:id', formEditMovie);
 

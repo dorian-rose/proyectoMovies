@@ -51,7 +51,7 @@ const createEditMovieSchema = {
     //isURL: true,
     notEmpty: true,
     errorMessage: 'La imagen debe ser una URL'
-  }
+  },
 };
 
 module.exports = createEditMovieSchema;

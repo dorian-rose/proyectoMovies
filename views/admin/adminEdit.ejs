@@ -3,31 +3,34 @@
         <section>
 
             <form action="/admin/movies/edit-movie/<%=movie._id%>" method="POST">
+                
                 <input type="text" id="Title" name="Title" placeholder="nombre de la película" class=""
-                    value="<%= movie.Title %>">
+                    value="<%=movie.Title%>">
                 <input type="text" id="Year" name="Year" placeholder="Año de la película" class=""
-                    value="<%= movie.Year %>">
+                    value="<%=movie.Year%>">
                 <input type="text" id="Runtime" name="Runtime" placeholder="Duración de la película" class=""
-                    value="<%= movie.Runtime %>">
+                    value="<%=movie.Runtime%>">
                 <input type="text" id="Genre" name="Genre" placeholder="Género de la película" class=""
-                    value="<%= movie.Genre %>">
+                    value="<%=movie.Genre%>">
                 <input type="text" id="Director" name="Director" placeholder="Director de la película" class=""
-                    value="<%= movie.Director %>">
+                    value="<%=movie.Director%>">
                 <input type="text" id="Poster" name="Poster" placeholder="Imagen de la película" class=""
-                    value="<%= movie.Poster %>">
+                    value="<%=movie.Poster%>">
                 <input type="text" id="Actors" name="Actors" placeholder="Actores de la película" class=""
-                    value="<%= movie.Actors%>">
+                    value="<%=movie.Actors%>">
                 <input type="text" id="Plot" name="Plot" placeholder="Trama de la película" class=""
-                    value="<%= movie.Plot%>">
+                    value="<%=movie.Plot%>">
                 <input type="text" id="Metascore" name="Metascore" placeholder="Puntuación de la película" class=""
-                    value="<%= movie.Metascore%>">
+                    value="<%=movie.Metascore%>">
+                <textarea type="text" id="Review" name="Review" placeholder="Añada aquí su opinión" class="" rows="6" cols="50" value="<%=movie.Review%>"></textarea>
                 <input type="submit" value="Editar Película">
             </form>
 
         </section>
-
-        <% if(locals.errors && locals.errors.length> 0) { %>
-            <% locals.errors.forEach(element=> {
+       
+        <% if (typeof errors !== 'undefined') { %>
+         
+            <% errors.forEach(element=> {
 
                 if (!element.msg.includes("Invalid value")) { %>
 
