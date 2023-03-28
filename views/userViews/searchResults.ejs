@@ -1,32 +1,7 @@
-<%-include('./userTemplates/header2') %>
-<%-include("userTemplates/nav") %>
+<%-include('./userTemplates/header2') %> 
 
-<% if (arraySearchResult.length > 0) { %>
-<h1 class="centerText">Search Results</h1>
-<section class="gridContainerMax-2c">
-  <% arraySearchResult.forEach(movie => { %>
-  <article class="movie-card centerText gridContainerMax-2c maxWidthMedium">
-    <div>
-      <img src="<%=movie.Poster%>" alt="<%=movie.Title %>">
-      <a href= <%=`/search/${movie.Title}`%> >See More</a>
-    </div>
-    
-    <div>
-      <h1><%=movie.Title %></h1>
-      <div class="movie-facts">
-        <span>Year: <%=movie.Year%>, </span
-        ><span>Duration: <%= movie.Runtime %>, </span>
-        <span>Genre: <%= movie.Genre %> </span>
-      </div>
-      <h4>Director:</h4>
-      <p><%= movie.Director %></p>
 
-      <h3>Sinopsis</h3>
-      <p><%= movie.Plot %></p>
-    </div>
-  </article>
-  <% }) %>
-</section>
-<% } else { %>
-<p class="error-message">No movies found</p>
-<% } %> <%- include("./userTemplates/footer") %>
+
+
+
+<%- include("./userTemplates/footer") %>

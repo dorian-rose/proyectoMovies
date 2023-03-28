@@ -1,6 +1,7 @@
 const { consultation } = require('../helpers/fetch');
 const {connection} = require('../helpers/dbConect')
 const {scrapeMovieReviews}= require('../helpers/scraping')
+const mongoose = require('mongoose');
 
 //Renderiza la vista inicial
 const getIndex = (req, res) => {
@@ -10,11 +11,9 @@ const getIndex = (req, res) => {
 
 //Recoge datos de una pelicula por su titulo y pinta 
 const searchTitle = async (req, res) => {
-    const title = req.params.title
     try {
         const movieData = await consultation(title);
         //const reviews = await scrapeMovieReviews(search);
-        console.log(movieData)
         //console.log(reviews)
         res.render("userViews/detailView", {
             movieData,
@@ -85,23 +84,35 @@ const showSearch = (req, res) => {
 //   };
   
   const getMovie = async (req, res) => {
+
+    console.log('entra en get movie')
+
+    let resultados;
     try {
-      const { search } = req.body;
-      const arraySearchResult = [];
+      const {search}  = req.body;
+      const regex = /\s/g;
+      const titulo = search.replace(regex, "-")
+      console.log({titulo})
 
-      console.log(search, 'estamos en getMovie');
-      // Buscar película en OMDB
-      const movie = await consultation(null, search, null);
+        console.log('console.l',`${process.env.URLBASEMONGO}${titulo}`)
 
-      arraySearchResult.push(movie);
-      console.log('este es el array results', arraySearchResult);
+        const moviesMongo = await consultation((`${process.env.URLBASEMONGO}${titulo}`, 'get'))
 
-      if (!movie) {
-        //return res.render('movies', { error: 'Movie not found' });
+        // const moviesMongo = await consultation((`http://localhost:3000/admin/movies/title/unico`, 'get'))
+        console.log('Esto es lo que devuelve el mongo', moviesMongo)
+
+        resultados={moviesMongo};
+
+        if(moviesMongo == undefined){
+
+        // Buscar película en OMDB
+        const movie = await consultation(`${process.env.URLBASEOMDB}&s=${search}`, 'get', req.body);
+        //console.log(movie)
+        resultados={movie};
       }
-      console.log('este es el titulo:', search)
-
-     res.render('userViews/searchResults', {arraySearchResult});
+    
+      
+     res.render('userViews/searchResults', resultados);
 
     } catch (error) {
       console.error(error);

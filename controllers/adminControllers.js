@@ -15,12 +15,18 @@ const getMoviesAdmin = async (req, res) => {
             })
 
         } else {
-            return res.render('admin/adminView', {
-                movies,
+            res.render('admin/adminView', {
+                movies
             })
-
-        }
-
+            return res.status(200).json({
+                ok: true,
+                msg: "Movie retrieved",
+                data: movies,
+                
+            })
+            
+        } 
+            
 
     } catch (error) {
         return res.status(500).json({
@@ -34,7 +40,6 @@ const getMoviesAdmin = async (req, res) => {
 const getMovieAdmin = async (req, res) => {
 
     try {
-
         const title = req.params.title;
         console.log("title =", title)
         const movie = await Movies.findOne({ Title: title });

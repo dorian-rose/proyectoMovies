@@ -19,7 +19,7 @@ router.get("/search-title/:title", searchTitle);
 //myMovies renderView
 router.get("/myMovies", getFavouriteMovies);
 
-router.get('/found-all', getMovie);
+//router.get('/found-all', getMovie);
 router.post("/found-all", getMovie);
 // router.get('/found', searchMovie);
 // router.post('/found', searchMovie); 
