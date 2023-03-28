@@ -82,39 +82,34 @@ const showSearch = (req, res) => {
 //       });
 //     }
 //   };
-  
-  const getMovie = async (req, res) => {
 
-    console.log('entra en get movie')
+const getMovie = async (req, res) => {
+
+    console.log('entramos en función getMovie - front controller, y estamos justo ANTES del TRY')
 
     let resultados;
     try {
       const {search}  = req.body;
       const regex = /\s/g;
       const titulo = search.replace(regex, "-")
-      console.log({titulo})
 
-        console.log('console.l',`${process.env.URLBASEMONGO}${titulo}`)
-
-        const moviesMongo = await consultation((`${process.env.URLBASEMONGO}${titulo}`, 'get'))
-
+        // console.log('console.l',`${process.env.URLBASEMONGO}${titulo}`)
+        // const moviesMongo = await consultation((`${process.env.URLBASEMONGO}${titulo}`, 'get'))
         // const moviesMongo = await consultation((`http://localhost:3000/admin/movies/title/unico`, 'get'))
-        console.log('Esto es lo que devuelve el mongo', moviesMongo)
+        // console.log('Esto es lo que devuelve el mongo', moviesMongo)
+        // resultados={moviesMongo};
 
-        resultados={moviesMongo};
-
-        if(moviesMongo == undefined){
-
+        // if(moviesMongo == undefined){
         // Buscar película en OMDB
-        const movie = await consultation(`${process.env.URLBASEOMDB}&s=${search}`, 'get', req.body);
-        //console.log(movie)
-        resultados={movie};
+        const movie = await consultation(`${process.env.URLBASEOMDB}&s=${search}`, 'get');
+        results={movie};
+
+        console.log(results)
+
+        res.render('userViews/searchResults', results);
       }
     
-      
-     res.render('userViews/searchResults', resultados);
-
-    } catch (error) {
+     catch (error) {
       console.error(error);
   
       return res.status(500).json({
@@ -122,7 +117,7 @@ const showSearch = (req, res) => {
         msg: 'Error retrieving movie',
       });
     }
-  };
+};
 
 //recoge datos y pinta lista "mis peliculas" (favourites)
 const getFavouriteMovies = async (req, res) => {
