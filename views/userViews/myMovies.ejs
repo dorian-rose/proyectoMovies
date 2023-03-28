@@ -17,7 +17,20 @@ if (arrayMovies.length > 0) { %>
       </div>
       <h4>Director:</h4>
       <p><%= movie.Director %></p>
-      <a href="#">Remove from favourites</a>
+     <form
+      action="http://localhost:3000/movies/add"
+      method="post"
+      id="add-movie"
+    >
+      <input
+        class="display-none"
+        type="text"
+        name="title"
+        id="title"
+        value="<%= movie.Title %>"
+      />
+      <input type="submit" value="add to favourites" />
+    </form>
     </div>
   </article>
   <% }) %>

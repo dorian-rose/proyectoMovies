@@ -38,16 +38,12 @@ const addFaveMovie = async (user, title) => {
 }
 
 //delete an entry 
-const removeFaveMovie = async (title) => {
+const removeFaveMovie = async (title, user) => {
     let client, result;
     try {
         client = await pool.connect();
-        const data = await client.query(queries.getEntriesByTitle, [title])
-        const entry = data.rows
-        if (entry.length > 0) {
-            await client.query(queries.deleteEntries, [title]);
-            result = { ok: true, msg: "entry deleted" }
-        } else { result = { ok: false, msg: "Title doesn't exist" } }
+        await client.query(queries.deleteFavourite, [title, user]);
+        result = { ok: true, msg: "movie removed" }
     } catch (error) {
         console.log(error)
         throw error

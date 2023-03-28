@@ -49,6 +49,10 @@
   margin: 0 auto;
   justify-items: center;
 }
+
+.display-none {
+  display: none;
+}
 /*+++++++++++++++++*/
 
 /*HEADERS ++++++++++++++++++++++++++++*/

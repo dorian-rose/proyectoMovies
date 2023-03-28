@@ -18,9 +18,7 @@ if (movieData.ok !=false||movieData.Response== "True") { %>
     <p><%= movieData.Actors %></p>
     <h4>Plot:</h4>
     <p><%= movieData.Plot %></p>
-    <a href="http://localhost:3000/movies/add/2/Walkabout"
-      >Add to favourites
-    </a>
+    <a href="http://localhost:3000/movies/add/Walkabout">Add to favourites </a>
 
     <form
       action="http://localhost:3000/movies/add"
@@ -28,12 +26,13 @@ if (movieData.ok !=false||movieData.Response== "True") { %>
       id="add-movie"
     >
       <input
+        class="display-none"
         type="text"
-        name="movie"
-        id="movie"
+        name="title"
+        id="title"
         value="<%= movieData.Title %>"
       />
-      <input type="submit" />
+      <input type="submit" value="add to favourites" />
     </form>
   </article>
 </section>

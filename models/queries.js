@@ -8,7 +8,11 @@ const queries = {
 
     addFavourite: `INSERT INTO movies(id_users, title)
 VALUES 
-($1, $2)`
+($1, $2)`,
+
+    deleteFavourite: `DELETE 
+FROM movies 
+WHERE title =$1 and id_users=$2`
 }
 
 module.exports = queries

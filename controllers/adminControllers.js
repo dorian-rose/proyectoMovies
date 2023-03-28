@@ -3,6 +3,7 @@ const Movies = require('../models/movieModel');
 
 
 const getMoviesAdmin = async (req, res) => {
+
     try {
 
         const movies = await Movies.find()
@@ -34,23 +35,16 @@ const getMoviesAdmin = async (req, res) => {
 const getMovieAdmin = async (req, res) => {
 
     try {
-
         const title = req.params.title;
-        console.log("title =", title)
         const movie = await Movies.findOne({ Title: title });
-
         if (movie) {
             return res.status(200).json({
                 ok: true,
                 msg: "Movie retrieved",
                 data: movie,
             });
-        } else {
-            return res.status(404).json({
-                ok: false,
-                msg: "This movie doesn't exist",
-            });
         }
+        else { throw error }
     } catch (error) {
         return res.status(500).json({
             ok: false,
@@ -73,7 +67,7 @@ const createMovie = async (req, res) => {
         const errors = res.locals.errors;
         console.log(errors)
         res.render('../views/admin/adminCreate.ejs', { errors });
-        
+
     }
 };
 

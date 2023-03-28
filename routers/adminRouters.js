@@ -25,8 +25,8 @@ router.post('/movies/edit-movie/:id', [
   validateInputs
 ],
   (req, res) => {
-   editMovie(req, res);
-});
+    editMovie(req, res);
+  });
 
 router.get('/movies/edit-form/:id', formEditMovie);
 
