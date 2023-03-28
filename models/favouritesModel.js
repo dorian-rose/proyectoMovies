@@ -23,6 +23,19 @@ const getFaveMovies = async (user) => {
     return result
 }
 
+const getOneFave = async (user, title) => {
+    let client, result;
+    try {
+        client = await pool.connect();
+        const data = await client.query(queries.getFavourite, [user, title])
+        result = data.rows
+    } catch (error) {
+        console.log(error)
+        throw error
+    } finally { client.release() }
+    return result
+}
+
 //add assocoation for a favourite movie to user
 const addFaveMovie = async (user, title) => {
     let client, result;
@@ -52,4 +65,4 @@ const removeFaveMovie = async (title, user) => {
 }
 
 
-module.exports = { getFaveMovies, addFaveMovie, removeFaveMovie }
+module.exports = { getFaveMovies, addFaveMovie, removeFaveMovie, getOneFave }

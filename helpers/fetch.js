@@ -2,8 +2,13 @@
 const consultation = async (url, method, body = {}) => {  //! ver qué modificar
     let options = {};
     const data = { ...body }
+    if (data.title) {
+        const titleSpaced = data.title.replaceAll("_", " ")
+        data.title = titleSpaced
+    }
+
     try {
-        if (method == "POST" || method == "PUT") {
+        if (method == "POST" || method == "PUT" || method == "DELETE") {
             options = {
                 method: method,
                 body: JSON.stringify(data),
@@ -12,15 +17,7 @@ const consultation = async (url, method, body = {}) => {  //! ver qué modificar
                 }
             }
         }
-        if (method == "DELETE") {
-            options = {
-                method: method,
-                body: JSON.stringify(body),
-                headers: {
-                    "Content-type": "application/json",
-                }
-            }
-        }
+
 
         let respuesta = await fetch(url, options);
         let resp = await respuesta.json();

@@ -49,10 +49,13 @@
   margin: 0 auto;
   justify-items: center;
 }
-
-.display-none {
+.none {
   display: none;
 }
+.display {
+  display: block;
+}
+
 /*+++++++++++++++++*/
 
 /*HEADERS ++++++++++++++++++++++++++++*/
@@ -67,6 +70,10 @@
 /*+++++++++++++++++*/
 
 /*FOOTER ++++++++++++++++++++++++++++*/
+footer {
+  margin-top: 40px;
+}
+
 #logoImgFooter {
   display: flex;
   margin: auto;
@@ -270,7 +277,7 @@
   margin: 30px 15px 15px;
 }
 .movie-card a {
-  display: block;
+  /* display: block; */
   margin: 20px 0 5px;
 }
 /*+++++++++++++++++*/

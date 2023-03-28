@@ -10,9 +10,13 @@ const getIndex = (req, res) => {
 
 //Recoge datos de una pelicula por su titulo y pinta 
 const searchTitle = async (req, res) => {
+    let remove;
+    let add;
+    user = "3"
     const title = req.params.title
     const urlMongo = `http://localhost:3000/admin/movies/title/${title}`
     const url = `http://www.omdbapi.com/?apikey=cf8ab226&t=${title}`
+    const urlUsers = `http://localhost:3000/api/movie/${user}/${title}`
     const method = "GET"
     let movieData;
     try {
@@ -20,14 +24,22 @@ const searchTitle = async (req, res) => {
         if (result.ok) {
             movieData = result.data
         } else {
-            console.log("OMBD")
             movieData = await consultation(url, method)
-            console.log(movieData)
         }
-        //const reviews = await scrapeMovieReviews(search);
-        //console.log(reviews)
+        const data = await consultation(urlUsers, method);
+        if (data.data.length > 0) {
+            remove = "display"
+            add = "none"
+        } else {
+            remove = "display"
+            add = "none"
+        }
+        // const reviews = await scrapeMovieReviews(search);
+        // console.log(reviews)
         res.render("userViews/detailView", {
             movieData,
+            remove,
+            add
         });
     } catch (error) {
         return res.status(500).json({
@@ -79,26 +91,28 @@ const getMovie = async (req, res) => {
 
 //recoge datos y pinta lista "mis peliculas" (favourites)
 const getFavouriteMovies = async (req, res) => {
-    console.log("in get favourites")
-    const user = 3
+    const user = 3 // to be updated
     const urlUsers = `http://localhost:3000/api/movies/${user}`
     const method = "GET"
     const arrayMovies = []
     try {
-        let movieData;
         const data = await consultation(urlUsers, method);
         const movieList = data.data
         for (let movie of movieList) {
-            movieData = await consultation(movie.title)
-            //arrayMovies.push(movieData)
-            ///////
-            movieData = await consultation(urlMongo, method)
-            if (!movieData.ok) {
+            let movieData;
+            const title = movie.title
+            const urlMongo = `http://localhost:3000/admin/movies/title/${title}`
+            const url = `http://www.omdbapi.com/?apikey=cf8ab226&t=${title}`
+            const result = await consultation(urlMongo, method)
+            if (result.ok) {
+                movieData = result.data
+            } else {
                 movieData = await consultation(url, method)
             }
             arrayMovies.push(movieData)
         }
-        res.render("userViews/favouriteMovies", { arrayMovies })
+        // res.render("userViews/favouriteMovies", { arrayMovies })
+        res.render("userViews/myMovies", { arrayMovies })
 
     } catch (error) {
         return res.status(500).json({
@@ -110,39 +124,44 @@ const getFavouriteMovies = async (req, res) => {
 
 //recoge datos y pinta lista "mis peliculas" (favourites)
 const addFavouriteMovie = async (req, res) => {
-
-    const user = "4"
+    const user = "3"
     const title = req.params.title
     const body = { title }
-    console.log(title)
+    method = "POST"
+    const urlUsers = `http://localhost:3000/api/movie/add/${user}`
+
     try {
-        const response = await consultation(body, null, user, method = "POST");
-        data = await response.json()
-        console.log(data);
+        const response = await consultation(urlUsers, method, body);
+        if (response.ok) {
+            res.redirect("back")
+        }
     } catch (error) {
-        return res.status(500).json({
+        res.status(500).json({
             ok: false,
             msg: "Error adding movies",
         });
     }
-    res.redirect(`http://localhost:3000/search-title/${req.body.title}`)
+    //res.redirect(`http://localhost:3000/search-title/${req.body.title}`)   
 }
 
 const deleteFavourite = async (req, res) => {
+    const user = "3"
+    const title = req.params.title
+    const body = { title }
+    method = "DELETE"
+    const urlUsers = `http://localhost:3000/api/movie/delete/${user}`
 
-    const title = req.params.title;
-    const user = 4
     try {
-        await consultation(title, null, user, method = "DELETE");
-        // data = await response.json()
-        // console.log(data);
+        const response = await consultation(urlUsers, method, body);
+        if (response.ok) {
+            res.redirect("back")
+        } else { throw error }
     } catch (error) {
         return res.status(500).json({
             ok: false,
             msg: "Error error deleting favourite",
         });
     }
-    res.redirect(`http://localhost:3000/movies/${user}`);
 }
 
 module.exports = {

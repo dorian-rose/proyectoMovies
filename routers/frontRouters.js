@@ -27,6 +27,6 @@ router.post("/found-all", getMovie);
 router.get("/movies", getFavouriteMovies);
 router.get("/movies/add/:title", addFavouriteMovie);
 
-router.delete("/movies/delete/:title", deleteFavourite);
+router.get("/movies/delete/:title", deleteFavourite);
 
 module.exports = router;
