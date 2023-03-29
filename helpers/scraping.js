@@ -1,88 +1,107 @@
 const puppeteer = require('puppeteer');
 
-const scrapeMovieReviews = async (movieTitle) => {
-  const browser = await puppeteer.launch({ headless: true });
+const getReviews=async(movieTitle) =>{
+  let reviews = [];
+
+  // Crea una instancia de Puppeteer
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
   try {
-    // Navega a la página de la película en IMDb
-    const url = `https://www.imdb.com/find?q=${movieTitle}&s=tt&ttype=ft&ref_=fn_ft`;
-    await page.goto(url, { waitUntil: 'networkidle0' }); // 'networkidle0'hace que espere hasta que termina de cargar la páina
+    // Navega a la página de búsqueda de Filmaffinity
+    await page.goto(`https://www.filmaffinity.com/es/search.php?stext=${movieTitle}&stype=title`);
 
-    // Obtiene el enlace de la película
-    const link = await page.evaluate(() => {
-      const result = document.querySelector('.findResult .result_text a');
-      return result ? result.href : null;
-    });
+    // Espera a que la página cargue y busca el primer resultado
+    await page.waitForSelector('.movie-card-1');
+    const resultLink = await page.$('.movie-card-1 a');
 
-    if (!link) {
-      throw new Error(`No se pudo encontrar el enlace de IMDb para la película ${movieTitle}`);
+    // Si no se encuentra ningún resultado, devuelve un array vacío
+    if (!resultLink) {
+      return reviews;
     }
 
-    // Navega a la página de reseñas de la película en IMDb
-    await page.goto(`${link}reviews`, { waitUntil: 'networkidle0' });
+    // Navega al enlace del resultado y espera a que la página cargue
+    const resultUrl = await resultLink.evaluate(link => link.href);
+    await page.goto(resultUrl);
+    await page.waitForSelector('.pro-review[itemprop="review"]');
 
-    // Espera a que carguen todas las reseñas
-    await page.waitForTimeout(5000); // Espera 5 segundos
-
-    // Extrae las reseñas
-    const reviews = await page.evaluate(() => {
-      const reviewList = document.querySelectorAll('.lister-item-content');
-      const reviewsArray = [];
-      for (let i = 0; i < reviewList.length; i++) {
-        const review = reviewList[i];
-        const title = review.querySelector('.title').innerText;
-        const rating = review.querySelector('.rating-other-user-rating span:first-child').innerText;
-        const content = review.querySelector('.content .text').innerText;
-        reviewsArray.push({ title, rating, content });
-      }
-      return reviewsArray;
-    });
-
-    return reviews;
-  } catch (error) {
-    console.error(error);
-    return null;
+    // Extrae el contenido de todos los divs con la clase "pro-review" e itemprop="review"
+    const reviewDivs = await page.$$('.pro-review[itemprop="review"]');
+    for (const reviewDiv of reviewDivs) {
+      const review = await page.evaluate(div => div.innerText.trim(), reviewDiv);
+      reviews.push(review);
+    }
+  } catch (err) {
+    console.error(err);
   } finally {
+    // Cierra la instancia de Puppeteer
     await browser.close();
   }
-};
+
+  // Devuelve el array de reseñas
+  console.log(reviews.join('\n---\n'));
+}
 
 
-//ejemplo de srapping en una pagina más fácil de acceder
+module.exports={
+  getReviews
+}
+
+// Ejemplo de uso
+//getReviews('avatar')
 
 
-// const crapeMovieReviews =()=>(tituloPelicula) {
-//     const browser = await puppeteer.launch();
-//     const page = await browser.newPage();
-//     await page.goto('http://www.bandejadeplata.com/criticas-de-cine/');
-  
-//     // Ingresa el título de la película en el cuadro de búsqueda y haz clic en el botón de búsqueda
-//     await page.type('#s', tituloPelicula);
-//     await page.click('#searchsubmit');
-  
-//     // Espera a que la página de resultados cargue y haz clic en la primera reseña
-//     await page.waitForSelector('.post h2 a');
-//     await page.click('.post h2 a');
-  
-//     // Espera a que la página de la reseña cargue y extrae su contenido por consola
-//     await page.waitForSelector('.entry-content');
-//     const contenidoResena = await page.$eval('.entry-content', elemento => elemento.textContent);
-//     console.log(contenidoResena);
-  
+
+
+// const puppeteer = require('puppeteer');
+
+// async function getReviews(movieTitle) {
+//   let reviews = [];
+
+//   // Crea una instancia de Puppeteer
+//   const browser = await puppeteer.launch({ headless: true });
+//   const page = await browser.newPage();
+
+//   try {
+//     // Navega al sitio web y acepta las cookies
+//     await page.goto('https://www.ecartelera.com/');
+//     await page.click('button[data-testid="cookie-policy-accept-button"]');
+
+//     // Ingresa el título de la película en el campo de búsqueda y espera a que aparezcan los resultados
+//     await page.type('#search-box', movieTitle);
+//     await page.click('#search-button');
+//     await page.waitForSelector('.search-list a');
+
+//     // Hace clic en el primer resultado de búsqueda y espera a que cargue la página de la película
+//     const resultLink = await page.$('.search-list a');
+//     await resultLink.click();
+//     await page.waitForSelector('.movie-title');
+
+//     // Navega a la sección de reseñas y espera a que se carguen
+//     await page.click('a[href="#criticas"]');
+//     await page.waitForSelector('.critica');
+
+//     // Extrae el contenido de los elementos <p> con la clase "cuerpo"
+//     const reviewDivs = await page.$$('.critica .cuerpo');
+//     for (const reviewDiv of reviewDivs) {
+//       const review = await page.evaluate(div => div.innerText.trim(), reviewDiv);
+//       reviews.push(review);
+//     }
+//   } catch (err) {
+//     console.error(err);
+//   } finally {
+//     // Cierra la instancia de Puppeteer
 //     await browser.close();
 //   }
 
+//   // Si no se encontraron reseñas, devuelve un mensaje
+//   if (reviews.length === 0) {
+//     console.log('No se han encontrado reseñas.');
+//   } else {
+//     // Devuelve el array de reseñas
+//     console.log(reviews.join('\n---\n'));
+//   }
+// }
 
-
-
-
-
-
-
-
-
-
-module.exports = {
-  scrapeMovieReviews,
-};
+// // Ejemplo de uso
+// getReviews('El Padrino');
