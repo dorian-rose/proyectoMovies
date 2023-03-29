@@ -1,7 +1,5 @@
 const { consultation } = require('../helpers/fetch');
-const {scrapeMovieReviews}= require('../helpers/scraping')
-const { scrapeMovieReviews } = require('../helpers/scraping')
-
+const {getReviews}= require('../helpers/scraping')
 
 //Renderiza la vista inicial
 const getIndex = (req, res) => {
@@ -36,8 +34,10 @@ const searchTitle = async (req, res) => {
             remove = "none"
             add = "display"
         }
-        // const reviews = await scrapeMovieReviews(search);
+        
+        // const reviews = await getReviews(search);
         // console.log(reviews)
+
 
         res.render("userViews/detailView", {
             movieData,
@@ -52,14 +52,6 @@ const searchTitle = async (req, res) => {
         });
     }
 };
-
-const searchGenre = async (req, res) => {
-    try {
-        const movieData = await consultation(genre);
-
-        console.log(movieData)
-        //const reviews = await scrapeMovieReviews(search);
-        //console.log(reviews)
 
 //Renderiza el dashboard
 const showDashboard = (req, res) => {
@@ -91,19 +83,19 @@ const getMovie = async (req, res) => {
       const titulo = search.replace(regex, "-")
 
         // console.log('console.l',`${process.env.URLBASEMONGO}${titulo}`)
-        // const moviesMongo = await consultation((`${process.env.URLBASEMONGO}${titulo}`, 'get'))
+         const moviesMongo = await consultation((`${process.env.URLBASEMONGO}${titulo}`, 'get'))
         // const moviesMongo = await consultation((`http://localhost:3000/admin/movies/title/unico`, 'get'))
-        // console.log('Esto es lo que devuelve el mongo', moviesMongo)
-        // resultados={moviesMongo};
+         console.log('Esto es lo que devuelve el mongo', moviesMongo)
+         resultados={moviesMongo};
 
         // if(moviesMongo == undefined){
         // Buscar película en OMDB
         const movie = await consultation(`${process.env.URLBASEOMDB}&s=${search}`, 'get');
 
-        if(!movie) {
+        if(movie) {
             results={movie};
 
-            console.log(results)
+            console.log(results) //esto da error en consola, pero nos da igual porque pinta bien
 
             res.render('userViews/searchResults', results);
 
@@ -178,6 +170,7 @@ const addFavouriteMovie = async (req, res) => {
     //res.redirect(`http://localhost:3000/search-title/${req.body.title}`)   
 }
 
+
 const deleteFavourite = async (req, res) => {
     const user = "3"
     const title = req.params.title
@@ -238,10 +231,8 @@ const deleteFavourite = async (req, res) => {
 //   };
 
 module.exports = {
-
   getIndex,
   searchTitle,
-  searchGenre,
   showDashboard,
   showSearch,
   getMovie,
@@ -249,5 +240,4 @@ module.exports = {
   getFavouriteMovies,
   addFavouriteMovie,
   deleteFavourite,
-
 }
