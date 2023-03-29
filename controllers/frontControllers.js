@@ -18,6 +18,26 @@ const searchTitle = async (req, res) => {
         res.render("userViews/detailView", {
             movieData,
         });
+
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            msg: "Error retrieving movies",
+        });
+    }
+};
+
+const searchGenre = async (req, res) => {
+    try {
+        const movieData = await consultation(genre);
+
+        console.log(movieData)
+        //const reviews = await scrapeMovieReviews(search);
+        //console.log(reviews)
+        res.render("userViews/detailView", {
+            movieData,
+        });
+        
     } catch (error) {
         return res.status(500).json({
             ok: false,
@@ -44,45 +64,7 @@ const showSearch = (req, res) => {
   }
 }
 
-// const searchMovie = async (req, res) => {
-//     try {
-//       const { search } = req.body;
-//       console.log('estamos en searchMovie');
-//       console.log(search, 'estamos buscando en Mongo');
-  
-//       // Conectar a la base de datos
-//       await connection();
-  
-//       // Buscar películas en la base de datos
-//       const movies = await Movie.find({ Title: search });
-  
-//       // Si se encontraron películas en la base de datos, mostrarlas en la vista
-//       if (movies.length > 0) {
-//         //return res.render('movies', { movies });
-//         console.log(movies)
-//       }
-  
-//       // Si no se encontraron películas en la base de datos, mostrar un mensaje de error en la vista
-//       if (!movies || movies.length === 0) {
-//         await getMovie()
-//       }
-//       // Si se encontraron películas en la base de datos, mostrarlas en la vista (aun no he pintado)
-//       const moviesToRender = movies.map(async (movie) => {
-       
-//         return { movie };
-//       });
-//       //return res.render('myMovies', { movies: moviesToRender });
-
-//     } catch (error) {
-//       console.error(error);
-  
-//       return res.status(500).json({
-//         ok: false,
-//         msg: 'Error retrieving movies',
-//       });
-//     }
-//   };
-
+//Función que busca títulos a través de la consulta, en OMDB y BBDD
 const getMovie = async (req, res) => {
 
     console.log('entramos en función getMovie - front controller, y estamos justo ANTES del TRY')
@@ -159,14 +141,53 @@ const addFavouriteMovie = async (req, res) => {
     }
 }
 
+// const searchMovie = async (req, res) => {
+//     try {
+//       const { search } = req.body;
+//       console.log('estamos en searchMovie');
+//       console.log(search, 'estamos buscando en Mongo');
+  
+//       // Conectar a la base de datos
+//       await connection();
+  
+//       // Buscar películas en la base de datos
+//       const movies = await Movie.find({ Title: search });
+  
+//       // Si se encontraron películas en la base de datos, mostrarlas en la vista
+//       if (movies.length > 0) {
+//         //return res.render('movies', { movies });
+//         console.log(movies)
+//       }
+  
+//       // Si no se encontraron películas en la base de datos, mostrar un mensaje de error en la vista
+//       if (!movies || movies.length === 0) {
+//         await getMovie()
+//       }
+//       // Si se encontraron películas en la base de datos, mostrarlas en la vista (aun no he pintado)
+//       const moviesToRender = movies.map(async (movie) => {
+       
+//         return { movie };
+//       });
+//       //return res.render('myMovies', { movies: moviesToRender });
+
+//     } catch (error) {
+//       console.error(error);
+  
+//       return res.status(500).json({
+//         ok: false,
+//         msg: 'Error retrieving movies',
+//       });
+//     }
+//   };
+
 module.exports = {
-  searchTitle,
   getIndex,
-  getFavouriteMovies,
-  //searchMovie,
-  getMovie,
+  searchTitle,
+  searchGenre,
   showDashboard,
   showSearch,
+  getMovie,
+  //searchMovie,
+  getFavouriteMovies,
   addFavouriteMovie,
-  
 }

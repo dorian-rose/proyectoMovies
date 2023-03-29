@@ -1,13 +1,13 @@
 <%- include("./userTemplates/header2.ejs") %>
 <%- include("./userTemplates/photoSliderOpacity.ejs") %>
 
-<main class="centerText">
+<main id="mainBlockSearchView" class="centerText">
 
     <form action="/found-all" method="POST">
         <input type="text" name="search" id="search" placeholder="Insert a movie/series title">
-        <button type="submit">Search</button>
+        <button type="submit" class="generalBtn">Search</button>
     </form>
-    
+
 </main>
 
       <!-- <form action="http://localhost:3000/found-all" method="POST">
