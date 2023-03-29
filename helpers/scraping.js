@@ -1,9 +1,9 @@
 const puppeteer = require('puppeteer');
 
-async function getReviews(movieTitle) {
+const getReviews=async(movieTitle) =>{
   let reviews = [];
 
- 
+  // Crea una instancia de Puppeteer
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
@@ -39,11 +39,16 @@ async function getReviews(movieTitle) {
   }
 
   // Devuelve el array de reseñas
-  console.log(reviews.join('\n---\n'));  //para que salga legible en consola
+  console.log(reviews.join('\n---\n'));
+}
+
+
+module.exports={
+  getReviews
 }
 
 // Ejemplo de uso
-getReviews('avatar')
+//getReviews('avatar')
 
 
 
