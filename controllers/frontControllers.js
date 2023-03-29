@@ -83,10 +83,10 @@ const getMovie = async (req, res) => {
       const titulo = search.replace(regex, "-")
 
         // console.log('console.l',`${process.env.URLBASEMONGO}${titulo}`)
-        // const moviesMongo = await consultation((`${process.env.URLBASEMONGO}${titulo}`, 'get'))
+         const moviesMongo = await consultation((`${process.env.URLBASEMONGO}${titulo}`, 'get'))
         // const moviesMongo = await consultation((`http://localhost:3000/admin/movies/title/unico`, 'get'))
-        // console.log('Esto es lo que devuelve el mongo', moviesMongo)
-        // resultados={moviesMongo};
+         console.log('Esto es lo que devuelve el mongo', moviesMongo)
+         resultados={moviesMongo};
 
         // if(moviesMongo == undefined){
         // Buscar película en OMDB
@@ -95,7 +95,7 @@ const getMovie = async (req, res) => {
         if(movie) {
             results={movie};
 
-            console.log(results)
+            console.log(results) //esto da error en consola, pero nos da igual porque pinta bien
 
             res.render('userViews/searchResults', results);
 
