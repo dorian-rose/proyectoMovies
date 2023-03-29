@@ -6,8 +6,8 @@ if (arrayMovies.length > 0) { %>
   <article class="movie-card centerText gridContainerMax-2c maxWidthMedium">
     <div>
       <img src="<%=movie.Poster%>" alt="<%=movie.Title %> " />
-      <a href= <%=`/search/${movie.Title}`%> >See More</a>
-    </div>
+      
+      </div>
     <div>
       <h1><%=movie.Title %></h1>
       <div class="movie-facts">
@@ -17,7 +17,8 @@ if (arrayMovies.length > 0) { %>
       </div>
       <h4>Director:</h4>
       <p><%= movie.Director %></p>
-      <a href="#">Remove from favourites</a>
+     <a class="see-more" href=<%=`search-title/${movie.Title.replaceAll(" ","_")}`%> >see more</a>
+     <a  href=<%=`/movies/delete/${movie.Title.replaceAll(" ","_")}` %> >Remove from favourites </a>
     </div>
   </article>
   <% }) %>
@@ -25,6 +26,3 @@ if (arrayMovies.length > 0) { %>
 <% } else { %>
 <p class="error-message">No movies found</p>
 <% } %> <%- include("./userTemplates/footer") %>
-
-
-

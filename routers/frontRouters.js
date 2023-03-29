@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const { searchTitle, getIndex, getFavouriteMovies, getMovie, searchMovie, showDashboard, showSearch, addFavouriteMovie, searchGenre
+
+const { searchTitle, getIndex, getFavouriteMovies, getMovie, searchMovie, showDashboard, showSearch, addFavouriteMovie, deleteFavourite, searchGenre
+
 } = require("../controllers/frontControllers");
 
 //INDEX renderView
@@ -19,23 +21,27 @@ router.post("/found-all", getMovie);
 //Buscar pelis por título, devuelve una sola.
 router.get("/search-title/:title", searchTitle);
 
+
 //Search by genre movie - sends form
 router.post("/search-genre/:genre", searchGenre);
 
 //myMovies renderView
-router.get("/my-movies", getFavouriteMovies);
+//router.get("/myMovies", getFavouriteMovies); //change to remove capital 
+
+
 
 //FAVOURITES renderView
-router.get("/movies/:user", getFavouriteMovies);
+router.get("/movies", getFavouriteMovies);
 
 //FAVOURITES envía el formulario
-router.post("/movies/add/:movie", addFavouriteMovie);
+router.get("/movies/add/:title", addFavouriteMovie);
 
 //DELETES FROM favourites
-// router.get("/movies/delete/:title", deleteFavourite);
+router.get("/movies/delete/:title", deleteFavourite);
 
 //router.get('/found-all', getMovie);
 // router.get('/found', searchMovie);
 // router.post('/found', searchMovie); 
+
 
 module.exports = router;
