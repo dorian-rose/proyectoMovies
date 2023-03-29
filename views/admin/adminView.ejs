@@ -1,62 +1,55 @@
 <%- include('./templates/header.ejs') %>
 <%- include('./templates/nav.ejs') %>
 
+    <main>
 
-        <main>
+        <button><a href="/admin/movies/create-form">Crear película</a></button>
 
-            <button><a href="/admin/movies/create-form">Crear película</a></button>
+            <% if(movies.length> 0) {%>
 
-            <% if(movies.length > 0) {%>
+                <h1 class="centerText">My Movies</h1>
 
-                <% movies.forEach(element=> {%>
+                <section class="favoutie-movies gridContainerMax-2c">
 
-                    <h2>
-                        <%= element.Title %>
-                    </h2>
+                    <% movies.forEach(element=> {%>
 
-                    <p>
-                        <%= element.Year %>
-                    </p>
+                        <article class="movie-card centerText gridContainerMax-2c maxWidthMedium">
 
-                    <p>
-                        <%= element.Runtime %>
-                    </p>                    
-                    <p>
-                        <%= element.Genre %>
-                    </p>
-                    
-                    <p>
-                        <%= element.Director %>
-                    </p>
-                    
-                    <p>
-                        <%= element.Poster %>
-                    </p>
-                    
-                    <p>
-                        <%= element.Actors %>
-                    </p>
-                    
-                    <p>
-                        <%= element.Plot %>
-                    </p>
-                    
-                    <p>
-                        <%= element.Metascore %>
-                    </p>
+                            <div>
+                                <img src="<%=element.Poster%>" />
+                            </div>
 
+                            <div>
+                                <h1>
+                                    <%=element.Title %>
+                                </h1>
 
-                    <button><a href="/admin/movies/edit-form/<%= element._id %>">Editar</a></button>
-                    <button><a href="/admin/movies/remove-movie/<%= element._id %>">Eliminar</a></button>
-                    
-                    <% }); %>
+                                <div class="movie-facts">
 
-                        <% } else { %>
+                                    <span>Year: <%=element.Year%>, </span><span>Duration: <%= element.Runtime %>,</span>
+                                    <span>Genre: <%= element.Genre %> </span>
 
-                            <p>No hay ninguna película</p>
+                                </div>
 
-                            <% } %>
-        </main>
+                                <h4>Director:</h4>
 
+                                <p>
+                                    <%= element.Director %>
+                                </p>
 
-        <%- include('./templates/footer.ejs') %>
+                                <button><a href="/admin/movies/edit-form/<%= element._id %>">Editar</a></button>
+                                <button><a href="/admin/movies/remove-movie/<%= element._id %>">Eliminar</a></button>
+
+                            </div>
+                        </article>
+
+                        <% }); %>
+                            <% } else { %>
+
+                                <p>No hay ninguna película</p>
+
+                                <% } %>
+
+    </main>
+    
+<%- include('./templates/footer.ejs') %>

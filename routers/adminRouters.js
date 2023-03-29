@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { validateInputs } = require('../middleware/inputValidator');
 const { checkSchema } = require('express-validator');
-const createEditMovieSchema = require('../models/validatorMovieModel');
+const createEditMovieSchema = require('../helpers/validatorMovieModel');
 const { getMoviesAdmin, getMovieAdmin, formCreateMovie, createMovie, deleteMovie, editMovie, formEditMovie } = require('../controllers/adminControllers');
 
 
@@ -14,9 +14,7 @@ router.post('/movies/create-movie', [
   checkSchema(createEditMovieSchema),
   validateInputs
 ],
-  (req, res) => {
-    createMovie(req, res);
-  });
+  createMovie);
 
 router.get('/movies/create-form', formCreateMovie);
 
@@ -24,9 +22,9 @@ router.post('/movies/edit-movie/:id', [
   checkSchema(createEditMovieSchema),
   validateInputs
 ],
-  (req, res) => {
-    editMovie(req, res);
-  });
+
+  editMovie);
+
 
 router.get('/movies/edit-form/:id', formEditMovie);
 

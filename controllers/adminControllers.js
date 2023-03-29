@@ -1,4 +1,3 @@
-const { errors } = require('puppeteer');
 const Movies = require('../models/movieModel');
 
 
@@ -46,10 +45,12 @@ const getMovieAdmin = async (req, res) => {
         }
         else { throw error }
     } catch (error) {
+
         return res.status(500).json({
             ok: false,
             msg: "Error retrieving the movie",
         });
+
     }
 };
 
@@ -59,14 +60,25 @@ const createMovie = async (req, res) => {
 
     try {
 
-        await newMovies.save();
-        return res.redirect('/admin/movies');
+        if (!res.errors) {
+
+            await newMovies.save();
+            return res.redirect('/admin/movies');
+
+        } else {
+
+            const errors = res.errors;
+            res.render('../views/admin/adminCreate.ejs', { errors });
+
+        }
 
     } catch (error) {
 
-        const errors = res.locals.errors;
-        console.log(errors)
-        res.render('../views/admin/adminCreate.ejs', { errors });
+
+        return res.status(500).json({
+            ok: false,
+            msg: "Error retrieving the movie",
+        });
 
     }
 };
@@ -94,17 +106,29 @@ const editMovie = async (req, res) => {
         const actors = req.body.Actors;
         const plot = req.body.Plot;
         const metascore = req.body.Metascore;
+        const review = req.body.Review;
 
-        const update = { 'Title': title, 'Year': year, 'Genre': genre, 'Director': director, 'Poster': poster, 'Runtime': runtime, 'Actors': actors, 'Plot': plot, 'Metascore': metascore };
+        const update = { 'Title': title, 'Year': year, 'Genre': genre, 'Director': director, 'Poster': poster, 'Runtime': runtime, 'Actors': actors, 'Plot': plot, 'Metascore': metascore, 'Review': review };
 
-        await Movies.findOneAndUpdate({ _id: id }, { $set: update });
-        return res.redirect('/admin/movies');
+
+        if (!res.errors) {
+
+            await Movies.findOneAndUpdate({ _id: id }, { $set: update });
+            return res.redirect('/admin/movies');
+
+        } else {
+
+            const movie = await Movies.findById(req.params.id);
+            const errors = res.errors;
+            res.render('../views/admin/adminEdit.ejs', { movie, errors });
+        }
 
     } catch (error) {
 
-        const movie = await Movies.findById(req.params.id);
-        const errors = res.locals.errors;
-        res.render('../views/admin/adminEdit.ejs', { movie, errors });
+        return res.status(500).json({
+            ok: false,
+            msg: "Error retrieving the movie",
+        });
 
     };
 };
@@ -130,16 +154,14 @@ const deleteMovie = async (req, res) => {
         return res.redirect('/admin/movies');
 
     } catch (error) {
-        console.log(error);
+
         return res.status(500).json({
             ok: false,
             msg: 'ERROR: no se ha podido eliminar la película.'
         });
     }
 
-
 };
-
 
 module.exports = {
 
