@@ -2,9 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 
-const { searchTitle, getIndex, getFavouriteMovies, getMovie, searchMovie, showDashboard, showSearch, addFavouriteMovie, deleteFavourite, searchGenre
-
-} = require("../controllers/frontControllers");
+const { searchTitle, getIndex, getFavouriteMovies, getMovie,  showDashboard, showSearch, addFavouriteMovie, deleteFavourite, searchGenre} = require("../controllers/frontControllers");
 
 //INDEX renderView
 router.get("/", getIndex);
@@ -23,7 +21,7 @@ router.get("/search-title/:title", searchTitle);
 
 
 //Search by genre movie - sends form
-router.post("/search-genre/:genre", searchGenre);
+//router.post("/search-genre/:genre", searchGenre);
 
 //myMovies renderView
 //router.get("/myMovies", getFavouriteMovies); //change to remove capital 

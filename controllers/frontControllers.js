@@ -1,6 +1,6 @@
 const { consultation } = require('../helpers/fetch');
-const {scrapeMovieReviews}= require('../helpers/scraping')
-const { scrapeMovieReviews } = require('../helpers/scraping')
+const {getReviews}= require('../helpers/scraping')
+
 
 
 //Renderiza la vista inicial
@@ -36,7 +36,7 @@ const searchTitle = async (req, res) => {
             remove = "none"
             add = "display"
         }
-        // const reviews = await scrapeMovieReviews(search);
+        // const reviews = await getReviews(search);
         // console.log(reviews)
 
         res.render("userViews/detailView", {
@@ -53,13 +53,13 @@ const searchTitle = async (req, res) => {
     }
 };
 
-const searchGenre = async (req, res) => {
-    try {
-        const movieData = await consultation(genre);
+// const searchGenre = async (req, res) => {
+//     try {
+//         const movieData = await consultation(genre);
 
-        console.log(movieData)
-        //const reviews = await scrapeMovieReviews(search);
-        //console.log(reviews)
+//         console.log(movieData)
+//         //const reviews = await getReviews(search);
+//         //console.log(reviews)
 
 //Renderiza el dashboard
 const showDashboard = (req, res) => {
@@ -238,10 +238,9 @@ const deleteFavourite = async (req, res) => {
 //   };
 
 module.exports = {
-
   getIndex,
   searchTitle,
-  searchGenre,
+ // searchGenre,
   showDashboard,
   showSearch,
   getMovie,
@@ -249,5 +248,4 @@ module.exports = {
   getFavouriteMovies,
   addFavouriteMovie,
   deleteFavourite,
-
 }
