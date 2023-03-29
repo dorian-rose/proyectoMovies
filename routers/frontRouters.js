@@ -2,9 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 
-const { searchTitle, getIndex, getFavouriteMovies, getMovie, searchMovie, showDashboard, showSearch, addFavouriteMovie, deleteFavourite, searchGenre
-
-} = require("../controllers/frontControllers");
+const { searchTitle, getIndex, getFavouriteMovies, getMovie,  showDashboard, showSearch, addFavouriteMovie, deleteFavourite, searchGenre} = require("../controllers/frontControllers");
 
 //INDEX renderView
 router.get("/", getIndex);
@@ -21,9 +19,7 @@ router.post("/found-all", getMovie);
 //Buscar pelis por título, devuelve una sola.
 router.get("/search-title/:title", searchTitle);
 
-
 //Search by genre movie - sends form
-// router.post("/search-genre/:genre");
 
 //myMovies renderView
 //router.get("/myMovies", getFavouriteMovies); //change to remove capital 
@@ -40,6 +36,5 @@ router.get("/movies/delete/:title", deleteFavourite);
 //router.get('/found-all', getMovie);
 // router.get('/found', searchMovie);
 // router.post('/found', searchMovie); 
-
 
 module.exports = router;

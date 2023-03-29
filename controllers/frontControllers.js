@@ -1,7 +1,6 @@
 const { consultation } = require('../helpers/fetch');
 const {getReviews}= require('../helpers/scraping')
 
-
 //Renderiza la vista inicial
 const getIndex = (req, res) => {
     //console.log(req.oidc.isAuthenticated())
@@ -35,6 +34,10 @@ const searchTitle = async (req, res) => {
             remove = "none"
             add = "display"
         }
+        
+        // const reviews = await getReviews(search);
+        // console.log(reviews)
+
 
         res.render("userViews/detailView", {
             movieData,

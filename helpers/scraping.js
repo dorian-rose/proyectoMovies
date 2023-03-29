@@ -46,3 +46,4 @@ const getReviews=async(movieTitle) =>{
 // getReviews('dory')
 
 module.exports={getReviews}
+
