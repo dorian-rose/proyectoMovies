@@ -277,8 +277,10 @@ footer {
   margin: 30px 15px 15px;
 }
 .movie-card a {
-  /* display: block; */
-  margin: 20px 0 5px;
+  margin: 10px 10px 20px;
+}
+.movie-card .see-more {
+  display: block;
 }
 /*+++++++++++++++++*/
 /* Favoutie movies list  */
