@@ -22,8 +22,6 @@ router.post("/found-all", getMovie);
 router.get("/search-title/:title", searchTitle);
 
 
-//Search by genre movie - sends form
-router.post("/search-genre/:genre", searchGenre);
 
 //myMovies renderView
 //router.get("/myMovies", getFavouriteMovies); //change to remove capital 

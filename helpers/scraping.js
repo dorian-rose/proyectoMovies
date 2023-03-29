@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-const getReviews=async(movieTitle) =>{
+const getReviews = async (movieTitle) => {
   let reviews = [];
 
   // Crea una instancia de Puppeteer
@@ -43,4 +43,4 @@ const getReviews=async(movieTitle) =>{
 }
 
 // Ejemplo de uso
-getReviews('dory')
+//getReviews('dory')

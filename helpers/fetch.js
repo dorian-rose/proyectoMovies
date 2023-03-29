@@ -3,15 +3,15 @@
 
 const consultation = async (url, method, body = {}) => {  //! ver qué modificar
     let options = {};
-       // console.log('estos son los parametros de la consulta',{url},{method},{body})
+    // console.log('estos son los parametros de la consulta',{url},{method},{body})
     const data = { ...body }
-   // if (data.title) {
-   //     const titleSpaced = data.title.replaceAll("_", " ")
-    //    data.title = titleSpaced.toLowerCase()
-  //  }
+    if (data.title) {
+        const titleSpaced = data.title.replaceAll("_", " ")
+        data.title = titleSpaced.toLowerCase()
+    }
 
     try {
-    console.log('estamos entrando al try del fetch')
+        console.log("fetch url", url)
         if (method == "POST" || method == "PUT" || method == "DELETE") {
 
 
@@ -24,12 +24,12 @@ const consultation = async (url, method, body = {}) => {  //! ver qué modificar
             }
         }
 
-
+        console.log(url, options)
         // console.log('esta es la resp del GET', `${url}`)
-        let respuesta= await fetch(`${url}`, options);
-        
+        let respuesta = await fetch(url, options);
+
         let resp = await respuesta.json();
-        
+
         return resp;
 
     } catch (error) {

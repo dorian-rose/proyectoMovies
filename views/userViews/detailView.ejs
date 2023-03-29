@@ -1,46 +1,36 @@
-<%- include('./userTemplates/header2') %>
-<%- include("userTemplates/nav") %>
+<%- include('./userTemplates/header2') %> <%- include("userTemplates/nav") %> <%
+if (movieData.ok !=false||movieData.Response== "True") { %>
 
-<% if (movieData.ok !=false||movieData.Response== "True") { %>
+<section class="movie-card centerText gridContainerMax-2c maxWidthMedium">
+  <div>
+    <img src="<%=movieData.Poster%>" alt="<%=movieData.Title %> " />
+  </div>
 
-  <section class="movie-card centerText gridContainerMax-2c maxWidthMedium">
+  <article>
+    <h1><%=movieData.Title %></h1>
 
-    <div>
-      <img src="<%=movieData.Poster%>" alt="<%=movieData.Title %> " />
+    <div class="movie-facts">
+      <span>Year: <%=movieData.Year%>, </span>
+      <span>Duration: <%= movieData.Runtime %>, </span>
+      <span>Genre: <%= movieData.Genre %> </span>
     </div>
 
-    <article>
-      
-      <h1><%=movieData.Title %></h1>
-      
-      <div class="movie-facts">
-        <span>Year: <%=movieData.Year%>, </span>
-        <span>Duration: <%= movieData.Runtime %>, </span>
-        <span>Genre: <%= movieData.Genre %> </span>
-      </div>
+    <h4>Director:</h4>
+    <p><%= movieData.Director %></p>
 
-      <h4>Director:</h4>
-      <p><%= movieData.Director %></p>
+    <h4>Cast:</h4>
+    <p><%= movieData.Actors %></p>
 
-      <h4>Cast:</h4>
-      <p><%= movieData.Actors %></p>
+    <h4>Plot:</h4>
+    <p><%= movieData.Plot %></p>
 
-      <h4>Plot:</h4>
-      <p><%= movieData.Plot %></p>
-
-      <a href="/movies/add/2/Walkabout">Add to favourites</a>
-
-      <form action="/movies/add" method="post" id="add-movie">
-        <input type="text" name="movie" id="movie" value="<%= movieData.Title %>"/>
-        <input type="submit"/>
-      </form>
-
-    </article>
-  </section>
-
+    <a class=<%=add%>  href=<%=`/movies/add/${movieData.Title.replaceAll(" ","_")}`%> >Add to
+      favourites</a>
+    <a class=<%=remove%>  href=<%=`/movies/delete/${movieData.Title.replaceAll(" ","_")}`%> >Remove
+      from favourites</a>
+  </article>
+</section>
 
 <% } else { %>
 <p class="error-message"><%= movieData.msg %></p>
-<% } %>
-
-<%- include("./userTemplates/footer") %>
+<% } %> <%- include("./userTemplates/footer") %>
