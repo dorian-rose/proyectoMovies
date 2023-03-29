@@ -49,20 +49,64 @@
   margin: 0 auto;
   justify-items: center;
 }
+.none {
+  display: none;
+}
+.display {
+  display: block;
+}
+
 /*+++++++++++++++++*/
 
 /*HEADERS ++++++++++++++++++++++++++++*/
 .headerBlock1 {
   background-color: var(--dark);
+  box-shadow: 1px 3px black;
 }
 
 #logoImgHeader {
   max-width: 12%;
   margin: 2%;
+  box-shadow: 0.01px 4px black;
+  border-radius: 7%;
 }
 /*+++++++++++++++++*/
 
+/*MENU HAMBURGUESA ++++++++++++++++++++++++++++*/
+#menu_on{
+	display: inline-block;
+	width:30px;
+	height: 20px;
+	position: relative;
+	z-index: 2;
+}
+ 
+#menu_on span{
+	width: 100%;
+	height: 4px;
+	border-radius: 4px;
+	display: block;
+	position: absolute;
+	background: var(--dark);
+	transition: all 0.5s ease;
+	transform-origin : 0px 100%;
+}
+ 
+#menu_on span:nth-child(2){
+	top: calc(50% - 2px);
+}
+ 
+#menu_on span:nth-child(3){
+  bottom: 0;
+}
+
+/*+++++++++++++++++*/
+
 /*FOOTER ++++++++++++++++++++++++++++*/
+footer {
+  margin-top: 40px;
+}
+
 #logoImgFooter {
   display: flex;
   margin: auto;
@@ -182,7 +226,7 @@
   justify-items: center;
   gap: 10%;
 
-  background-color: var(--blank);
+  background-color: rgb(38, 40, 53)
 }
 
 #searchBtn {
@@ -196,27 +240,42 @@
   background-color: var(--dark);
   color: var(--blank);
 
-  padding-top: 2%;
-  padding-bottom: 2%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  padding-left: 0.5%;
+  padding-right: 0.5%;
 
   font-family: sans-serif;
   font-size: 100%;
   text-decoration: none;
 
   border-radius: 20%;
+  box-shadow: 4px 2px 2px var(--aqua-blue);
 
   transition: 0.5s;
 }
 
 .generalBtn:hover {
-  border: 2px solid var(--red);
+  
   background-color: var(--blank);
   color: var(--dark);
 
-  transform: scale(2);
+  box-shadow: 4px 2px 2px var(--red);
+
+  transform: scale(1.1);
 }
 
 /*+++++++++++++++++*/
+
+/*SEARCH VIEW ++++++++++++++++++++++++++++*/
+
+#mainBlockSearchView {
+  background-color: rgb(38, 40, 53)
+}
+
+/*+++++++++++++++++*/
+
+/*CARDS ++++++++++++++++++++++++++++*/
 .movie-card {
   margin: 50px 20px auto;
   color: var(--dark);
@@ -266,8 +325,10 @@
   margin: 30px 15px 15px;
 }
 .movie-card a {
+  margin: 10px 10px 20px;
+}
+.movie-card .see-more {
   display: block;
-  margin: 20px 0 5px;
 }
 /*+++++++++++++++++*/
 /* Favoutie movies list  */

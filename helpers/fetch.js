@@ -1,3 +1,6 @@
+
+
+
 const consultation = async (url, method, body = {}) => {  //! ver qué modificar
     let options = {};
        // console.log('estos son los parametros de la consulta',{url},{method},{body})
@@ -10,6 +13,7 @@ const consultation = async (url, method, body = {}) => {  //! ver qué modificar
     try {
     console.log('estamos entrando al try del fetch')
         if (method == "POST" || method == "PUT" || method == "DELETE") {
+
 
             options = {
                 method: method,
@@ -34,4 +38,6 @@ const consultation = async (url, method, body = {}) => {  //! ver qué modificar
 }
 
 
+
 module.exports = { consultation };
+
