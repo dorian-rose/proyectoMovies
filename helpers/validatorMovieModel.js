@@ -45,13 +45,13 @@ const createEditMovieSchema = {
     notEmpty: true,
     errorMessage: 'El director es requerido'
   },
-  Poster: {
-    in: ['body'],
-    isString: true,
-    //isURL: true,
-    notEmpty: true,
-    errorMessage: 'La imagen debe ser una URL'
-  },
+  // Poster: {
+  //   in: ['body'],
+  //   isString: true,
+  //   //isURL: true,
+  //   notEmpty: true,
+  //   errorMessage: 'La imagen debe ser una URL'
+  // },
 };
 
 module.exports = createEditMovieSchema;

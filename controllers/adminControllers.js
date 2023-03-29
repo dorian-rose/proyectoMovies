@@ -1,5 +1,6 @@
 const Movies = require('../models/movieModel');
-
+const multer = require('multer');
+const path = require('path');
 
 const getMoviesAdmin = async (req, res) => {
 
@@ -55,12 +56,26 @@ const getMovieAdmin = async (req, res) => {
 
 
 const createMovie = async (req, res) => {
-    const newMovies = new Movies(req.body);
+    console.log(req)
+    const newMovies = new Movies({
+
+        Title: req.body.Title,
+        Year: req.body.Year,
+        Genre: req.body.Genre,
+        Director: req.body.Director,
+        Poster: req.file.filename,
+        Runtime: req.body.Runtime,
+        Actors: req.body.Actors,
+        Plot: req.body.Plot,
+        Metascore: req.body.Metascore,
+        Review: req.body.Review,
+
+
+    });
 
     try {
-
         if (!res.errors) {
-
+            console.log("here")
             await newMovies.save();
             return res.redirect('/admin/movies');
 
@@ -76,7 +91,7 @@ const createMovie = async (req, res) => {
 
         return res.status(500).json({
             ok: false,
-            msg: "Error retrieving the movie",
+            msg: "Error creating the movie",
         });
 
     }
@@ -100,7 +115,7 @@ const editMovie = async (req, res) => {
         const year = req.body.Year;
         const genre = req.body.Genre;
         const director = req.body.Director;
-        const poster = req.body.Poster;
+        const poster = req.file.filename;
         const runtime = req.body.Runtime;
         const actors = req.body.Actors;
         const plot = req.body.Plot;
