@@ -44,4 +44,9 @@ const getReviews = async (movieTitle) => {
 
 module.exports = { getReviews };
 // Ejemplo de uso
-//getReviews('dory')
+
+// getReviews('dory')
+
+module.exports={getReviews}
+
+

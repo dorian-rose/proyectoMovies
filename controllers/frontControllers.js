@@ -1,6 +1,5 @@
 const { consultation } = require('../helpers/fetch');
-const { getReviews } = require('../helpers/scraping')
-
+const {getReviews}= require('../helpers/scraping')
 
 
 //Renderiza la vista inicial
@@ -35,11 +34,14 @@ const searchTitle = async (req, res) => {
             remove = "none"
             add = "display"
         }
-        // const reviews = await scrapeMovieReviews(search);
+        
+        // const reviews = await getReviews(search);
         // console.log(reviews)
+
         console.log("at reviews")
         const reviews = await getReviews(title)
         console.log(reviews)
+
         res.render("userViews/detailView", {
             movieData,
             remove,
@@ -80,31 +82,28 @@ const getMovie = async (req, res) => {
 
     let results;
     try {
-        const { search } = req.body;
-        const regex = /\s/g;
-        const titulo = search.replace(regex, "-")
-        console.log('mongo url', `${process.env.URLBASEMONGO}${titulo}`)
-        const moviesMongo = await consultation((`${process.env.URLBASEMONGO}${titulo}`, "GET"))
-        console.log("moviesMongo", moviesMongo)
 
-        //const result = await consultation(urlMongo, method)
-        // if (result.ok) {
-        //     movieData = result.data
-        // } else {
-        //     movieData = await consultation(url, method)
-        // }
-        ///     // const moviesMongo = await consultation((`http://localhost:3000/admin/movies/title/unico`, 'get'))
-        // console.log('Esto es lo que devuelve el mongo', moviesMongo)
-        // resultados={moviesMongo};
+      const {search}  = req.body;
+      const regex = /\s/g;
+      const titulo = search.replace(regex, "-")
+
+        // console.log('console.l',`${process.env.URLBASEMONGO}${titulo}`)
+         const moviesMongo = await consultation((`${process.env.URLBASEMONGO}${titulo}`, 'get'))
+        // const moviesMongo = await consultation((`http://localhost:3000/admin/movies/title/unico`, 'get'))
+         console.log('Esto es lo que devuelve el mongo', moviesMongo)
+         resultados={moviesMongo};
+
 
         // if(moviesMongo == undefined){
         // Buscar película en OMDB
         const movie = await consultation(`${process.env.URLBASEOMDB}&s=${search}`, 'get');
 
-        if (!movie) {
-            results = { movie };
 
-            console.log(results)
+        if(movie) {
+            results={movie};
+
+
+            console.log(results) //esto da error en consola, pero nos da igual porque pinta bien
 
             res.render('userViews/searchResults', results);
 
@@ -178,6 +177,7 @@ const addFavouriteMovie = async (req, res) => {
     //res.redirect(`http://localhost:3000/search-title/${req.body.title}`)   
 }
 
+
 const deleteFavourite = async (req, res) => {
     const user = "3"
     const title = req.params.title
@@ -238,14 +238,14 @@ const deleteFavourite = async (req, res) => {
 
 module.exports = {
 
-    getIndex,
-    searchTitle,
-    showDashboard,
-    showSearch,
-    getMovie,
-    //searchMovie,
-    getFavouriteMovies,
-    addFavouriteMovie,
-    deleteFavourite,
+  getIndex,
+  searchTitle,
+  showDashboard,
+  showSearch,
+  getMovie,
+  //searchMovie,
+  getFavouriteMovies,
+  addFavouriteMovie,
+  deleteFavourite,
 
 }
