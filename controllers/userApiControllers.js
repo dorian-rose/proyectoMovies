@@ -1,4 +1,4 @@
-const { getFaveMovies, addFaveMovie, removeFaveMovie} = require("../models/favouritesModel");
+const { getFaveMovies, addFaveMovie, removeFaveMovie, getOneFave } = require("../models/favouritesModel");
 
 
 //URL for this function: /api/movie/:user 
@@ -14,24 +14,23 @@ const getFavourites = async (req, res) => {
     }
 }
 
+const getFavouriteOne = async (req, res) => {
+    const { user, title } = req.params
+    let data;
+    try {
+        data = await getOneFave(user, title)
+        res.status(200).json({ ok: true, data })
+    } catch (error) {
+        res.status(500).json({ ok: false, msg: "error getting movie" })
+    }
 
-// const addFavourite = async (req, res) => {
-//     console.log("add favourites")
-//     const { user } = req.query
-//     const title = { title: "hello" };//req.params.title
-//     console.log(user, title)
-//     // let data;
-//     try {
-//         await addFaveMovie(user, title)
-//         res.status(200).json({ ok: true })
-//     } catch (error) {
-//         res.status(500).json({ ok: false, msg: "error adding favourite" })
-//     }
-// }
+}
+
 const addFavourite = async (req, res) => {
+    //aqui una validacion que esta peli no esta ya añadido a este usuario
     const user = req.params.user
     const title = req.body.title
-    let data;
+    //let data;
     try {
         await addFaveMovie(user, title)
         res.status(200).json({ ok: true })
@@ -43,9 +42,10 @@ const addFavourite = async (req, res) => {
 
 //remove a movie from favourites
 const removeFavourite = async (req, res) => {
-    let { title } = req.query
+    const user = req.params.user
+    const title = req.body.title
     try {
-        const result = await removeFaveMovie(title)
+        const result = await removeFaveMovie(title, user)
         if (!result.ok) {
             res.status(404).json({ ok: false, msg: result.msg })
         } else { res.status(200).json({ ok: true }) }
@@ -54,4 +54,4 @@ const removeFavourite = async (req, res) => {
     }
 }
 
-module.exports = { getFavourites, addFavourite, removeFavourite }
+module.exports = { getFavourites, addFavourite, removeFavourite, getFavouriteOne }

@@ -2,10 +2,11 @@ const express = require("express")
 
 const router = express.Router()
 
-const { getFavourites, addFavourite, removeFavourite } = require("../controllers/userApiControllers")
+const { getFavourites, addFavourite, removeFavourite, getFavouriteOne } = require("../controllers/userApiControllers")
 
-router.get("/movie/:user", getFavourites)
+router.get("/movies/:user", getFavourites)
+router.get("/movie/:user/:title", getFavouriteOne)
 router.post("/movie/add/:user", addFavourite)
-router.delete("/movie/:title", removeFavourite)
+router.delete("/movie/delete/:user", removeFavourite)
 
 module.exports = router

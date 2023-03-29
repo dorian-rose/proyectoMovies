@@ -49,6 +49,13 @@
   margin: 0 auto;
   justify-items: center;
 }
+.none {
+  display: none;
+}
+.display {
+  display: block;
+}
+
 /*+++++++++++++++++*/
 
 /*HEADERS ++++++++++++++++++++++++++++*/
@@ -63,6 +70,10 @@
 /*+++++++++++++++++*/
 
 /*FOOTER ++++++++++++++++++++++++++++*/
+footer {
+  margin-top: 40px;
+}
+
 #logoImgFooter {
   display: flex;
   margin: auto;
@@ -266,8 +277,10 @@
   margin: 30px 15px 15px;
 }
 .movie-card a {
+  margin: 10px 10px 20px;
+}
+.movie-card .see-more {
   display: block;
-  margin: 20px 0 5px;
 }
 /*+++++++++++++++++*/
 /* Favoutie movies list  */

@@ -18,23 +18,12 @@ if (movieData.ok !=false||movieData.Response== "True") { %>
     <p><%= movieData.Actors %></p>
     <h4>Plot:</h4>
     <p><%= movieData.Plot %></p>
-    <a href="http://localhost:3000/movies/add/2/Walkabout"
-      >Add to favourites
+    <a class="<%= add%>" href=<%=`/movies/add/${movieData.Title.replaceAll(" ","_")}` %> >Add to
+      favourites
     </a>
-
-    <form
-      action="http://localhost:3000/movies/add"
-      method="post"
-      id="add-movie"
-    >
-      <input
-        type="text"
-        name="movie"
-        id="movie"
-        value="<%= movieData.Title %>"
-      />
-      <input type="submit" />
-    </form>
+    <a class="<%= remove%>" href=<%=`/movies/delete/${movieData.Title.replaceAll(" ","_")}` %> >Remove
+      from favourites
+    </a>
   </article>
 </section>
 

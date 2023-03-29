@@ -22,7 +22,9 @@ router.post('/movies/edit-movie/:id', [
   checkSchema(createEditMovieSchema),
   validateInputs
 ],
+
   editMovie);
+
 
 router.get('/movies/edit-form/:id', formEditMovie);
 
