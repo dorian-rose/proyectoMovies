@@ -100,7 +100,7 @@ const getMovie = async (req, res) => {
         // Buscar película en OMDB
         const movie = await consultation(`${process.env.URLBASEOMDB}&s=${search}`, 'get');
 
-        if(!movie) {
+        if(movie) {
             results={movie};
 
             console.log(results)
