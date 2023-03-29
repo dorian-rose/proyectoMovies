@@ -1,6 +1,5 @@
 const { getFaveMovies, addFaveMovie, removeFaveMovie, getOneFave } = require("../models/favouritesModel");
 
-
 //URL for this function: /api/movie/:user 
 const getFavourites = async (req, res) => {
     const user = req.params.user
@@ -14,6 +13,9 @@ const getFavourites = async (req, res) => {
     }
 }
 
+
+//ADD a movie TO favourites
+
 const getFavouriteOne = async (req, res) => {
     const { user, title } = req.params
     let data;
@@ -25,6 +27,7 @@ const getFavouriteOne = async (req, res) => {
     }
 
 }
+
 
 const addFavourite = async (req, res) => {
     //aqui una validacion que esta peli no esta ya añadido a este usuario
@@ -39,8 +42,7 @@ const addFavourite = async (req, res) => {
     }
 }
 
-
-//remove a movie from favourites
+//REMOVE a movie FROM favourites
 const removeFavourite = async (req, res) => {
     const user = req.params.user
     const title = req.body.title

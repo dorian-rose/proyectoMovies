@@ -1,6 +1,7 @@
 const { consultation } = require('../helpers/fetch');
-//const { connection } = require('../helpers/dbConect')
+const {scrapeMovieReviews}= require('../helpers/scraping')
 const { scrapeMovieReviews } = require('../helpers/scraping')
+
 
 //Renderiza la vista inicial
 const getIndex = (req, res) => {
@@ -10,6 +11,7 @@ const getIndex = (req, res) => {
 
 //Recoge datos de una pelicula por su titulo y pinta 
 const searchTitle = async (req, res) => {
+
     let remove;
     let add;
     user = "3"
@@ -36,11 +38,13 @@ const searchTitle = async (req, res) => {
         }
         // const reviews = await scrapeMovieReviews(search);
         // console.log(reviews)
+
         res.render("userViews/detailView", {
             movieData,
             remove,
             add
         });
+        
     } catch (error) {
         return res.status(500).json({
             ok: false,
@@ -48,6 +52,14 @@ const searchTitle = async (req, res) => {
         });
     }
 };
+
+const searchGenre = async (req, res) => {
+    try {
+        const movieData = await consultation(genre);
+
+        console.log(movieData)
+        //const reviews = await scrapeMovieReviews(search);
+        //console.log(reviews)
 
 //Renderiza el dashboard
 const showDashboard = (req, res) => {
@@ -67,25 +79,47 @@ const showSearch = (req, res) => {
     }
 }
 
-
+//Función que busca títulos a través de la consulta, en OMDB y BBDD
 const getMovie = async (req, res) => {
-    try {
-        const { search } = req.body;
-        console.log(search, 'estamos en getMovie');
-        // Buscar película en OMDB
-        const movie = await consultation(null, search, null);
-        if (!movie) {
-            //return res.render('movies', { error: 'Movie not found' });
-        }
-        console.log('este es el titulo:', search)
-        //console.log(movie)
-    } catch (error) {
-        console.error(error);
 
-        return res.status(500).json({
-            ok: false,
-            msg: 'Error retrieving movie',
-        });
+    console.log('entramos en función getMovie - front controller, y estamos justo ANTES del TRY')
+
+    let resultados;
+    try {
+      const {search}  = req.body;
+      const regex = /\s/g;
+      const titulo = search.replace(regex, "-")
+
+        // console.log('console.l',`${process.env.URLBASEMONGO}${titulo}`)
+        // const moviesMongo = await consultation((`${process.env.URLBASEMONGO}${titulo}`, 'get'))
+        // const moviesMongo = await consultation((`http://localhost:3000/admin/movies/title/unico`, 'get'))
+        // console.log('Esto es lo que devuelve el mongo', moviesMongo)
+        // resultados={moviesMongo};
+
+        // if(moviesMongo == undefined){
+        // Buscar película en OMDB
+        const movie = await consultation(`${process.env.URLBASEOMDB}&s=${search}`, 'get');
+
+        if(!movie) {
+            results={movie};
+
+            console.log(results)
+
+            res.render('userViews/searchResults', results);
+
+        } else {
+            throw 'No movies found due to no title provided' 
+        }
+      }
+    
+     catch (error) {
+      console.error(error);
+  
+      return res.status(500).json({
+        ok: false,
+        msg: 'Error retrieving movie, please insert a valid title',
+      });
+
     }
 };
 
@@ -164,14 +198,56 @@ const deleteFavourite = async (req, res) => {
     }
 }
 
+// const searchMovie = async (req, res) => {
+//     try {
+//       const { search } = req.body;
+//       console.log('estamos en searchMovie');
+//       console.log(search, 'estamos buscando en Mongo');
+  
+//       // Conectar a la base de datos
+//       await connection();
+  
+//       // Buscar películas en la base de datos
+//       const movies = await Movie.find({ Title: search });
+  
+//       // Si se encontraron películas en la base de datos, mostrarlas en la vista
+//       if (movies.length > 0) {
+//         //return res.render('movies', { movies });
+//         console.log(movies)
+//       }
+  
+//       // Si no se encontraron películas en la base de datos, mostrar un mensaje de error en la vista
+//       if (!movies || movies.length === 0) {
+//         await getMovie()
+//       }
+//       // Si se encontraron películas en la base de datos, mostrarlas en la vista (aun no he pintado)
+//       const moviesToRender = movies.map(async (movie) => {
+       
+//         return { movie };
+//       });
+//       //return res.render('myMovies', { movies: moviesToRender });
+
+//     } catch (error) {
+//       console.error(error);
+  
+//       return res.status(500).json({
+//         ok: false,
+//         msg: 'Error retrieving movies',
+//       });
+//     }
+//   };
+
 module.exports = {
-    searchTitle,
-    getIndex,
-    getFavouriteMovies,
-    //searchMovie,
-    getMovie,
-    showDashboard,
-    showSearch,
-    addFavouriteMovie,
-    deleteFavourite
+
+  getIndex,
+  searchTitle,
+  searchGenre,
+  showDashboard,
+  showSearch,
+  getMovie,
+  //searchMovie,
+  getFavouriteMovies,
+  addFavouriteMovie,
+  deleteFavourite,
+
 }

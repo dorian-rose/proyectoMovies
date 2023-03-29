@@ -1,0 +1,40 @@
+<%-include('./userTemplates/header2') %>
+<%-include("userTemplates/nav") %>
+
+<% if (movie || movie.length > 0) { %>
+  <h1 class="centerText">Search Results</h1>
+  <section class="gridContainerMax-2c">
+    <% movie.Search.forEach(movie => { %>
+    <article class="movie-card centerText gridContainerMax-2c maxWidthMedium">
+
+      <div>
+        <img src=<%=movie.Poster %> alt="">
+        <p><%=movie.Title%></p> 
+      </div>
+      
+      <div>
+        <h1><%=movie.Title %></h1>
+        <div class="movie-facts">
+          <span>Year: <%=movie.Year%>, </span>
+        </div>
+
+        <div>
+          <h2>Type:</h2>
+          <p><%= movie.Type %></p>
+        </div>
+
+      </div>
+    </article>
+    <% }) %>
+  </section>
+  <div>
+    <a id="goBackBtn" href="/search">Back to search</a>
+  </div>
+
+<% } else { %>
+  
+  <p>Ops! No movies found</p>
+  
+  <% } %>
+
+<%- include("./userTemplates/footer") %> 
