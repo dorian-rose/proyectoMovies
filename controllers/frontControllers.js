@@ -84,11 +84,17 @@ const getMovie = async (req, res) => {
         // if(moviesMongo == undefined){
         // Buscar película en OMDB
         const movie = await consultation(`${process.env.URLBASEOMDB}&s=${search}`, 'get');
-        results={movie};
 
-        console.log(results)
+        if(!movie) {
+            results={movie};
 
-        res.render('userViews/searchResults', results);
+            console.log(results)
+
+            res.render('userViews/searchResults', results);
+
+        } else {
+            throw 'No movies found due to no title provided' 
+        }
       }
     
      catch (error) {
@@ -96,7 +102,7 @@ const getMovie = async (req, res) => {
   
       return res.status(500).json({
         ok: false,
-        msg: 'Error retrieving movie',
+        msg: 'Error retrieving movie, please insert a valid title',
       });
     }
 };

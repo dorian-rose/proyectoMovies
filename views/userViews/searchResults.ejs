@@ -27,8 +27,14 @@
     </article>
     <% }) %>
   </section>
+  <div>
+    <a id="goBackBtn" href="/search">Back to search</a>
+  </div>
 
 <% } else { %>
-<p>Ops! No movies found</p>
+  
+  <p>Ops! No movies found</p>
+  
+  <% } %>
 
-<% } %> <%- include("./userTemplates/footer") %>
+<%- include("./userTemplates/footer") %> 
