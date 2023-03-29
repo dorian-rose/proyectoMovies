@@ -4,7 +4,7 @@ const consultation = async (url, method, body = {}) => {  //! ver qué modificar
     const data = { ...body }
     if (data.title) {
         const titleSpaced = data.title.replaceAll("_", " ")
-        data.title = titleSpaced
+        data.title = titleSpaced.toLowerCase()
     }
 
     try {

@@ -14,6 +14,7 @@ const searchTitle = async (req, res) => {
     let add;
     user = "3"
     const title = req.params.title
+    console.log(title)
     const urlMongo = `http://localhost:3000/admin/movies/title/${title}`
     const url = `http://www.omdbapi.com/?apikey=cf8ab226&t=${title}`
     const urlUsers = `http://localhost:3000/api/movie/${user}/${title}`
@@ -30,9 +31,12 @@ const searchTitle = async (req, res) => {
         if (data.data.length > 0) {
             remove = "display"
             add = "none"
+            console.log("remove")
         } else {
-            remove = "display"
-            add = "none"
+            console.log(data.data)
+            console.log("add")
+            remove = "none"
+            add = "display"
         }
         // const reviews = await scrapeMovieReviews(search);
         // console.log(reviews)
