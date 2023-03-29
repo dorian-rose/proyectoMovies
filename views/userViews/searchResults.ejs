@@ -1,26 +1,26 @@
 <%-include('./userTemplates/header2') %>
 <%-include("userTemplates/nav") %>
 
-<% if (movie || movie.length > 0) { %>
+<% if (cosa || cosa.length > 0) { %>
   <h1 class="centerText">Search Results</h1>
   <section class="gridContainerMax-2c">
-    <% movie.Search.forEach(movie => { %>
+    <% cosa.forEach(peli => { %>
     <article class="movie-card centerText gridContainerMax-2c maxWidthMedium">
 
       <div>
-        <img src=<%=movie.Poster %> alt="">
-        <p><%=movie.Title%></p> 
+        <img src=<%=peli.Poster %> alt="">
+        <p><%=peli.Title%></p> 
       </div>
       
       <div>
-        <h1><%=movie.Title %></h1>
+        <h1><%=peli.Title %></h1>
         <div class="movie-facts">
-          <span>Year: <%=movie.Year%>, </span>
+          <span>Year: <%=peli.Year%>, </span>
         </div>
 
         <div>
           <h2>Type:</h2>
-          <p><%= movie.Type %></p>
+          <p><%= peli.Type %></p>
         </div>
 
       </div>

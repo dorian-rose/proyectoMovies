@@ -15,14 +15,9 @@ const getMoviesAdmin = async (req, res) => {
             })
 
         } else {
-            res.render('admin/adminView', {
+            
+           return res.render('admin/adminView', {
                 movies
-            })
-            return res.status(200).json({
-                ok: true,
-                msg: "Movie retrieved",
-                data: movies,
-                
             })
             
         } 
