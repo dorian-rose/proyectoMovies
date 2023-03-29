@@ -19,8 +19,6 @@ router.post("/found-all", getMovie);
 //Buscar pelis por título, devuelve una sola.
 router.get("/search-title/:title", searchTitle);
 
-//Search by genre movie - sends form
-
 //myMovies renderView
 //router.get("/myMovies", getFavouriteMovies); //change to remove capital 
 
