@@ -17,7 +17,7 @@ if (arrayMovies.length > 0) { %>
       </div>
       <h4>Director:</h4>
       <p><%= movie.Director %></p>
-     <a href=<%=`search-title/${movie.Title.replaceAll(" ","_")}`%> >see more</a>
+     <a class="see-more" href=<%=`search-title/${movie.Title.replaceAll(" ","_")}`%> >see more</a>
      <a  href=<%=`/movies/delete/${movie.Title.replaceAll(" ","_")}` %> >Remove from favourites </a>
     </div>
   </article>
