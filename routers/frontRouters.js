@@ -23,12 +23,10 @@ router.get("/search-title/:title", searchTitle);
 
 
 //Search by genre movie - sends form
-router.post("/search-genre/:genre", searchGenre);
+// router.post("/search-genre/:genre");
 
 //myMovies renderView
 //router.get("/myMovies", getFavouriteMovies); //change to remove capital 
-
-
 
 //FAVOURITES renderView
 router.get("/movies", getFavouriteMovies);
