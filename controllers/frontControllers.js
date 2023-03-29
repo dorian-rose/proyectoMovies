@@ -37,11 +37,14 @@ const searchTitle = async (req, res) => {
         }
         // const reviews = await scrapeMovieReviews(search);
         // console.log(reviews)
-
+        console.log("at reviews")
+        const reviews = await getReviews(title)
+        console.log(reviews)
         res.render("userViews/detailView", {
             movieData,
             remove,
-            add
+            add,
+            reviews
         });
 
     } catch (error) {

@@ -37,10 +37,11 @@ const getReviews = async (movieTitle) => {
     // Cierra la instancia de Puppeteer
     await browser.close();
   }
-
+  return reviews
   // Devuelve el array de reseñas
-  console.log(reviews.join('\n---\n'));
+  //console.log(reviews.join('\n---\n'));
 }
 
+module.exports = { getReviews };
 // Ejemplo de uso
 //getReviews('dory')

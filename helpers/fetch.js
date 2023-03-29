@@ -11,9 +11,7 @@ const consultation = async (url, method, body = {}) => {  //! ver qué modificar
     }
 
     try {
-        console.log("fetch url", url)
         if (method == "POST" || method == "PUT" || method == "DELETE") {
-
 
             options = {
                 method: method,
@@ -24,8 +22,7 @@ const consultation = async (url, method, body = {}) => {  //! ver qué modificar
             }
         }
 
-        console.log(url, options)
-        // console.log('esta es la resp del GET', `${url}`)
+
         let respuesta = await fetch(url, options);
 
         let resp = await respuesta.json();

@@ -24,6 +24,14 @@ if (movieData.ok !=false||movieData.Response== "True") { %>
     <h4>Plot:</h4>
     <p><%= movieData.Plot %></p>
 
+    <h4>Reviews:</h4>
+     <% reviews.forEach(review => { %>
+       <p class="reviews"><%=review%></p>
+      
+    <% }) %>
+
+    
+
     <a class=<%=add%>  href=<%=`/movies/add/${movieData.Title.replaceAll(" ","_")}`%> >Add to
       favourites</a>
     <a class=<%=remove%>  href=<%=`/movies/delete/${movieData.Title.replaceAll(" ","_")}`%> >Remove
