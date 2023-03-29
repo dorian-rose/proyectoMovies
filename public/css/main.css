@@ -231,21 +231,25 @@
 
   padding-top: 0.5%;
   padding-bottom: 0.5%;
+  padding-left: 0.5%;
+  padding-right: 0.5%;
 
   font-family: sans-serif;
   font-size: 100%;
   text-decoration: none;
 
   border-radius: 20%;
-  box-shadow: 5px 3px 3px var(--aqua-blue);
+  box-shadow: 4px 2px 2px var(--aqua-blue);
 
   transition: 0.5s;
 }
 
 .generalBtn:hover {
-  border: 1px solid var(--red);
+  
   background-color: var(--blank);
   color: var(--dark);
+
+  box-shadow: 4px 2px 2px var(--red);
 
   transform: scale(1.1);
 }
