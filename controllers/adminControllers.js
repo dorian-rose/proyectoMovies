@@ -15,6 +15,7 @@ const getMoviesAdmin = async (req, res) => {
             })
 
         } else {
+
             
            return res.render('admin/adminView', {
                 movies
@@ -22,7 +23,7 @@ const getMoviesAdmin = async (req, res) => {
             
         } 
             
-
+            
     } catch (error) {
         return res.status(500).json({
             ok: false,
