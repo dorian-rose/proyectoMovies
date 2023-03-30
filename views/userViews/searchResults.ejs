@@ -6,7 +6,6 @@
   <section class="gridContainerMax-2c">
     <% cosa.forEach(peli => { %>
     <article class="movie-card centerText gridContainerMax-2c maxWidthMedium">
-
       <div>
         <img src=<%=peli.Poster %> alt="">
         <p><%=peli.Title%></p> 
@@ -17,12 +16,11 @@
         <div class="movie-facts">
           <span>Year: <%=peli.Year%>, </span>
         </div>
-
         <div>
           <h2>Type:</h2>
           <p><%= peli.Type %></p>
         </div>
-
+        <a class="see-more" href=<%=`search-title/${peli.Title.replaceAll(" ","_")}`%> >see more</a>
       </div>
     </article>
     <% }) %>
@@ -30,7 +28,6 @@
   <div>
     <a id="goBackBtn" href="/search">Back to search</a>
   </div>
-
 <% } else { %>
   
   <p>Ops! No movies found</p>

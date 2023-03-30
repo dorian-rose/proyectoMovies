@@ -12,3 +12,11 @@ CREATE TABLE movies (
 --   database varchar(15),
   FOREIGN KEY (id_users) REFERENCES users(id_users)
 )
+
+INSERT INTO movies(id_users, title)
+VALUES 
+(id_users, title)
+
+DELETE 
+FROM movies 
+WHERE title =title and id_users=id_users
