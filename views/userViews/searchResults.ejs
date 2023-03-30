@@ -1,5 +1,5 @@
 <%-include('./userTemplates/header2') %>
-<%-include("userTemplates/nav") %>
+<%-include("userTemplates/menu") %>
 
 <% if (cosa || cosa.length > 0) { %>
   <h1 class="centerText">Search Results</h1>
@@ -14,7 +14,7 @@
       <div>
         <h1><%=peli.Title %></h1>
         <div class="movie-facts">
-          <span>Year: <%=peli.Year%>, </span>
+          <span>Year: <%=peli.Year%> </span>
         </div>
         <div>
           <h2>Type:</h2>

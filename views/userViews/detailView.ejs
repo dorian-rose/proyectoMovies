@@ -1,10 +1,9 @@
-<%- include('./userTemplates/header2') %> <%- include("userTemplates/nav") %> <%
-if (movieData.ok !=false||movieData.Response== "True") { %>
+<%- include('./userTemplates/header2') %> <%- include("userTemplates/menu") %> 
+<% if (movieData.ok !=false||movieData.Response== "True") { %>
 
 <section class="movie-card centerText gridContainerMax-2c maxWidthMedium">
   <div>
-   <img class="image-mongo" src=<%=`/assets/uploads/${movieData.Poster}`%> />
-   <img class="image-omdb" src="<%=movieData.Poster%>" alt="<%=movieData.Title %> " />
+   <img class="image-omdb" src="<%=movieData.image%>" alt="<%=movieData.Title %> " />
   </div>
 
   <article>
@@ -26,12 +25,10 @@ if (movieData.ok !=false||movieData.Response== "True") { %>
     <p><%= movieData.Plot %></p>
 
     <h4>Reviews:</h4>
-     <% reviews.forEach(review => { %>
-       <p class="reviews"><%=review%></p>
-      
-    <% }) %>
 
-    
+      <p class="reviews"></p>
+      
+
 
     <a class=<%=add%>  href=<%=`/movies/add/${movieData.Title.replaceAll(" ","_")}`%> >Add to
       favourites</a>

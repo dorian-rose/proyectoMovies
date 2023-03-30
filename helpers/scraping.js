@@ -32,7 +32,7 @@ const getReviews = async (movieTitle) => {
       const reviewDiv = reviewDivs[i];
       const review = await page.evaluate(div => div.innerText.trim(), reviewDiv);
       reviews.push(review);
-      
+
 
     }
   } catch (err) {
@@ -41,6 +41,7 @@ const getReviews = async (movieTitle) => {
     // Cierra la instancia de Puppeteer
     await browser.close();
   }
+
   return reviews
   // Devuelve el array de reseñas
   //console.log(reviews.join('\n---\n'));
@@ -48,12 +49,12 @@ const getReviews = async (movieTitle) => {
 
 
 module.exports = { getReviews };
+
 // Ejemplo de uso
+//getReviews('dory')
 
-// getReviews('dory')
 
 
-module.exports={getReviews}
 
 
 
