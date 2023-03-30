@@ -1,0 +1,34 @@
+
+<%- include("./userTemplates/header2") %>
+<%- include("./userTemplates/nav") %>
+
+
+
+<div class="modal fade" id="signupModal">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <h3>SignUp</h3>
+          <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-5">
+            
+        <form id="login-form" action="/signup" method="POST">
+         
+          <input type="text" id="login-email" name="email" class="form-control mb-3" placeholder="Title">
+  
+          <input type="text" id="login-password" name="password" class="form-control mb-3" placeholder="Password"
+
+          <button type="submit" class="btn btn-success w-100 mb-4">Login</button>
+
+          <button type="button" class="btn btn-info" id="googleLogin">Google</button>
+          <button type="button" class="btn btn-primary" id="facebookLogin">Facebook</button>
+          <button type="button" class="btn btn-dark" id="githubLogin">Github</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%- include("./userTemplates/footer") %>

@@ -1,30 +1,16 @@
 const express = require('express');
-
 const cors = require("cors");
 
 //dotenv
 require('dotenv').config();
-//auth0
-const { auth } = require('express-openid-connect');
-//auth0 configuration
-const config = {
-    authRequired: false,
-    auth0Logout: true,
-    secret: process.env.SECRET,
-    baseURL: process.env.BASEURL,
-    clientID: process.env.CLIENTID,
-    issuerBaseURL: process.env.ISSUER,
-};
 
 const { connection } = require('./helpers/dbConect')
-
 
 const app = express();
 
 app.use(cors());
 
-const port = process.env.PORT;
-
+const port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 
@@ -34,7 +20,7 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views'); //* también es posible hacer `${__dirname}/views`
 
 // auth router attaches /login, /logout, and /callback routes to the baseURL
-//app.use(auth(config));
+
 //* CONEXION A BBDD
 connection()
 
@@ -52,6 +38,7 @@ app.use('/admin', require('./routers/adminRouters')); //* Ver si la ruta llevar�
 
 app.use("/", require("./routers/frontRouters"));
 
+app.use("/login", require("./routers/loginRouters"));
 //router for user apis (user details and list 'mis pelis')
 app.use("/api", require("./routers/userApiRouters")); //en srapping está comentado
 
