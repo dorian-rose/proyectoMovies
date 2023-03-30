@@ -1,8 +1,8 @@
 CREATE TABLE users (
   id_users serial NOT NULL PRIMARY KEY, 
-  full_name varchar(45) NOT NULL, 
+  -- full_name varchar(45) NOT NULL, 
   email varchar(100) NOT NULL UNIQUE,
-  password varchar(100) NOT NULL
+  permission varchar(45) 
 );
 
 CREATE TABLE movies (

@@ -17,7 +17,12 @@ VALUES
 
     deleteFavourite: `DELETE 
 FROM movies 
-WHERE title =$1 and id_users=$2`
+WHERE title =$1 and id_users=$2`,
+
+    createUser: `INSERT INTO users(email, permission)
+VALUES 
+($1, 'user')`
 }
+
 
 module.exports = queries

@@ -1,6 +1,6 @@
 const Movies = require('../models/movieModel');
-const multer = require('multer');
-const path = require('path');
+// const multer = require('multer');
+// const path = require('path');
 
 const getMoviesAdmin = async (req, res) => {
 

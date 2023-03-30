@@ -3,13 +3,16 @@ const { authFb } = require('../helpers/firebase')
 
 
 
+
 const formSignUp = async (req, res) => {
   console.log('estamos en formSignUp')
     res.render('userViews/loginSignUp');
+
 };
 const signUpCreate = async (req, res) => {
-    const email = "kevin@kevin.es"
-    const password = "kevin123456"
+
+    const email = req.body.email
+    const password = req.body.password
     try {
         const userCredential = await createUserWithEmailAndPassword(authFb, email, password)
         //console.log(userCredential)
@@ -25,13 +28,17 @@ const signUpCreate = async (req, res) => {
             console.log("Something went wrong", "error")
         }
     }
+
 }
 const formSignIn = async (req, res) => {
+
     res.render('userViews/loginSignIn');
+
 };
 const signInCreate = async (req, res) => {
-    const email = "kevin@kevin.es"
-    const password = "kevin123456"
+
+   const email = req.body.email
+    const password = req.body.password
     try {
         const userCredentials = await signInWithEmailAndPassword(authFb, email, password)
         console.log(userCredentials)
@@ -69,6 +76,7 @@ module.exports = {
     formSignIn,
     signInCreate,
     logOut
+
 }
 
 
