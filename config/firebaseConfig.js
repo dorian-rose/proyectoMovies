@@ -14,6 +14,5 @@ const firebaseConfig = {
 
 
 
-  module.exports={
-    firebaseConfig
-  }
+  module.exports={firebaseConfig}
+  
