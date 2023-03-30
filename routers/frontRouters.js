@@ -9,7 +9,7 @@ router.get("/", getIndex);
 
 //DASHBOARD renderView
 router.get("/dashboard", showDashboard);
-
+ 
 //SEARCH renderView
 router.get("/search", showSearch)
 
