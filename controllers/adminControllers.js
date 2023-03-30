@@ -1,7 +1,9 @@
 const Movies = require('../models/movieModel');
-
+// const multer = require('multer');
+// const path = require('path');
 
 const getMoviesAdmin = async (req, res) => {
+
     try {
 
         const movies = await Movies.find()
@@ -14,8 +16,10 @@ const getMoviesAdmin = async (req, res) => {
             })
 
         } else {
+
+
             return res.render('admin/adminView', {
-                movies,
+                movies
             })
 
         }
@@ -33,116 +37,127 @@ const getMoviesAdmin = async (req, res) => {
 const getMovieAdmin = async (req, res) => {
 
     try {
-
         const title = req.params.title;
         const movie = await Movies.findOne({ Title: title });
-        console.log(movie)
         if (movie) {
             return res.status(200).json({
                 ok: true,
                 msg: "Movie retrieved",
                 data: movie,
             });
-        } else {
-            return res.status(404).json({
-                ok: false,
-                msg: "This movie doesn't exist",
-            });
         }
+        else { throw error }
     } catch (error) {
+
         return res.status(500).json({
             ok: false,
             msg: "Error retrieving the movie",
         });
+
     }
 };
 
 
 const createMovie = async (req, res) => {
-        console.log('creando')
-    const newMovies = new Movies(req.body);
+    console.log(req)
+    const newMovies = new Movies({
+
+        Title: req.body.Title,
+        Year: req.body.Year,
+        Genre: req.body.Genre,
+        Director: req.body.Director,
+        Poster: req.file.filename,
+        Runtime: req.body.Runtime,
+        Actors: req.body.Actors,
+        Plot: req.body.Plot,
+        Metascore: req.body.Metascore,
+        Review: req.body.Review,
+
+
+    });
 
     try {
-
-        const movies = await newMovies.save()
-
-        if (!movies) {
-
-            return res.status(404).json({
-                ok: false,
-                msg: 'CUATROCIENTOS CUATRO NOOOOOO!'
-            })
+        if (!res.errors) {
+            console.log("here")
+            await newMovies.save();
+            return res.redirect('/admin/movies');
 
         } else {
 
-            return res.redirect('/admin/movies')
-        }
+            const errors = res.errors;
+            res.render('../views/admin/adminCreate.ejs', { errors });
 
+        }
 
     } catch (error) {
 
-        console.log(error)
 
         return res.status(500).json({
             ok: false,
-            msg: 'ERROR: no se ha podido crear la película.'
+            msg: "Error creating the movie",
         });
 
-    };
-}
+    }
+};
+
 
 const formCreateMovie = async (req, res) => {
 
     res.render('../views/admin/adminCreate.ejs');
 
+
 };
 
 const editMovie = async (req, res) => {
-    console.log('entrando')
 
-    try {  
-        
+
+    try {
+
         const id = req.params.id;
-        const title = req.body.title;
-        const editedMovie = await Pelicula.findOneAndUpdate({_id:id},{$set:{title}},{new:true});
-            return res.status(201).json({
-                ok:true,
-                msg:"actualizando pelicula",
-                editedMovie,
-            })
-        
+        const title = req.body.Title;
+        const year = req.body.Year;
+        const genre = req.body.Genre;
+        const director = req.body.Director;
+        const poster = req.file.filename;
+        const runtime = req.body.Runtime;
+        const actors = req.body.Actors;
+        const plot = req.body.Plot;
+        const metascore = req.body.Metascore;
+        const review = req.body.Review;
+
+        const update = { 'Title': title, 'Year': year, 'Genre': genre, 'Director': director, 'Poster': poster, 'Runtime': runtime, 'Actors': actors, 'Plot': plot, 'Metascore': metascore, 'Review': review };
+
+
+        if (!res.errors) {
+
+            await Movies.findOneAndUpdate({ _id: id }, { $set: update });
+            return res.redirect('/admin/movies');
+
+        } else {
+
+            const movie = await Movies.findById(req.params.id);
+            const errors = res.errors;
+            res.render('../views/admin/adminEdit.ejs', { movie, errors });
+        }
+
     } catch (error) {
-        
+
         return res.status(500).json({
             ok: false,
-            msg: 'Error al buscar película para editar'
+            msg: "Error retrieving the movie",
         });
 
     };
-  };
+};
 
 const formEditMovie = async (req, res) => {
-    try {
-        const id = req.params.id;
-        const movie = await Movies.findOne({ _id: id });
 
-        if (!movie) {
-            return res.status(404).json({
-                ok: false,
-                msg: 'Película no encontrada'
-            });
-        } else {
-            res.render('../views/admin/adminEdit.ejs', {
-                movie
-            });
-        }
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            ok: false,
-            msg: 'Error al buscar película para editar'
-        });
-    }
+    const id = req.params.id;
+    const movie = await Movies.findOne({ _id: id });
+    res.render('../views/admin/adminEdit.ejs', {
+        movie,
+    });
+
 };
 
 
@@ -156,16 +171,14 @@ const deleteMovie = async (req, res) => {
         return res.redirect('/admin/movies');
 
     } catch (error) {
-        console.log(error);
+
         return res.status(500).json({
             ok: false,
             msg: 'ERROR: no se ha podido eliminar la película.'
         });
     }
 
-
 };
-
 
 module.exports = {
 

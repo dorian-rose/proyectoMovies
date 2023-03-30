@@ -1,0 +1,23 @@
+<%- include("./userTemplates/header2") %>
+<%- include("./userTemplates/menuIndex") %>
+<main>
+  <section id="indexBG" class="index centerText">
+    <div>
+      <h1 class="centerText">Heading</h1>
+    </div>
+
+    <a href="/login">Login (pondremos aqui el auth0)</a>
+    <a href="/">Sign up</a>
+    <a href="/search">Search</a>
+    <a href="/dashboard">Temporary link to dashboard</a>
+    <a href="/search-title/the lion king"
+      >Temporary link to search with LION KING de ejemplo</a
+    >
+
+    <% //if (isAuthenticated) { %>
+    <p><%= //JSON.stringify(user.nickname) %></p>
+    <% //} %>
+  </section>
+</main>
+
+<%- include("./userTemplates/footer") %>

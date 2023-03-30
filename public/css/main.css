@@ -1,20 +1,39 @@
-/** STYLE FOR ALL ++++++++++++++++++++++++++++ */
+/** STYLE FOR ALL ++++++++++++++++++++ */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
+/**paleta de colores*/
 :root {
-  /*paleta de colores*/
   --dark-blue: rgb(69 0 255);
+
   --blue: rgb(0 106 244);
   --light-blue: rgb(27 164 224);
   --aqua-blue: rgb(82 209 219);
   --red: rgb(255 42 0);
-  --blank: rgb(183, 236, 239);
+
+  --blank: rgb(228, 249, 250);
   --dark: rgb(33, 36, 37);
+
+  --dur: 1s;
+	/* font-size: calc(16px + (18 - 12)*(100vw - 320px)/(1280 - 320)); */
 }
+/**++++++++++++++++++*/
+
+.whiteLetters{
+  color: var(--blank)
+}
+
+.error-message {color: var(--red);
+  text-align: center;
+  box-shadow:  0px 0px 20px 0px black;
+  padding: 2%;
+  max-width: 50%;
+  display: block;
+  margin: 0 auto;
+  }
 
 .centerText {
   text-align: center;
@@ -33,7 +52,6 @@
   grid-template-columns: 1fr;
 }
 
-/* he hecho este nuevo aqui abajo con otro class porque no quiero que se haga mas que de dos columnas aunque este muy grande la pantall! */
 .gridContainerMax-2c {
   display: grid;
   grid-template-columns: 1fr;
@@ -43,19 +61,345 @@
   max-width: 1000px;
 }
 
-/** GENERAL FRONT VIEWS */
+.centerGridItems {
+  margin: 0 auto;
+  justify-items: center;
+}
+
+.none {
+  display: none;
+}
+
+.display {
+  display: block;
+}
+
+.error-message {color: var(--red);
+text-align: center;
+box-shadow:  0px 0px 20px 0px black;
+padding: 2%;
+max-width: 50%;
+display: block;
+margin: 0 auto;
+}
+/*+++++++++++++++++*/
+
+/*HEADERS ++++++++++++++++++++++++++++*/
+.headerBlock1 {
+  background-color: var(--dark);
+  box-shadow: 0px 0px 20px 0px black;
+}
+
+#logoImgHeader {
+  max-width: 12%;
+  margin: 2%;
+  box-shadow: 0px 0px 10px 0px black;
+  border-radius: 7%;
+}
+/*+++++++++++++++++*/
+
+nav {box-shadow: 0px 0px 20px 0px black; margin-bottom: 4%;}
+nav .navbar-brand {margin-left: 4%}
+nav button {margin-right: 4%}
+nav .collapse {margin-left: 4%}
+.nav-link .active {color: white}
+
+/*MENU HAMBURGUESA ++++++++++++++++++++++++++++*/
+#menu_on{
+	display: inline-block;
+	width:30px;
+	height: 20px;
+	position: relative;
+	z-index: 2;
+}
+ 
+#menu_on span{
+	width: 100%;
+	height: 4px;
+	border-radius: 4px;
+	display: block;
+	position: absolute;
+	background: var(--dark);
+	transition: all 0.5s ease;
+	transform-origin : 0px 100%;
+}
+ 
+#menu_on span:nth-child(2){
+	top: calc(50% - 2px);
+}
+ 
+#menu_on span:nth-child(3){
+  bottom: 0;
+}
+
+/*+++++++++++++++++*/
+
+/*FOOTER ++++++++++++++++++++++++++++*/
+footer {
+  background-color: var(--dark);
+  box-shadow: 0px 0px 20px 0px black;
+  margin-top: 20px;
+}
+
+#logoImgFooter {
+  display: flex;
+  margin: auto;
+  max-width: 8%;
+  padding: 4px;
+}
+
+.figureNoMargin {
+  margin:0;
+  padding: 0;
+}
+
+.footerText {
+  font-family: sans-serif;
+  font-size: 60%;
+  color: var(--blank);
+  padding: 4px;
+}
+
+.footerIcons {
+  max-width: 3%;
+  margin-right: 5%;
+  margin-left: 20%;
+  margin-bottom: 1%;
+  margin-top: 1%;
+  text-decoration: none;
+}
+
+#iconsBlock {
+  text-decoration: none;
+}
+/*+++++++++++++++++*/
+
+/*SLIDER ++++++++++++++++++++++++++++*/
+.photoSlider {
+  width: 100%;
+  height: 130px;
+  overflow: hidden;
+}
+
+.photoSlider ul {
+  display: flex;
+  animation: slider 12s infinite alternate linear;
+  width: 400%;
+}
+
+.photoSlider li {
+  width: 100%;
+  list-style: none;
+}
+
+.photoSlider img {
+  width: 100%;
+  height: 100%;
+}
+
+.opacity30 {
+  opacity: 30%;
+}
+
+/*+++++++++++++++++*/
+
+/** GENERAL FRONT VIEWS +++++++++++++ */
 /* movie-card contiene informacion "detalle" y foto de la peli */
+
+/*INDEX ++++++++++++++++++++++++++++*/
+#indexBG {
+  display: grid;
+  background-image: url("../assets/spectacularOMG_logo_blue_small.png");
+  background-repeat: no-repeat;
+
+  background-color: var(--blue);
+  background-size: 25%;
+}
+
+.index a {
+  display: block;
+}
+
+#indexContainer {
+  background-image: url("../assets/indexAlter.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  height: 1000px;
+}
+
+/*+++++++++++++++++*/
+
+/*404 ++++++++++++++++++++++++++++*/
+
+#block404 {
+  display: flex;
+  justify-content: center;
+  background-color: var(--blank);
+}
+
+#block404 img {
+  width: 100%;
+  animation: breathing 5s ease-out infinite normal;
+
+  z-index: -1000px;
+}
+
+#goBackBtn {
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 100%;
+
+  color: var(--dark);
+  background-color: var(--blank);
+
+  border-radius: 5%;
+
+  display: flex;
+  justify-content: center;
+
+  transition: 0.5s;
+}
+
+#goBackBtn:hover {
+  transform: scale(1.1);
+  background-color: rgb(197, 238, 197);
+}
+/*+++++++++++++++++*/
+
+/*DASHBOARD ++++++++++++++++++++++++++++*/
+#dashboardBtnBlock {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  gap: 10%;
+
+  background-color: rgb(38, 40, 53)
+}
+
+#searchBtn {
+  grid-column: 1/2;
+}
+
+#myMoviesBtn {
+  grid-column: 2/2;
+}
+.generalBtn {
+  background-color: var(--dark);
+  color: var(--blank);
+
+  font-family: sans-serif;
+  font-size: 100%;
+  text-decoration: none;
+
+  border-radius: 20%;
+  box-shadow: 4px 2px 2px var(--aqua-blue);
+
+  transition: 0.5s;
+}
+
+.generalBtn:hover {
+  
+  background-color: var(--blank);
+  color: var(--dark);
+
+  box-shadow: 4px 2px 2px var(--red);
+
+  transform: scale(1.1);
+}
+/*+++++++++++++++++*/
+
+/*SEARCH VIEW ++++++++++++++++++++++++++++*/
+
+#mainBlockSearchView {
+  background-color: rgb(38, 40, 53);
+}
+
+/** SEARCH BTN +++++++++++*/
+
+#searchInput {
+	color: var(--blank);
+	font: 1em/1.5 Hind, sans-serif;
+}
+
+#searchForm, #searchInput, .caret {
+	margin: auto;
+}
+
+#searchForm {
+	position: relative;
+	width: 100%;
+	max-width: 17em;
+}
+
+#searchInput, .caret {
+	display: block;
+	transition: all calc(var(--dur) * 0.5) linear;
+}
+
+#searchInput {
+	background: transparent;
+	border-radius: 50%;
+	box-shadow: 0 0 0 0.25em inset;
+	caret-color: var(--aqua-blue);
+	width: 2em;
+	height: 2em;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+#searchInput:focus, #searchInput:valid {
+	background: black;
+	border-radius: 0.25em;
+	box-shadow: none;
+	padding: 0.75em 1em;
+	transition-duration: calc(var(--dur) * 0.25);
+	transition-delay: calc(var(--dur) * 0.25);
+	width: 100%;
+	height: 3em;
+}
+
+#searchInput:focus {
+	animation: showCaret var(--dur) steps(1);
+	outline: transparent;
+}
+
+#searchInput:focus + .caret, #searchInput:valid + .caret {
+	animation: handleToCaret var(--dur) linear;
+	background: transparent;
+	width: 1px;
+	height: 1.5em;
+	transform: translate(0,-1em) rotate(-180deg) translate(7.5em,-0.25em);
+}
+
+.caret {
+	background: currentColor;
+	border-radius: 0 0 0.125em 0.125em;
+	margin-bottom: -0.6em;
+	width: 0.25em;
+	height: 1em;
+	transform: translate(0,-1em) rotate(-45deg) translate(0,0.875em);
+	transform-origin: 50% 0;
+}
+
+/*+++++++++++++++++*/
+
+/*CARDS ++++++++++++++++++++++++++++*/
 .movie-card {
-  margin: 50px auto;
+  margin: 50px 20px auto;
   color: var(--dark);
   background-color: rgb(234, 232, 232);
   border-radius: 10px;
 }
+
 .movie-card img {
   width: 80%;
   border-radius: 10px;
   margin: 20px 0;
 }
+
 /* el contenedor para la info de la peli (todo menos la foto) */
 .movie-card article {
   margin: 0 30px;
@@ -67,28 +411,140 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
 /* los campos de año, genero y duracion */
-.movie-card span {
-  margin: 2px 5px;
-  background-color: var(--dark);
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
+.movie-card {
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
-/* el corazoncito boton para añadir a lista favoritas */
-.movie-card .favourite-button {
-  color: var(--dark-blue);
-  font-size: 30px;
+.movie-card span {
+  margin: 10px;
+  padding: 5px 10px;
+  background-color: var(--light-blue);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
 }
 
 .movie-card h1 {
+  font-size: 2.2rem;
+  color: var(--dark-blue);
+  margin: 20px 0 10px;
+  padding: 10px 20px;
+  background-color: var(--light-blue);
+  border-radius: 5px;
+}
+
+.movie-card p {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: var(--dark);
+  line-height: 1.4;
+}
+
+.movie-card h4 {
+  margin: 20px 0 5px;
+  font-size: 1.3rem;
+  color: var(--blue);
+}
+
+.movie-card a {
+  display: inline-block;
+  margin: 10px 0 20px;
+  padding: 10px 20px;
+  background-color: var(--blue);
+  color: white;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.2s ease-in-out;
+}
+
+.movie-card a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.movie-card .see-more {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--blank);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.movie-card .see-more:hover {
+  color: var(--blue);
+  background-color: var(--blank);
+}
+
+.reviews {margin: 2%;}
+
+
+/*ADMIN ++++++++++++++++++++++++++++*/
+.poster-label {border: 1px solid gray;
+color: grey;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+cursor: pointer;}
+
+.movie-card button {
+  margin: 3% 6%;
+  
+}
+.movie-card button a {
+text-decoration: none;
+}
+.create-form input[type="file"] {
+  margin-left: 10%;
+}
+.create-form input[type="text"],
+.create-form textarea, .poster {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: grey;
+  display: block;
+  width: 80%;
+  max-width: 500px;
+  padding: 12px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin: 6px auto;
+  resize: vertical;
+}
+
+
+.create-form input[type="file"]{
+display: block;
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto 15px;
+}
+
+.edit-label {
+ display: block;
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.create-form input[type="submit"]{
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+}
+
+.create-form h1 {
+  text-align: center;
   color: var(--dark-blue);
   margin: 30px;
 }
-.movie-card h4 {
-  margin: 30px 15px 15px;
-}
+/*+++++++++++++++++*/
+
+/* Favoutie movies list  */
 
 /** GENERAL ADMIN VIEWS */
 
@@ -101,6 +557,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+  .photoSlider {
+    height: 200px;
+  }
 }
 /*768px end.*/
 
@@ -108,6 +567,9 @@
                      media query 992px
 ======================================*/
 @media screen and (min-width: 992px) {
+  .photoSlider {
+    height: 300px;
+  }
 }
 /*992px end.*/
 
@@ -115,5 +577,113 @@
                     media query 1200px
 ======================================*/
 @media screen and (min-width: 1200px) {
+  .photoSlider {
+    height: 500px;
+  }
 }
 /*1200px end.*/
+
+/**KEYFRAMES +++++++++++++++++++ */
+@keyframes slider {
+  0% {
+    margin-left: 0;
+  }
+  20% {
+    margin-left: 0;
+  }
+
+  25% {
+    margin-left: -100%;
+  }
+  45% {
+    marginleft: -100%;
+  }
+
+  50% {
+    margin-left: -200%;
+  }
+  70% {
+    margin-left: -200%;
+  }
+
+  75% {
+    margin-left: -300%;
+  }
+  100% {
+    margin-left: -300%;
+  }
+}
+
+@keyframes breathing {
+  0% {
+    transform: scale(1.01);
+  }
+
+  15% {
+    transform: scale(1.03);
+  }
+
+  25% {
+    transform: scale(1.05);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+
+  60% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1.01);
+  }
+}
+
+@keyframes showCaret {
+	from {
+		caret-color: transparent;
+	}
+	to {
+		caret-color: var(--primary);
+	}
+}
+
+@keyframes handleToCaret {
+	from {
+		background: currentColor;
+		width: 0.25em;
+		height: 1em;
+		transform: translate(0,-1em) rotate(-45deg) translate(0,0.875em);
+	}
+	25% {
+		background: currentColor;
+		width: 0.25em;
+		height: 1em;
+		transform: translate(0,-1em) rotate(-180deg) translate(0,0.875em);
+	}
+	50%, 62.5% {
+		background: var(--primary);
+		width: 1px;
+		height: 1.5em;
+		transform: translate(0,-1em) rotate(-180deg) translate(7.5em,2.5em);
+	}
+	75%, 99% {
+		background: var(--primary);
+		width: 1px;
+		height: 1.5em;
+		transform: translate(0,-1em) rotate(-180deg) translate(7.5em,-0.25em);
+	}
+	87.5% {
+		background: var(--primary);
+		width: 1px;
+		height: 1.5em;
+		transform: translate(0,-1em) rotate(-180deg) translate(7.5em,0.125em);
+	}
+	to {
+		background: transparent;
+		width: 1px;
+		height: 1.5em;
+		transform: translate(0,-1em) rotate(-180deg) translate(7.5em,-0.25em);
+	}
+}

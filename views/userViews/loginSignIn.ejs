@@ -1,0 +1,33 @@
+<%- include("./userTemplates/header2") %>
+<%- include("./userTemplates/nav") %>
+
+
+
+
+<div  id="signupModal">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h3>SignUp</h3>
+        <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-5">
+        <form id="signup-form">
+
+          <label for="email">Email:</label>
+          <input type="text" id="signup-email" class="form-control mb-3" placeholder="Title" required>
+
+          <label for="password">Password:</label>
+          <input type="password" id="signup-password" class="form-control mb-3" placeholder="Password" required>
+
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<%- include("./userTemplates/footer") %>

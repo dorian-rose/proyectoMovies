@@ -1,32 +1,52 @@
 <%- include('./templates/header.ejs') %>
 <%- include('./templates/nav.ejs') %>
 
-        <main>
+    <main>
 
-            <button><a href="/admin/movies/create-form">Crear película</a></button>
+            <% if(movies.length> 0) {%>
 
-            <% if(movies.length > 0) {%>
+                <h1 class="centerText">My Movies</h1>
 
-                <% movies.forEach(element=> {%>
+                <section class="favoutie-movies gridContainerMax-2c">
 
-                    <h2>
-                        <%= element.Title %>
-                    </h2>
+                    <% movies.forEach(element=> {%>
 
-                    <p>
-                    
-                    </p>
-                    <button><a href="/admin/movies/edit-form/<%= element._id %>">Editar</a></button>
-                    <button><a href="/admin/movies/remove-movie/<%= element._id %>">Eliminar</a></button>
-                    
-                    <% }); %>
+                        <article class="movie-card centerText gridContainerMax-2c maxWidthMedium">
 
-                        <% } else { %>
+                            <div>
+                                <img src=<%=`/assets/uploads/${element.Poster}`%> />
+                            <button><a href="/admin/movies/edit-form/<%= element._id %>">Editar</a></button>
+                                <button><a href="/admin/movies/remove-movie/<%= element._id %>">Eliminar</a></button>
+                            </div>
 
-                            <p>No hay ninguna película</p>
+                            <div>
+                                <h1>
+                                    <%=element.Title %>
+                                </h1>
 
-                            <% } %>
-        </main>
+                                <div class="movie-facts">
 
+                                    <span>Year: <%=element.Year%>, </span><span>Duration: <%= element.Runtime %>,</span>
+                                    <span>Genre: <%= element.Genre %> </span>
 
-        <%- include('./templates/footer.ejs') %>
+                                </div>
+
+                                <h4>Director:</h4>
+
+                                <p>
+                                    <%= element.Director %>
+                                </p>
+
+                            </div>
+                        </article>
+
+                        <% }); %>
+                            <% } else { %>
+
+                                <p>No hay ninguna película</p>
+
+                                <% } %>
+
+    </main>
+    
+<%- include('./templates/footer.ejs') %>

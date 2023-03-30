@@ -1,0 +1,36 @@
+<%-include('./userTemplates/header2') %>
+<%-include("userTemplates/menu") %>
+
+<% if (cosa) { %>
+  <h1 class="centerText">Search Results</h1>
+  <section class="gridContainerMax-2c">
+    <% cosa.forEach(peli => { %>
+    <article class="movie-card centerText gridContainerMax-2c maxWidthMedium">
+      <div>
+        <img src=<%=peli.Poster %> alt="">
+        <p><%=peli.Title%></p> 
+      </div>
+      
+      <div>
+        <h1><%=peli.Title %></h1>
+        <div class="movie-facts">
+          <span>Year: <%=peli.Year%> </span>
+        </div>
+        <div>
+          <span>Type: <%=peli.Type%> </span>
+        </div>
+        <a class="see-more" href=<%=`search-title/${peli.Title.replaceAll(" ","_")}`%> >see more</a>
+      </div>
+    </article>
+    <% }) %>
+  </section>
+  <div>
+    <a id="goBackBtn" href="/search">Back to search</a>
+  </div>
+<% } else { %>
+  
+  <p class="error-message">Ops! No movies found</p>
+  
+  <% } %>
+
+<%- include("./userTemplates/footer") %> 

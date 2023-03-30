@@ -1,0 +1,22 @@
+<%- include("./userTemplates/header2.ejs") %>
+<%- include("userTemplates/menu") %>
+<%- include("./userTemplates/photoSliderOpacity.ejs") %>
+
+<main id="mainBlockSearchView" class="centerText">
+
+    <form id="searchForm"action="/found-all" method="POST">
+       <label class="whiteLetters"  for="search">Search</label> 
+        <input id="searchInput" name="search" type="search" pattern=".*\S.*" required>
+        <span class="caret"></span>
+    </form>
+    
+
+</main>
+
+      
+    <!-- <form action="/found-all" method="POST">
+        <input type="text" name="search" id="search" placeholder="Insert a movie/series title">
+        <button type="submit" class="generalBtn">Search</button>
+    </form> -->
+
+<%- include("./userTemplates/footer") %>

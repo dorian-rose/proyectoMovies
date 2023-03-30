@@ -1,15 +1,16 @@
+<%- include("./userTemplates/header2") %>
+<%- include('./userTemplates/menu') %>
+<%- include('./userTemplates/photoSlider') %>
 
-<%- include('/views/userViews/userTemplates/header.ejs') %>
-
-<main>
-    <section class="gridContainerMF">
-        <div>
-            <a href="/search">Search Movies</a>
-        </div>
-        <div>
-            <a href="/movies">My Movies</a>
-        </div>
+  <main>
+    <section id="dashboardBtnBlock">
+      <div>
+        <a id="searchBtn" class="generalBtn" href="/search">Search Movies</a>
+      </div>
+      <div>
+        <a id="myMoviesBtn" class="generalBtn" href="/movies">My Movies</a>
+      </div>
     </section>
-</main>
+  </main>
 
-<%- include('/views/userViews/userTemplates/footer.ejs') %>
+<%- include("./userTemplates/footer") %>

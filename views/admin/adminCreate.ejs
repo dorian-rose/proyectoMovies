@@ -1,24 +1,40 @@
 <%- include('./templates/header.ejs') %>
-<%- include('./templates/nav.ejs') %>
+    <%- include('./templates/nav.ejs') %>
 
+        <section class="create-form">
+            <h1>Crear Película</h1>
+            <form action="/admin/movies/create-movie" method="POST" enctype="multipart/form-data">
 
-<section>
+                <input type="text" id="Title" name="Title" placeholder="Nombre de la película" class="">
+                <input type="text" id="Year" name="Year" placeholder="Año de la película" class="">
+                <input type="text" id="Runtime" name="Runtime" placeholder="Duración de la película" class="">
+                <input type="text" id="Genre" name="Genre" placeholder="Género de la película" class="">
+                <input type="text" id="Director" name="Director" placeholder="Director de la película" class="">
+                <label class="poster" for="Poster">Imagen de la película</label>
+                <input type="file" id="Poster" name="Poster" placeholder="Imagen de la película" class="" > 
+                <input type="text" id="Actors" name="Actors" placeholder="Actores de la película" class="">
+                <input type="text" id="Plot" name="Plot" placeholder="Trama de la película" class="">
+                <input type="text" id="Metascore" name="Metascore" placeholder="Puntuación de la película" class="">
+                <textarea type="text" id="Review" name="Review" placeholder="Añada aquí su opinión" class="" rows="6" cols="50"></textarea>
+                <input type="submit" value="Añadir Película">
 
-    <form action="/admin/movies/create-movie" method="POST">
+            </form>
 
-        <input type="text" id="Title" name="Title" placeholder="Nombre de la película" class="">
-        <input type="text" id="Year" name="Year" placeholder="Año de la película" class="">
-        <input type="text" id="Runtime" name="Runtime" placeholder="Duración de la película" class="">
-        <input type="text" id="Genre" name="Genre" placeholder="Género de la película" class="">
-        <input type="text" id="Director" name="Director" placeholder="Director de la película" class="">
-        <input type="text" id="Poster" name="Poster" placeholder="Imagen de la película" class="">
-        
-        <input type="submit" value="Añadir Película">
+            
+        </section>
 
-    </form>
+        <% if (typeof errors !== 'undefined') { %>
 
-</section>
+            <% errors.forEach(element=> {
 
+                if (!element.msg.includes("Invalid value")) { %>
+
+                <p>
+                    <%= element.msg %>
+                </p>
+
+                <% } }) %>
+
+                    <% } %>
 
 <%- include('./templates/footer.ejs') %>
-

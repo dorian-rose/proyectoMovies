@@ -1,41 +1,40 @@
-const urlBase = 'http://www.omdbapi.com/?';
-let url;
-const mongoUrlBase = "http://localhost:3000/admin/movies/"
-const consultation = async (title, searchTerm) => {  //! ver qué modificar
+
+
+
+const consultation = async (url, method, body = {}) => {  //! ver qué modificar
+    let options = {};
+    // console.log('estos son los parametros de la consulta',{url},{method},{body})
+    const data = { ...body }
+    if (data.title) {
+        const titleSpaced = data.title.replaceAll("_", " ")
+        data.title = titleSpaced.toLowerCase()
+    }
 
     try {
-        let movies = "";
-        console.log(title)
-        if (title) {
-            url = `${urlBase}apikey=${process.env.API_KEY_OMDB}&t=${title}`
-            const response = await fetch(url);
-            movies = await response.json();
-            console.log(movies)
-            if (movies.Response == "False") {
-                console.log("in mongo api consult");
-                url = `${mongoUrlBase}${title}`;
-                console.log(url)
-                const response = await fetch(url);
-                data = await response.json();
-                if (data.ok) {
-                    movies = data.data
-                } else { movies = data }
-            }
+        if (method == "POST" || method == "PUT" || method == "DELETE") {
 
-            return movies;
+            options = {
+                method: method,
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-type": "application/json",
+                }
+            }
         }
+
+
+        let respuesta = await fetch(url, options);
+
+        let resp = await respuesta.json();
+
+        return resp;
+
+    } catch (error) {
+        console.log('FAILED while fetching', error)
     }
-    catch (error) {
-        console.log('FAILED retrieving fetch');
-    }
-};
+}
 
 
 
 module.exports = { consultation };
 
-
-
-// const response = await fetch("http://localhost:3000/admin/movies/Kevin en la jungla");
-// movies = await response.json();
-// console.log(movies)

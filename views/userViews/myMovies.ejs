@@ -1,0 +1,27 @@
+<%- include('./userTemplates/header2') %> <%- include("userTemplates/menu") %> <%
+if (arrayMovies.length > 0) { %>
+<h1 class="centerText">My Movies</h1>
+<section class="favoutie-movies gridContainerMax-2c">
+  <% arrayMovies.forEach(movie => { %>
+  <article class="movie-card centerText gridContainerMax-2c maxWidthMedium">
+    <div>
+      <img src="<%=movie.image%>" alt="<%=movie.Title %> " />
+      </div>
+    <div>
+      <h1><%=movie.Title %></h1>
+      <div class="movie-facts">
+        <span>Year: <%=movie.Year%>, </span
+        ><span>Duration: <%= movie.Runtime %>, </span>
+        <span>Genre: <%= movie.Genre %> </span>
+      </div>
+      <h4>Director:</h4>
+      <p><%= movie.Director %></p>
+     <a class="see-more" href=<%=`search-title/${movie.Title.replaceAll(" ","_")}`%> >see more</a>
+     <a  href=<%=`/movies/delete/${movie.Title.replaceAll(" ","_").toLowerCase()}` %> >Remove from favourites </a>
+    </div>
+  </article>
+  <% }) %>
+</section>
+<% } else { %>
+<p class="error-message">No movies found</p>
+<% } %> <%- include("./userTemplates/footer") %>

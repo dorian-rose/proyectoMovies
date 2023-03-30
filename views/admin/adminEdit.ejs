@@ -1,18 +1,53 @@
 <%- include('./templates/header.ejs') %>
-<%- include('./templates/nav.ejs') %>
+    <%- include('./templates/nav.ejs') %>
+        <section class="create-form">
+            <h1> Editar Película</h1>
+            <form action="/admin/movies/edit-movie/<%=movie._id%>" method="POST" enctype="multipart/form-data">
+                <label class="edit-label" for="Title">Título</label>
+                <input type="text" id="Title" name="Title" placeholder="nombre de la película" class=""
+                    value="<%=movie.Title%>">
+                <label class="edit-label" for="Year">Año</label>
+                    <input type="text" id="Year" name="Year" placeholder="Año de la película" class=""
+                    value="<%=movie.Year%>">
+                <label class="edit-label" for="Runtime">Duración</label>
+                    <input type="text" id="Runtime" name="Runtime" placeholder="Duración de la película" class=""
+                    value="<%=movie.Runtime%>">
+                <label class="edit-label" for="Genre">Género</label>
+                    <input type="text" id="Genre" name="Genre" placeholder="Género de la película" class=""
+                    value="<%=movie.Genre%>">
+                <label class="edit-label" for="Director">Director</label>
+                    <input type="text" id="Director" name="Director" placeholder="Director de la película" class=""
+                    value="<%=movie.Director%>">
+                    <label class="edit-label" for="Poster">Imagen</label>
+                     <input type="file" id="Poster" name="Poster" placeholder="Imagen de la película" class="" value="<%=movie.Poster%>"> 
+                <label class="edit-label" for="Actors">Actores</label>
+                     <input type="text" id="Actors" name="Actors" placeholder="Actores de la película" class=""
+                    value="<%=movie.Actors%>">
+                <label class="edit-label" for="Plot">Tramo</label>
+                    <input type="text" id="Plot" name="Plot" placeholder="Trama de la película" class=""
+                    value="<%=movie.Plot%>">
+                <label class="edit-label" for="Metascore">Puntuación</label>
+                    <input type="text" id="Metascore" name="Metascore" placeholder="Puntuación de la película" class=""
+                    value="<%=movie.Metascore%>">
+                <label class="edit-label" for="Review">Reseña</label>
+                    <textarea type="text" id="Review" name="Review" placeholder="Añada aquí su opinión" class="" rows="6" cols="50" value="<%=movie.Review%>"></textarea>
+                <input type="submit" value="Editar Película">
+            </form>
 
-<section>
+        </section>
+       
+        <% if (typeof errors !== 'undefined') { %>
+         
+            <% errors.forEach(element=> {
 
-    <form action="/admin/movies/edit-movie/<%=movie._id%>" method="PUT">
-        <input type="text" id="Title" name="Title" placeholder="nombre de la película" class="" value="<%= movie.Title %>">
-        <!-- <input type="text" id="Year" name="Year" placeholder="Año de la película" class="" value="<%= //movie.Year %>">
-        <input type="text" id="Runtime" name="Runtime" placeholder="Duración de la película" class="" value="<%= //movie.Runtime %>">
-        <input type="text" id="Genre" name="Genre" placeholder="Género de la película" class="" value="<%= //movie.Genre %>">
-        <input type="text" id="Director" name="Director" placeholder="Director de la película" class="" value="<%= //movie.Director %>">
-        <input type="text" id="Poster" name="Poster" placeholder="Imagen de la película" class="" value="<%= //movie.Poster %>"> -->
-        <input type="submit" value="Editar Película">
-    </form>
+                if (!element.msg.includes("Invalid value")) { %>
 
-</section>
-<%= movie %>
+                <p>
+                    <%= element.msg %>
+                </p>
+
+                <% } }) %>
+
+                    <% } %>
+
 <%- include('./templates/footer.ejs') %>
