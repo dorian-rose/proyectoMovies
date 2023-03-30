@@ -5,7 +5,7 @@ const {getReviews}= require('../helpers/scraping')
 //Renderiza la vista inicial
 const getIndex = (req, res) => {
     //console.log(req.oidc.isAuthenticated())
-    res.render("userViews/index")
+    res.render("userViews/indexx")
 }
 
 //Recoge datos de una pelicula por su titulo y pinta 
