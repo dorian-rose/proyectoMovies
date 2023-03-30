@@ -413,33 +413,72 @@ footer {
 }
 
 /* los campos de año, genero y duracion */
+.movie-card {
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
 .movie-card span {
-  margin: 2px 5px;
-  background-color: var(--dark);
+  margin: 10px;
+  padding: 5px 10px;
+  background-color: var(--light-blue);
   color: white;
-  padding: 5px;
-  border-radius: 5px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
 }
 
 .movie-card h1 {
+  font-size: 2.2rem;
   color: var(--dark-blue);
-  margin: 30px;
+  margin: 20px 0 10px;
+  padding: 10px 20px;
+  background-color: var(--light-blue);
+  border-radius: 5px;
 }
 
-.favoutie-movies .movie-card p {
-  margin-bottom: 10px;
+.movie-card p {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: var(--dark);
+  line-height: 1.4;
 }
 
 .movie-card h4 {
-  margin: 30px 15px 15px;
+  margin: 20px 0 5px;
+  font-size: 1.3rem;
+  color: var(--blue);
 }
 
 .movie-card a {
-  margin: 10px 10px 20px;
+  display: inline-block;
+  margin: 10px 0 20px;
+  padding: 10px 20px;
+  background-color: var(--blue);
+  color: white;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.2s ease-in-out;
+}
+
+.movie-card a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .movie-card .see-more {
   display: block;
+  font-size: 0.9rem;
+  color: var(--blank);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.movie-card .see-more:hover {
+  color: var(--blue);
+  background-color: var(--blank);
 }
 
 .reviews {margin: 2%;}
