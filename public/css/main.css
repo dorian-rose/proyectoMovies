@@ -77,6 +77,12 @@
 }
 /*+++++++++++++++++*/
 
+nav {box-shadow: 0px 0px 20px 0px black; margin-bottom: 4%;}
+nav .navbar-brand {margin-left: 4%}
+nav button {margin-right: 4%}
+nav .collapse {margin-left: 4%}
+.nav-link .active {color: white}
+
 /*MENU HAMBURGUESA ++++++++++++++++++++++++++++*/
 #menu_on{
 	display: inline-block;
@@ -111,6 +117,7 @@
 footer {
   background-color: var(--dark);
   box-shadow: 0px 0px 20px 0px black;
+  margin-top: 20px;
 }
 
 #logoImgFooter {

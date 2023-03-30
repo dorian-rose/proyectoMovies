@@ -1,12 +1,11 @@
-<%- include('./userTemplates/header2') %> <%- include("userTemplates/nav") %> <%
+<%- include('./userTemplates/header2') %> <%- include("userTemplates/menu") %> <%
 if (arrayMovies.length > 0) { %>
 <h1 class="centerText">My Movies</h1>
 <section class="favoutie-movies gridContainerMax-2c">
   <% arrayMovies.forEach(movie => { %>
   <article class="movie-card centerText gridContainerMax-2c maxWidthMedium">
     <div>
-      <img src="<%=movie.Poster%>" alt="<%=movie.Title %> " />
-      
+      <img src="<%=movie.image%>" alt="<%=movie.Title %> " />
       </div>
     <div>
       <h1><%=movie.Title %></h1>
