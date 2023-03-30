@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
-const path = require('path');
+// const multer = require('multer');
+// const path = require('path');
 
 const { uploadMiddleware } = require('../middleware/multer')
 const { validateInputs } = require('../middleware/inputValidator');

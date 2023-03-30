@@ -64,5 +64,17 @@ const removeFaveMovie = async (title, user) => {
     return result
 }
 
+const createNewUser = async (user) => {
+    let client, result;
+    try {
+        client = await pool.connect();
+        await client.query(queries.createUser, [user]);
+        result = { ok: true, msg: "user added" }
+    } catch (error) {
+        console.log(error)
+        throw error
+    } finally { client.release() }
+    return result
+}
 
-module.exports = { getFaveMovies, addFaveMovie, removeFaveMovie, getOneFave }
+module.exports = { getFaveMovies, addFaveMovie, removeFaveMovie, getOneFave, createNewUser }

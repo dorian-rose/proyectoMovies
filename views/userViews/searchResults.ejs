@@ -1,7 +1,7 @@
 <%-include('./userTemplates/header2') %>
 <%-include("userTemplates/menu") %>
 
-<% if (cosa || cosa.length > 0) { %>
+<% if (cosa) { %>
   <h1 class="centerText">Search Results</h1>
   <section class="gridContainerMax-2c">
     <% cosa.forEach(peli => { %>
@@ -30,7 +30,7 @@
   </div>
 <% } else { %>
   
-  <p>Ops! No movies found</p>
+  <p class="error-message">Ops! No movies found</p>
   
   <% } %>
 

@@ -1,4 +1,4 @@
-const { getFaveMovies, addFaveMovie, removeFaveMovie, getOneFave } = require("../models/favouritesModel");
+const { getFaveMovies, addFaveMovie, removeFaveMovie, getOneFave, createNewUser } = require("../models/favouritesModel");
 
 //URL for this function: /api/movie/:user 
 const getFavourites = async (req, res) => {
@@ -56,4 +56,19 @@ const removeFavourite = async (req, res) => {
     }
 }
 
-module.exports = { getFavourites, addFavourite, removeFavourite, getFavouriteOne }
+
+const addUser = async (req, res) => {
+    console.log("adduser")
+    //aqui una validacion que esta peli no esta ya añadido a este usuario
+    //const user = req.params.user
+    const user = req.body.user
+    //let data;
+    try {
+        await createNewUser(user)
+        res.status(200).json({ ok: true })
+    } catch (error) {
+        res.status(500).json({ ok: false, msg: "error adding favourite" })
+    }
+}
+
+module.exports = { getFavourites, addFavourite, removeFavourite, getFavouriteOne, addUser }

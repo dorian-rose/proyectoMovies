@@ -3,8 +3,6 @@
 
     <main>
 
-        <button><a href="/admin/movies/create-form">Crear película</a></button>
-
             <% if(movies.length> 0) {%>
 
                 <h1 class="centerText">My Movies</h1>
@@ -17,6 +15,8 @@
 
                             <div>
                                 <img src=<%=`/assets/uploads/${element.Poster}`%> />
+                            <button><a href="/admin/movies/edit-form/<%= element._id %>">Editar</a></button>
+                                <button><a href="/admin/movies/remove-movie/<%= element._id %>">Eliminar</a></button>
                             </div>
 
                             <div>
@@ -36,9 +36,6 @@
                                 <p>
                                     <%= element.Director %>
                                 </p>
-
-                                <button><a href="/admin/movies/edit-form/<%= element._id %>">Editar</a></button>
-                                <button><a href="/admin/movies/remove-movie/<%= element._id %>">Eliminar</a></button>
 
                             </div>
                         </article>

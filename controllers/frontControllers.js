@@ -1,3 +1,4 @@
+
 const { consultation } = require('../helpers/fetch');
 const { getReviews } = require('../helpers/scraping')
 
@@ -14,25 +15,15 @@ const searchTitle = async (req, res) => {
     let add;
     let reviews;
     // let image;
-    const user = "3"
+    const user = 3; //req.cookies.user
     const title = req.params.title
     const method = "GET"
     let movieData;
 
     try {
-        const result = await consultation(`${process.env.URLBASEMONGO}${title}`, method)
-        if (result.ok) {
-            movieData = result.data
-            //reviews = movieData.Review
-            movieData.image = `/assets/uploads/${movieData.Poster}`
-
-        } else {
-            movieData = await consultation(`${process.env.URLBASEOMDB}&t=${title}`, method)
-            movieData.image = movieData.Poster
-            //reviews = await getReviews(title)
-        }
-        const data = await consultation(`${process.env.URLBASEUSER}${user}/${title}`, method);
+        const data = await consultation(`${process.env.URLBASEUSER}${user}/${title.toLowerCase()}`, method);
         if (data.data.length > 0) {
+            console.log("length", data.data.length)
             remove = "display"
             add = "none"
         } else {
@@ -40,11 +31,24 @@ const searchTitle = async (req, res) => {
             add = "display"
         }
 
+        const result = await consultation(`${process.env.URLBASEMONGO}${title}`, method)
+        if (result.ok) {
+            movieData = result.data
+            reviews = movieData.Review
+            movieData.image = `/assets/uploads/${movieData.Poster}`
+
+        } else {
+            movieData = await consultation(`${process.env.URLBASEOMDB}&t=${title}`, method)
+            movieData.image = movieData.Poster
+            reviews = await getReviews(title)
+        }
+
+        console.log("past reviews")
         res.render("userViews/detailView", {
             movieData,
             remove,
             add,
-            //reviews //insert in detailView: <%=reviews%>
+            reviews
         });
 
     } catch (error) {
@@ -180,13 +184,14 @@ const getFavouriteMovies = async (req, res) => {
 //recoge datos y pinta lista "mis peliculas" (favourites)
 const addFavouriteMovie = async (req, res) => {
     const user = "3"
-    const title = req.params.title
+    const title = req.params.title.toLowerCase()
     const body = { title }
     method = "POST"
 
     try {
         const response = await consultation(`${process.env.URLBASEUSER}add/${user}`, method, body);
         if (response.ok) {
+            console.log("here at redirect")
             res.redirect("back")
         }
     } catch (error) {

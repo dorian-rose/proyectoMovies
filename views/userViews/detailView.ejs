@@ -26,13 +26,13 @@
 
     <h4>Reviews:</h4>
 
-      <p class="reviews"></p>
+      <p class="reviews"><%=reviews%></p>
       
 
 
     <a class=<%=add%>  href=<%=`/movies/add/${movieData.Title.replaceAll(" ","_")}`%> >Add to
       favourites</a>
-    <a class=<%=remove%>  href=<%=`/movies/delete/${movieData.Title.replaceAll(" ","_")}`%> >Remove
+    <a class=<%=remove%>  href=<%=`/movies/delete/${movieData.Title.replaceAll(" ","_").toLowerCase()}`%> >Remove
       from favourites</a>
   </article>
 </section>
