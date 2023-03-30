@@ -3,17 +3,19 @@
 
 <main id="mainBlockSearchView" class="centerText">
 
-    <form action="/found-all" method="POST">
-        <input type="text" name="search" id="search" placeholder="Insert a movie/series title">
-        <button type="submit" class="generalBtn">Search</button>
+    <form id="searchForm"action="/found-all" method="POST">
+        <!-- <label for="search">Search</label> -->
+        <input id="searchInput" name="search" type="search" pattern=".*\S.*" required>
+        <span class="caret"></span>
     </form>
+    
 
 </main>
 
-      <!-- <form action="http://localhost:3000/found-all" method="POST">
-        <label for="search">Search</label>
-        <input id="search" name="search" type="search" pattern=".*\S.*" required>
-        <span class="caret"></span>
+      
+    <!-- <form action="/found-all" method="POST">
+        <input type="text" name="search" id="search" placeholder="Insert a movie/series title">
+        <button type="submit" class="generalBtn">Search</button>
     </form> -->
 
 <%- include("./userTemplates/footer") %>

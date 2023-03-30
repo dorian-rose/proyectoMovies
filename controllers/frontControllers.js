@@ -1,12 +1,11 @@
 const { consultation } = require('../helpers/fetch');
-const { getReviews } = require('../helpers/scraping')
-
+const {getReviews}= require('../helpers/scraping')
 
 
 //Renderiza la vista inicial
 const getIndex = (req, res) => {
     //console.log(req.oidc.isAuthenticated())
-    res.render("userViews/index")
+    res.render("userViews/indexx")
 }
 
 //Recoge datos de una pelicula por su titulo y pinta 
@@ -38,8 +37,15 @@ const searchTitle = async (req, res) => {
             remove = "none"
             add = "display"
         }
-        // const reviews = await scrapeMovieReviews(search);
+        
+        // const reviews = await getReviews(search);
         // console.log(reviews)
+
+
+        console.log("at reviews")
+        const reviews = await getReviews(title)
+        console.log(reviews)
+
 
         res.render("userViews/detailView", {
             movieData,
@@ -81,52 +87,59 @@ const getMovie = async (req, res) => {
 
 
 
+ 
 
     try {
 
-        const { search } = req.body;
-        const regex = /\s/g;
-        let results;
-        //  const titulo = search.replace(regex, "-")
-        //  const title= req.body.title
+      const {search}  = req.body;
+      const regex = /\s/g;
+      let results;
+    //  const titulo = search.replace(regex, "-")
+    //  const title= req.body.title
+
         console.log('esto es lo que mandamos al fetch:   ', search);
         // console.log('console.l',`${process.env.URLBASEMONGO}${titulo}`)
         const moviesMongo = await consultation((`${process.env.URLBASEMONGO}${search}`))
         // const moviesMongo = await consultation((`http://localhost:3000/admin/movies/title/${titulo}`))
-        console.log('Esto es lo que devuelve el mongo', moviesMongo)
+
+         console.log('Esto es lo que devuelve el mongo', moviesMongo)
+
         // resultados={moviesMongo};
 
 
         // if(moviesMongo == undefined){
         // Buscar película en OMDB
 
-        if (moviesMongo.ok) {
-            results = { moviesMongo };
-            console.log("este es el de mongo", results.moviesMongo.data)
-            let cosa = [results.moviesMongo.data]
-            res.render('userViews/searchResults', { cosa });
-        }
 
+        if(moviesMongo.ok){
+            results={moviesMongo};
+            console.log("este es el de mongo",results.moviesMongo.data)
+            let cosa = [results.moviesMongo.data]
+            res.render('userViews/searchResults', {cosa});
+
+        }
+ 
         else {
             console.log('estamos buscando en ombdb')
             const movie = await consultation(`${process.env.URLBASEOMDB}&s=${search}`);
-            results = { movie };
+            results={movie};
 
-            console.log('ESPECTACULAR', results.movie.Search) //esto da error en consola, pero nos da igual porque pinta bien
+            console.log('ESPECTACULAR',results.movie.Search) //esto da error en consola, pero nos da igual porque pinta bien
             cosa = results.movie.Search
-            console.log("esto es cosa", cosa)
-            res.render('userViews/searchResults', { cosa });
+            console.log("esto es cosa",cosa)
+           res.render('userViews/searchResults', {cosa});
 
-        }
-    }
-
-    catch (error) {
-        console.error(error);
-
-        return res.status(500).json({
-            ok: false,
-            msg: 'Error retrieving movie, please insert a valid title',
-        });
+        } 
+      }
+    
+     catch (error) {
+      console.error(error);
+  
+      return res.status(500).json({
+        ok: false,
+        msg: 'Error retrieving movie, please insert a valid title',
+      });
+ 
 
 
     }
@@ -238,6 +251,7 @@ const addFavouriteMovie = async (req, res) => {
     //res.redirect(`http://localhost:3000/search-title/${req.body.title}`)   
 }
 
+
 const deleteFavourite = async (req, res) => {
     const user = "3"
     const title = req.params.title
@@ -298,14 +312,14 @@ const deleteFavourite = async (req, res) => {
 
 module.exports = {
 
-    getIndex,
-    searchTitle,
-    showDashboard,
-    showSearch,
-    getMovie,
-    //searchMovie,
-    getFavouriteMovies,
-    addFavouriteMovie,
-    deleteFavourite,
+  getIndex,
+  searchTitle,
+  showDashboard,
+  showSearch,
+  getMovie,
+  //searchMovie,
+  getFavouriteMovies,
+  addFavouriteMovie,
+  deleteFavourite,
 
 }

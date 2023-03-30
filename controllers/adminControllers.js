@@ -16,12 +16,15 @@ const getMoviesAdmin = async (req, res) => {
             })
 
         } else {
-            return res.render('admin/adminView', {
+
+            
+           return res.render('admin/adminView', {
                 movies
             })
-        }
-
-
+            
+        } 
+            
+            
     } catch (error) {
         return res.status(500).json({
             ok: false,

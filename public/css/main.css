@@ -16,6 +16,9 @@
 
   --blank: rgb(228, 249, 250);
   --dark: rgb(33, 36, 37);
+
+  --dur: 1s;
+	/* font-size: calc(16px + (18 - 12)*(100vw - 320px)/(1280 - 320)); */
 }
 /**++++++++++++++++++*/
 
@@ -49,9 +52,11 @@
   margin: 0 auto;
   justify-items: center;
 }
+
 .none {
   display: none;
 }
+
 .display {
   display: block;
 }
@@ -61,13 +66,13 @@
 /*HEADERS ++++++++++++++++++++++++++++*/
 .headerBlock1 {
   background-color: var(--dark);
-  box-shadow: 1px 3px black;
+  box-shadow: 0px 0px 20px 0px black;
 }
 
 #logoImgHeader {
   max-width: 12%;
   margin: 2%;
-  box-shadow: 0.01px 4px black;
+  box-shadow: 0px 0px 10px 0px black;
   border-radius: 7%;
 }
 /*+++++++++++++++++*/
@@ -104,7 +109,8 @@
 
 /*FOOTER ++++++++++++++++++++++++++++*/
 footer {
-  margin-top: 40px;
+  background-color: var(--dark);
+  box-shadow: 0px 0px 20px 0px black;
 }
 
 #logoImgFooter {
@@ -114,12 +120,16 @@ footer {
   padding: 4px;
 }
 
+.figureNoMargin {
+  margin:0;
+  padding: 0;
+}
+
 .footerText {
   font-family: sans-serif;
-  font-size: 70%;
-  text-align: center;
+  font-size: 60%;
   color: var(--blank);
-  padding: 8px;
+  padding: 4px;
 }
 
 .footerIcons {
@@ -162,6 +172,7 @@ footer {
 .opacity30 {
   opacity: 30%;
 }
+
 /*+++++++++++++++++*/
 
 /** GENERAL FRONT VIEWS +++++++++++++ */
@@ -180,6 +191,16 @@ footer {
 .index a {
   display: block;
 }
+
+#indexContainer {
+  background-image: url("../assets/indexAlter.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  height: 1000px;
+}
+
 /*+++++++++++++++++*/
 
 /*404 ++++++++++++++++++++++++++++*/
@@ -240,11 +261,6 @@ footer {
   background-color: var(--dark);
   color: var(--blank);
 
-  padding-top: 0.5%;
-  padding-bottom: 0.5%;
-  padding-left: 0.5%;
-  padding-right: 0.5%;
-
   font-family: sans-serif;
   font-size: 100%;
   text-decoration: none;
@@ -264,13 +280,80 @@ footer {
 
   transform: scale(1.1);
 }
-
 /*+++++++++++++++++*/
 
 /*SEARCH VIEW ++++++++++++++++++++++++++++*/
 
 #mainBlockSearchView {
-  background-color: rgb(38, 40, 53)
+  background-color: rgb(38, 40, 53);
+}
+
+/** SEARCH BTN +++++++++++*/
+
+#searchInput {
+	color: var(--blank);
+	font: 1em/1.5 Hind, sans-serif;
+}
+
+#searchForm, #searchInput, .caret {
+	margin: auto;
+}
+
+#searchForm {
+	position: relative;
+	width: 100%;
+	max-width: 17em;
+}
+
+#searchInput, .caret {
+	display: block;
+	transition: all calc(var(--dur) * 0.5) linear;
+}
+
+#searchInput {
+	background: transparent;
+	border-radius: 50%;
+	box-shadow: 0 0 0 0.25em inset;
+	caret-color: var(--aqua-blue);
+	width: 2em;
+	height: 2em;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+#searchInput:focus, #searchInput:valid {
+	background: black;
+	border-radius: 0.25em;
+	box-shadow: none;
+	padding: 0.75em 1em;
+	transition-duration: calc(var(--dur) * 0.25);
+	transition-delay: calc(var(--dur) * 0.25);
+	width: 100%;
+	height: 3em;
+}
+
+#searchInput:focus {
+	animation: showCaret var(--dur) steps(1);
+	outline: transparent;
+}
+
+#searchInput:focus + .caret, #searchInput:valid + .caret {
+	animation: handleToCaret var(--dur) linear;
+	background: transparent;
+	width: 1px;
+	height: 1.5em;
+	transform: translate(0,-1em) rotate(-180deg) translate(7.5em,-0.25em);
+}
+
+.caret {
+	background: currentColor;
+	border-radius: 0 0 0.125em 0.125em;
+	margin-bottom: -0.6em;
+	width: 0.25em;
+	height: 1em;
+	transform: translate(0,-1em) rotate(-45deg) translate(0,0.875em);
+	transform-origin: 50% 0;
 }
 
 /*+++++++++++++++++*/
@@ -282,11 +365,13 @@ footer {
   background-color: rgb(234, 232, 232);
   border-radius: 10px;
 }
+
 .movie-card img {
   width: 80%;
   border-radius: 10px;
   margin: 20px 0;
 }
+
 /* el contenedor para la info de la peli (todo menos la foto) */
 .movie-card article {
   margin: 0 30px;
@@ -298,6 +383,7 @@ footer {
   flex-wrap: wrap;
   justify-content: center;
 }
+
 /* los campos de año, genero y duracion */
 .movie-card span {
   margin: 2px 5px;
@@ -315,12 +401,15 @@ footer {
 .favoutie-movies .movie-card p {
   margin-bottom: 10px;
 }
+
 .movie-card h4 {
   margin: 30px 15px 15px;
 }
+
 .movie-card a {
   margin: 10px 10px 20px;
 }
+
 .movie-card .see-more {
   display: block;
 }
@@ -376,6 +465,7 @@ text-decoration: none;
   margin: 30px;
 }
 /*+++++++++++++++++*/
+
 /* Favoutie movies list  */
 
 /** GENERAL ADMIN VIEWS */
@@ -410,7 +500,7 @@ text-decoration: none;
 ======================================*/
 @media screen and (min-width: 1200px) {
   .photoSlider {
-    height: 540px;
+    height: 500px;
   }
 }
 /*1200px end.*/
@@ -470,4 +560,52 @@ text-decoration: none;
   100% {
     transform: scale(1.01);
   }
+}
+
+@keyframes showCaret {
+	from {
+		caret-color: transparent;
+	}
+	to {
+		caret-color: var(--primary);
+	}
+}
+
+@keyframes handleToCaret {
+	from {
+		background: currentColor;
+		width: 0.25em;
+		height: 1em;
+		transform: translate(0,-1em) rotate(-45deg) translate(0,0.875em);
+	}
+	25% {
+		background: currentColor;
+		width: 0.25em;
+		height: 1em;
+		transform: translate(0,-1em) rotate(-180deg) translate(0,0.875em);
+	}
+	50%, 62.5% {
+		background: var(--primary);
+		width: 1px;
+		height: 1.5em;
+		transform: translate(0,-1em) rotate(-180deg) translate(7.5em,2.5em);
+	}
+	75%, 99% {
+		background: var(--primary);
+		width: 1px;
+		height: 1.5em;
+		transform: translate(0,-1em) rotate(-180deg) translate(7.5em,-0.25em);
+	}
+	87.5% {
+		background: var(--primary);
+		width: 1px;
+		height: 1.5em;
+		transform: translate(0,-1em) rotate(-180deg) translate(7.5em,0.125em);
+	}
+	to {
+		background: transparent;
+		width: 1px;
+		height: 1.5em;
+		transform: translate(0,-1em) rotate(-180deg) translate(7.5em,-0.25em);
+	}
 }
