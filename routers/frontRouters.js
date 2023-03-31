@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 
-const { searchTitle, getIndex, getFavouriteMovies, getMovie,  showDashboard, showSearch, addFavouriteMovie, deleteFavourite, searchGenre} = require("../controllers/frontControllers");
+const { searchTitle, getIndex, getFavouriteMovies, getMovie, showDashboard, showSearch, addFavouriteMovie, deleteFavourite, searchGenre, addNewUser } = require("../controllers/frontControllers");
 
 //INDEX renderView
 router.get("/", getIndex);
 
 //DASHBOARD renderView
 router.get("/dashboard", showDashboard);
- 
+
 //SEARCH renderView
 router.get("/search", showSearch)
 
@@ -30,6 +30,9 @@ router.get("/movies/add/:title", addFavouriteMovie);
 
 //DELETES FROM favourites
 router.get("/movies/delete/:title", deleteFavourite);
+
+//ADD user to SQL
+router.get("/user/add/:user", addNewUser);
 
 //router.get('/found-all', getMovie);
 // router.get('/found', searchMovie);

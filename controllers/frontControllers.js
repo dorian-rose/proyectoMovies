@@ -15,7 +15,8 @@ const searchTitle = async (req, res) => {
     let add;
     let reviews;
     // let image;
-    const user = 3; //req.cookies.user
+    const user = req.cookies.user
+    console.log(user)
     const title = req.params.title
     const method = "GET"
     let movieData;
@@ -147,7 +148,7 @@ const getMovie = async (req, res) => {
 
 //recoge datos y pinta lista "mis peliculas" (favourites)
 const getFavouriteMovies = async (req, res) => {
-    const user = 3 // to be updated
+    const user = req.cookies.user
     const method = "GET"
     const arrayMovies = []
     try {
@@ -183,7 +184,7 @@ const getFavouriteMovies = async (req, res) => {
 
 //recoge datos y pinta lista "mis peliculas" (favourites)
 const addFavouriteMovie = async (req, res) => {
-    const user = "3"
+    const user = req.cookies.user
     const title = req.params.title.toLowerCase()
     const body = { title }
     method = "POST"
@@ -191,7 +192,6 @@ const addFavouriteMovie = async (req, res) => {
     try {
         const response = await consultation(`${process.env.URLBASEUSER}add/${user}`, method, body);
         if (response.ok) {
-            console.log("here at redirect")
             res.redirect("back")
         }
     } catch (error) {
@@ -203,9 +203,8 @@ const addFavouriteMovie = async (req, res) => {
     //res.redirect(`http://localhost:3000/search-title/${req.body.title}`)   
 }
 
-
 const deleteFavourite = async (req, res) => {
-    const user = "3"
+    const user = req.cookies.user
     const title = req.params.title
     const body = { title }
     method = "DELETE"
@@ -223,6 +222,25 @@ const deleteFavourite = async (req, res) => {
     }
 }
 
+const addNewUser = async (req, res) => {
+    const user = req.params.user
+    const body = { user }
+    method = "POST"
+
+    try {
+        const response = await consultation(process.env.URLBASENEWUSER, method, body);
+        if (response.ok) {
+            console.log("success sending to fetch")
+        }
+    }
+    catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: "Error adding user before fetch",
+        });
+    }
+    res.redirect("http://localhost:3000/dashboard")
+}
 
 
 module.exports = {
@@ -236,5 +254,6 @@ module.exports = {
     getFavouriteMovies,
     addFavouriteMovie,
     deleteFavourite,
+    addNewUser
 
 }
