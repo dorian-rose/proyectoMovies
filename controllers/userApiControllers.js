@@ -58,14 +58,11 @@ const removeFavourite = async (req, res) => {
 
 
 const addUser = async (req, res) => {
-    console.log("adduser")
-    //aqui una validacion que esta peli no esta ya añadido a este usuario
-    //const user = req.params.user
     const user = req.body.user
-    //let data;
     try {
         await createNewUser(user)
         res.status(200).json({ ok: true })
+        console.log("new user created")
     } catch (error) {
         res.status(500).json({ ok: false, msg: "error adding favourite" })
     }

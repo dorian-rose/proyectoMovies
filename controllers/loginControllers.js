@@ -1,11 +1,12 @@
 const { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, getRedirectResult } = require('firebase/auth');
 const { authFb } = require('../helpers/firebase')
+const { addNewUser } = require("./frontControllers")
 
 
 
 
 const formSignUp = async (req, res) => {
-  console.log('estamos en formSignUp')
+    console.log('estamos en formSignUp')
     res.render('userViews/loginSignUp');
 
 };
@@ -14,9 +15,12 @@ const signUpCreate = async (req, res) => {
     const email = req.body.email
     const password = req.body.password
     try {
-        const userCredential = await createUserWithEmailAndPassword(authFb, email, password)
+        //code de dorian: esta linea setea el email del usuario en cookies 
+        res.cookie('user', email, { http: true, secure: true, sameSite: 'strict', expires: new Date('2023-12-20') })
+        //fin  code de dorian
+        //const userCredential = await createUserWithEmailAndPassword(authFb, email, password)
         //console.log(userCredential)
-        res.redirect('/')
+        res.redirect(`/user/add/${email}`)// esto va a mi function de añadir a base de datos (frontController, addNewUser), y luego desde alli se redirige a dashboard
     } catch (error) {
         if (error.code === 'auth/email-already-in-use') {
             console.log("Email already in use", "error")
@@ -37,11 +41,15 @@ const formSignIn = async (req, res) => {
 };
 const signInCreate = async (req, res) => {
 
-   const email = req.body.email
-    const password = req.body.password
+    const { email, password } = req.body
+    console.log(email, password)
+    //const password = req.body.password
     try {
-        const userCredentials = await signInWithEmailAndPassword(authFb, email, password)
-        console.log(userCredentials)
+        //code de dorian: esta linea setea el email del usuario en cookies 
+        res.cookie('user', email, { http: true, secure: true, sameSite: 'strict', expires: new Date('2023-12-20') })
+        //fin  code de dorian
+        //const userCredentials = await signInWithEmailAndPassword(authFb, email, password)
+        //console.log(userCredentials)
     } catch (error) {
         if (error.code === 'auth/wrong-password') {
             console.log("Wrong password", "error")
@@ -70,6 +78,8 @@ const logOut = async (req, res) => {
 //       // realiza la lógica necesaria aquí si el usuario no está autenticado
 //     }
 // });
+
+
 module.exports = {
     formSignUp,
     signUpCreate,

@@ -1,9 +1,9 @@
 
 
 
-const consultation = async (url, method, body = {}) => {  //! ver qué modificar
+const consultation = async (url, method, body = {}) => {
     let options = {};
-    // console.log('estos son los parametros de la consulta',{url},{method},{body})
+    console.log(url)
     const data = { ...body }
     if (data.title) {
         const titleSpaced = data.title.replaceAll("_", " ")

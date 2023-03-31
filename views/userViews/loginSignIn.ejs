@@ -1,5 +1,5 @@
 <%- include("./userTemplates/header2") %>
-<%- include("./userTemplates/nav") %>
+<%- include("./userTemplates/menu") %>
 
 
 
@@ -12,13 +12,13 @@
         <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
       </div>
       <div class="modal-body p-5">
-        <form id="signup-form">
+        <form id="signup-form" action="/login/signin" method="POST">
 
           <label for="email">Email:</label>
-          <input type="text" id="signup-email" class="form-control mb-3" placeholder="Title" required>
+          <input type="text" name="email" id="signup-email" class="form-control mb-3" placeholder="Title" required>
 
           <label for="password">Password:</label>
-          <input type="password" id="signup-password" class="form-control mb-3" placeholder="Password" required>
+          <input type="password" name="password" id="signup-password" class="form-control mb-3" placeholder="Password" required>
 
           <button type="submit" class="btn btn-primary">Save changes</button>
         </form>

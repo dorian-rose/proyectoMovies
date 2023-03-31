@@ -1,5 +1,5 @@
 <%- include("./userTemplates/header2") %>
-<%- include("./userTemplates/nav") %>
+<%- include("./userTemplates/menu") %>
 
 <div  id="signupModal">
   <div class="modal-dialog">
@@ -9,7 +9,7 @@
         <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
       </div>
       <div class="modal-body p-5">
-        <form id="login-form" action="/signup" method="POST">
+        <form id="login-form" action="/login/signup" method="POST">
           <input type="text" id="login-email" name="email" class="form-control mb-3" placeholder="Title">
           <input type="text" id="login-password" name="password" class="form-control mb-3" placeholder="Password">
           <button type="submit" class="btn btn-success w-100 mb-4">SignUp</button>

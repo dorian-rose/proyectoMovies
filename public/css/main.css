@@ -66,13 +66,6 @@
   justify-items: center;
 }
 
-.none {
-  display: none;
-}
-
-.display {
-  display: block;
-}
 
 .error-message {color: var(--red);
 text-align: center;
@@ -480,10 +473,27 @@ footer {
   color: var(--blue);
   background-color: var(--blank);
 }
+.movie-card a.none {
+  display: none;
+}
+
+.movie-card a.display {
+  display: block;
+}
+
 
 .reviews {margin: 2%;}
 
+.nav-index {
+  background-color: var(--dark);
+  padding: 13px;
+}
+.nav-index li {
+display: inline;
+margin: 4%;}
 
+.nav-index a {text-decoration: none;
+color: white;}
 /*ADMIN ++++++++++++++++++++++++++++*/
 .poster-label {border: 1px solid gray;
 color: grey;
