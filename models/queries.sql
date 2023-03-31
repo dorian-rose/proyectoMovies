@@ -1,17 +1,16 @@
 CREATE TABLE users (
-  id_users serial NOT NULL PRIMARY KEY, 
-  -- full_name varchar(45) NOT NULL, 
-  email varchar(100) NOT NULL UNIQUE,
-  permission varchar(45) 
-);
+	email varchar(100) NOT NULL UNIQUE PRIMARY KEY,
+  id_users serial NOT NULL, 
+ permission varchar(45) 
+) 
 
 CREATE TABLE movies (
   id_movie serial NOT NULL PRIMARY KEY, 
   title varchar(100) NOT NULL, 
-  id_users int,
---   database varchar(15),
-  FOREIGN KEY (id_users) REFERENCES users(id_users)
+  email varchar(100) NOT NULL,
+  FOREIGN KEY (email) REFERENCES users(email)
 )
+
 
 INSERT INTO movies(id_users, title)
 VALUES 

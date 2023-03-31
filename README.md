@@ -26,7 +26,7 @@ Tiene botón de Añadir a Mis películas, que tiene que vincular la peli con el 
 
 /////
 
-ADMIN (e.g. ruta http://localhost:5000/admin/servicios/
+ADMIN (e.g. ruta http://localhost:5000/admin/servicios/)
 Pasos 1 y 3 ^^^
 
 2. Muestra todas las pelis en lista admin (ruta:  /movies, method: GET). Tambien un boton "crear" encima de la lista, y junto con cada peli dos botones, "editar" y "borrar" 
