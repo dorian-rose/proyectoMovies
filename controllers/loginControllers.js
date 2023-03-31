@@ -1,4 +1,4 @@
-const { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, getRedirectResult } = require('firebase/auth');
+const { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail,  } = require('firebase/auth');
 const { authFb } = require('../helpers/firebase')
 const { addNewUser } = require("./frontControllers")
 
@@ -18,7 +18,7 @@ const signUpCreate = async (req, res) => {
         //code de dorian: esta linea setea el email del usuario en cookies 
         res.cookie('user', email, { http: true, secure: true, sameSite: 'strict', expires: new Date('2023-12-20') })
         //fin  code de dorian
-        //const userCredential = await createUserWithEmailAndPassword(authFb, email, password)
+        const userCredential = await createUserWithEmailAndPassword(authFb, email, password)
         //console.log(userCredential)
         res.redirect(`/user/add/${email}`)// esto va a mi function de añadir a base de datos (frontController, addNewUser), y luego desde alli se redirige a dashboard
     } catch (error) {
@@ -48,7 +48,7 @@ const signInCreate = async (req, res) => {
         //code de dorian: esta linea setea el email del usuario en cookies 
         res.cookie('user', email, { http: true, secure: true, sameSite: 'strict', expires: new Date('2023-12-20') })
         //fin  code de dorian
-        //const userCredentials = await signInWithEmailAndPassword(authFb, email, password)
+        const userCredentials = await signInWithEmailAndPassword(authFb, email, password)
         //console.log(userCredentials)
     } catch (error) {
         if (error.code === 'auth/wrong-password') {
@@ -60,6 +60,7 @@ const signInCreate = async (req, res) => {
         }
     }
 }
+
 const logOut = async (req, res) => {
     try {
         await signOut(authFb)
@@ -68,16 +69,48 @@ const logOut = async (req, res) => {
         console.log(error)
     }
 }
-// onAuthStateChanged(auth, async (user)  => {
-//     if (user) {
-//         console.log(user)
-//       console.log("El usuario está autenticado");
-//       // realiza la lógica necesaria aquí si el usuario está autenticado
-//     } else {
-//       console.log("El usuario no está autenticado");
-//       // realiza la lógica necesaria aquí si el usuario no está autenticado
-//     }
-// });
+
+
+
+const forgotPassword = async (req, res) => {
+    res.render('userViews/forgotPassword');
+  }
+  
+  const requestPasswordReset = async (req, res) => {
+    const email = req.body.email;
+    try {
+      await sendPasswordResetEmail(authFb, email);
+      console.log("Password reset email sent successfully");
+     // res.render("userViews/loginSignIn", { message: "Password reset email sent successfully" });
+    } catch (error) {
+      console.log("Error sending password reset email", error);
+      //res.render("userViews/loginSignIn", { message: "Error sending password reset email" });
+    }
+  };
+
+
+  const resetPassword = async (req, res) => {
+    const { oobCode, newPassword } = req.body;
+    try {
+      await confirmPasswordReset(authFb, oobCode, newPassword);
+      console.log("Password reset successful");
+      //res.render("userViews/loginSignIn", { message: "Password reset successful" });
+    } catch (error) {
+      console.log("Error resetting password", error);
+      //res.render("userViews/loginSignIn", { message: "Error resetting password" });
+    }
+  };
+
+  const resetLinkSent = async (req, res) => {
+    res.render('userViews/resetLinkSent');
+  }
+
+
+
+
+  
+
+
 
 
 module.exports = {
@@ -92,37 +125,10 @@ module.exports = {
 
 
 
-// onAuthStateChanged(auth, async (user) => {
-//     console.log(user)
-//     if (user) {
-//       loginCheck(user);
-//       try {
-//         const querySnapshot = await getDocs(collection(db, "posts"));
-//         setupPosts(querySnapshot.docs);
-//       } catch (error) {
-//         console.log(error)
-//       }
-//     } else {
-//       setupPosts([]);
-//       loginCheck(user);
-//     }
-//   });
 
 
 
 
 
 
-// //* TESTING ABSOLUTO OMG
-// const loggedOutLinks = document.querySelectorAll(".logged-out");
-// const loggedInLinks = document.querySelectorAll(".logged-in");
 
-// loginCheck = (user) => {
-//   if (user) {
-//     loggedInLinks.forEach((link) => (link.style.display = "block"));
-//     loggedOutLinks.forEach((link) => (link.style.display = "none"));
-//   } else {
-//     loggedInLinks.forEach((link) => (link.style.display = "none"));
-//     loggedOutLinks.forEach((link) => (link.style.display = "block"));
-//   }
-// };
