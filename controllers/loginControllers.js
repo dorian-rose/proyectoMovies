@@ -13,7 +13,7 @@ const formSignUp = async (req, res) => {
 const signUpCreate = async (req, res) => {
 
     const email = req.body.email
-    // const password = req.body.password
+    const password = req.body.password
     try {
         //code de dorian: esta linea setea el email del usuario en cookies 
         res.cookie('user', email, { http: true, secure: true, sameSite: 'strict', expires: new Date('2023-12-20') })
@@ -41,11 +41,15 @@ const formSignIn = async (req, res) => {
 };
 const signInCreate = async (req, res) => {
 
-    const email = req.body.email
-    const password = req.body.password
+    const { email, password } = req.body
+    console.log(email, password)
+    //const password = req.body.password
     try {
-        const userCredentials = await signInWithEmailAndPassword(authFb, email, password)
-        console.log(userCredentials)
+        //code de dorian: esta linea setea el email del usuario en cookies 
+        res.cookie('user', email, { http: true, secure: true, sameSite: 'strict', expires: new Date('2023-12-20') })
+        //fin  code de dorian
+        //const userCredentials = await signInWithEmailAndPassword(authFb, email, password)
+        //console.log(userCredentials)
     } catch (error) {
         if (error.code === 'auth/wrong-password') {
             console.log("Wrong password", "error")
